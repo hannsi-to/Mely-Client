@@ -1,0 +1,19 @@
+{
+  "compatibilityLevel": "JAVA_8",
+  "package": "me.hannsi.melyclient.mixin",
+  "refmap": "refmap.example.json",
+  "mixins": [
+    "net.minecraft.client.entity.IEntity",
+    "org.lwjgl.nanovg.MixinNanoVGGLConfig"
+  ],
+  "client": [
+    "net.minecraft.client.IMinecraft",
+    "net.minecraft.client.MixinMinecraft",
+    "net.minecraft.client.entity.MixinEntityPlayerSP",
+    "net.minecraft.client.shader.IShaderGroup",
+    "net.minecraft.client.shader.MixinShaderGroup",
+    "net.minecraft.util.ISession",
+    "net.minecraft.util.MixinMovementInputFromOptions"
+  ],
+  "server": []
+}
