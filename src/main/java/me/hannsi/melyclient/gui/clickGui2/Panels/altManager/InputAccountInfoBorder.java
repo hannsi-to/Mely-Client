@@ -3,6 +3,7 @@ package me.hannsi.melyclient.gui.clickGui2.Panels.altManager;
 import me.hannsi.melyclient.MelyClient;
 import me.hannsi.melyclient.gui.clickGui2.ClickGui2;
 import me.hannsi.melyclient.util.render.nanovg.render.NVGRenderUtil;
+import me.hannsi.melyclient.util.render.nanovg.render.font.FontUtil;
 import me.hannsi.melyclient.util.system.math.MouseUtil;
 
 import java.awt.*;
@@ -31,6 +32,8 @@ public class InputAccountInfoBorder {
     }
 
     public void draw(int mouseX, int mouseY, float width, float height) {
+        FontUtil bonIcon40 = new FontUtil(MelyClient.fontManager.bonIcon, 40);
+
         NVGRenderUtil.drawRadialGradientRect(x - 1, y - 1, width / 9f + 2, height / 3f + 2, mouseX, mouseY, 0, 70, new Color(91, 91, 91, 255), new Color(4, 4, 4, 255));
 
         NVGRenderUtil.drawRectWH(x, y, width / 9f, height / 3f, new Color(0, 0, 0, 255));
@@ -41,7 +44,7 @@ public class InputAccountInfoBorder {
             NVGRenderUtil.drawRadialGradientRect(x, y, width / 9f, height / 3f, mouseX, mouseY, 0, 70, new Color(255, 255, 255, 50), new Color(4, 4, 4, 255));
         }
 
-        NVGRenderUtil.drawText(icon, MelyClient.fontManager.bonIcon, x + 5, y + 2.5f, 40, new Color(0, 120, 212, 255));
+        bonIcon40.drawText(icon, x + 5, y + 2.5f, new Color(0, 120, 212, 255));
 
         //NVGRenderUtil.drawText(
         //        accountData.getSession().getUsername(),

@@ -5,6 +5,7 @@ import me.hannsi.melyclient.gui.clickGui.setting.system.SettingPanel;
 import me.hannsi.melyclient.module.system.Category;
 import me.hannsi.melyclient.module.system.Module;
 import me.hannsi.melyclient.util.render.nanovg.render.NVGRenderUtil;
+import me.hannsi.melyclient.util.render.nanovg.render.font.FontUtil;
 import me.hannsi.melyclient.util.system.math.MouseUtil;
 import me.hannsi.melyclient.util.system.math.animation.Easing;
 import me.hannsi.melyclient.util.system.math.animation.EasingUtil;
@@ -38,33 +39,41 @@ public class ModulePanel {
     }
 
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
+        FontUtil bonIcon10 = new FontUtil(MelyClient.fontManager.bonIcon, 10);
+        FontUtil ubuntu10 = new FontUtil(MelyClient.fontManager.ubuntu, 10);
+
         value = 10 - easingUtil.get(1000) * 10;
 
-        NVGRenderUtil.drawRoundedRectWH(x, y, ((ClickGui.INSTANCE.width / 4f) - 100), MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10) + 5, 5, new Color(50, 50, 50, 255));
+        NVGRenderUtil.drawRoundedRectWH(x, y, ((ClickGui.INSTANCE.width / 4f) - 100), ubuntu10.getHeight() + 5, 5, new Color(50, 50, 50, 255));
 
-        NVGRenderUtil.drawText(module.getName(), MelyClient.fontManager.ubuntu, x + 5, y + (MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10) + 5) / 2f, 10, new Color(255, 255, 255, 255), NanoVG.NVG_ALIGN_LEFT | NanoVG.NVG_ALIGN_MIDDLE);
+        ubuntu10.drawText(module.getName(), x + 5, y + (ubuntu10.getHeight() + 5) / 2f, new Color(255, 255, 255, 255), NanoVG.NVG_ALIGN_LEFT | NanoVG.NVG_ALIGN_MIDDLE);
 
-        NVGRenderUtil.drawRoundedRectWH(x + ((ClickGui.INSTANCE.width / 4f) - 100) - 25, y + 2.5f, 20, MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10), 5, new Color(40, 40, 40, 255));
+        NVGRenderUtil.drawRoundedRectWH(x + ((ClickGui.INSTANCE.width / 4f) - 100) - 25, y + 2.5f, 20, ubuntu10.getHeight(), 5, new Color(40, 40, 40, 255));
 
         NVGRenderUtil.drawCircle(x + ((ClickGui.INSTANCE.width / 4f) - 100) - 25 + (5 + value), y + 2.5f + 5, 5, module.isToggle() ? new Color(100, 100, 255, 255) : new Color(30, 30, 30, 255));
 
-        if (MouseUtil.isHoveringWH(x + ((ClickGui.INSTANCE.width / 4f) - 100) + 5, y - (MelyClient.fontManager.getHeight(MelyClient.fontManager.bonIcon, 10) + 7) / 4f, MelyClient.fontManager.getWidth(MelyClient.fontManager.bonIcon, "u", 10), (MelyClient.fontManager.getHeight(MelyClient.fontManager.bonIcon, 10) + 7), mouseX, mouseY)) {
-            NVGRenderUtil.drawText("u", MelyClient.fontManager.bonIcon, x + ((ClickGui.INSTANCE.width / 4f) - 100) + 5, y + (MelyClient.fontManager.getHeight(MelyClient.fontManager.bonIcon, 10) + 7) / 2f, 10, new Color(255, 255, 255, 255), 5f, ColorUtil.getRainbow(20, 255, 255), NanoVG.NVG_ALIGN_LEFT | NanoVG.NVG_ALIGN_MIDDLE);
+        if (MouseUtil.isHoveringWH(x + ((ClickGui.INSTANCE.width / 4f) - 100) + 5, y - (bonIcon10.getHeight() + 7) / 4f, bonIcon10.getWidth("u"), (bonIcon10.getHeight() + 7), mouseX, mouseY)) {
+            bonIcon10.drawBlurText("u", x + ((ClickGui.INSTANCE.width / 4f) - 100) + 5, y + (bonIcon10.getHeight() + 7) / 2f, new Color(255, 255, 255, 255), 5f, ColorUtil.getRainbow(20, 255, 255), NanoVG.NVG_ALIGN_LEFT | NanoVG.NVG_ALIGN_MIDDLE);
 
             ClickGui.INSTANCE.description = "Open " + module.getName() + " setting.";
         }
 
-        NVGRenderUtil.drawText("u", MelyClient.fontManager.bonIcon, x + ((ClickGui.INSTANCE.width / 4f) - 100) + 5, y + (MelyClient.fontManager.getHeight(MelyClient.fontManager.bonIcon, 10) + 7) / 2f, 10, new Color(255, 255, 255, 255), NanoVG.NVG_ALIGN_LEFT | NanoVG.NVG_ALIGN_MIDDLE);
+        bonIcon10.drawText("u", x + ((ClickGui.INSTANCE.width / 4f) - 100) + 5, y + (bonIcon10.getHeight() + 7) / 2f, new Color(255, 255, 255, 255), NanoVG.NVG_ALIGN_LEFT | NanoVG.NVG_ALIGN_MIDDLE);
     }
 
     public void drawScreen2(int mouseX, int mouseY, float partialTicks) {
-        if (MouseUtil.isHoveringWH(x, y, ((ClickGui.INSTANCE.width / 4f) - 100), MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10) + 5, mouseX, mouseY)) {
+        FontUtil ubuntu10 = new FontUtil(MelyClient.fontManager.ubuntu, 10);
+
+        if (MouseUtil.isHoveringWH(x, y, ((ClickGui.INSTANCE.width / 4f) - 100), ubuntu10.getHeight() + 5, mouseX, mouseY)) {
             ClickGui.INSTANCE.description = module.getDescription();
         }
     }
 
     public void mouseClicked(int mouseX, int mouseY, int mouseButton) {
-        if (MouseUtil.isHoveringWH(x, y, ((ClickGui.INSTANCE.width / 4f) - 100), MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10) + 5, mouseX, mouseY)) {
+        FontUtil bonIcon10 = new FontUtil(MelyClient.fontManager.bonIcon, 10);
+        FontUtil ubuntu10 = new FontUtil(MelyClient.fontManager.ubuntu, 10);
+
+        if (MouseUtil.isHoveringWH(x, y, ((ClickGui.INSTANCE.width / 4f) - 100), ubuntu10.getHeight() + 5, mouseX, mouseY)) {
             if (mouseButton == 0) {
                 module.toggle();
                 easingUtil.reset();
@@ -72,17 +81,17 @@ public class ModulePanel {
             }
         }
 
-        if (MouseUtil.isHoveringWH(x + ((ClickGui.INSTANCE.width / 4f) - 100) + 5, y - (MelyClient.fontManager.getHeight(MelyClient.fontManager.bonIcon, 10) + 7) / 4f, MelyClient.fontManager.getWidth(MelyClient.fontManager.bonIcon, "u", 10), (MelyClient.fontManager.getHeight(MelyClient.fontManager.bonIcon, 10) + 7), mouseX, mouseY)) {
+        if (MouseUtil.isHoveringWH(x + ((ClickGui.INSTANCE.width / 4f) - 100) + 5, y - (bonIcon10.getHeight() + 7) / 4f, bonIcon10.getWidth("u"), (bonIcon10.getHeight() + 7), mouseX, mouseY)) {
             if (mouseButton == 0) {
                 if (ClickGui.INSTANCE.settingPanel == null) {
-                    ClickGui.INSTANCE.settingPanel = new SettingPanel(module, ClickGui.INSTANCE.width / 4f + 110 + ((ClickGui.INSTANCE.width / 4f) - 100) + 5 + MelyClient.fontManager.getWidth(MelyClient.fontManager.bonIcon, "u", 10) + 5, ClickGui.INSTANCE.height / 4f + 31);
+                    ClickGui.INSTANCE.settingPanel = new SettingPanel(module, ClickGui.INSTANCE.width / 4f + 110 + ((ClickGui.INSTANCE.width / 4f) - 100) + 5 + bonIcon10.getWidth("u") + 5, ClickGui.INSTANCE.height / 4f + 31);
                 } else {
                     SettingPanel nowSettingPanel = ClickGui.INSTANCE.settingPanel;
 
                     if (nowSettingPanel.getModule() == module) {
                         ClickGui.INSTANCE.settingPanel = null;
                     } else {
-                        ClickGui.INSTANCE.settingPanel = new SettingPanel(module, ClickGui.INSTANCE.width / 4f + 110 + ((ClickGui.INSTANCE.width / 4f) - 100) + 5 + MelyClient.fontManager.getWidth(MelyClient.fontManager.bonIcon, "u", 10) + 5, ClickGui.INSTANCE.height / 4f + 31);
+                        ClickGui.INSTANCE.settingPanel = new SettingPanel(module, ClickGui.INSTANCE.width / 4f + 110 + ((ClickGui.INSTANCE.width / 4f) - 100) + 5 + bonIcon10.getWidth("u") + 5, ClickGui.INSTANCE.height / 4f + 31);
                     }
                 }
             }

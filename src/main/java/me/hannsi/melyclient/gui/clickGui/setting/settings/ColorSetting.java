@@ -6,6 +6,7 @@ import me.hannsi.melyclient.gui.clickGui.setting.system.SettingBase;
 import me.hannsi.melyclient.module.system.Module;
 import me.hannsi.melyclient.module.system.settings.Setting;
 import me.hannsi.melyclient.util.render.nanovg.render.NVGRenderUtil;
+import me.hannsi.melyclient.util.render.nanovg.render.font.FontUtil;
 import me.hannsi.melyclient.util.system.conversion.BonIcon;
 import me.hannsi.melyclient.util.system.math.MathUtil;
 import me.hannsi.melyclient.util.system.math.MouseUtil;
@@ -40,17 +41,20 @@ public class ColorSetting extends SettingBase {
 
     public ColorSetting(Module module, Setting<Color> setting, float x, float y) {
         super(module, setting, x, y);
+
+        FontUtil ubuntu10 = new FontUtil(MelyClient.fontManager.ubuntu, 10);
+
         colorSetting = setting;
         open = false;
         typed = false;
         pickerBoxDrag = false;
         defaultColor = colorSetting.getValue();
         maxColor = defaultColor;
-        circleX = x + MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10) / 2f;
-        circleY = y + MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10) + 5 + MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10) / 2f;
+        circleX = x + ubuntu10.getHeight() / 2f;
+        circleY = y + ubuntu10.getHeight() + 5 + ubuntu10.getHeight() / 2f;
         lastMouseX = 0;
         lastMouseY = 0;
-        fontHeight = MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10);
+        fontHeight = ubuntu10.getHeight();
         pickerBoxScale = 100 - ((fontHeight / 2f) * 2);
         tempMouseX = x + fontHeight / 2f + pickerBoxScale + 1;
         tempMouseY = y + fontHeight + 5 + fontHeight / 2f + pickerBoxScale;
@@ -61,32 +65,36 @@ public class ColorSetting extends SettingBase {
     @Override
     @SuppressWarnings("unchecked")
     public float drawScreen(int mouseX, int mouseY, float partialTicks) {
-        if (MouseUtil.isHoveringWH(x, y, MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10) + MelyClient.fontManager.getWidth(MelyClient.fontManager.ubuntu, setting.getName(), 10), MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10), mouseX, mouseY)) {
-            NVGRenderUtil.drawText(setting.getName(), MelyClient.fontManager.ubuntu, x + MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10) + 5, y + 1, 10, new Color(255, 255, 255, 255), 5f, ColorUtil.getRainbow(20, 255, 255));
+        FontUtil ubuntu10 = new FontUtil(MelyClient.fontManager.ubuntu, 10);
+
+        if (MouseUtil.isHoveringWH(x, y, ubuntu10.getHeight() + ubuntu10.getWidth(setting.getName()), ubuntu10.getHeight(), mouseX, mouseY)) {
+            ubuntu10.drawBlurText(setting.getName(), x + ubuntu10.getHeight() + 5, y + 1, new Color(255, 255, 255, 255), 5f, ColorUtil.getRainbow(20, 255, 255));
         } else {
-            NVGRenderUtil.drawText(setting.getName(), MelyClient.fontManager.ubuntu, x + MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10) + 5, y + 1, 10, new Color(255, 255, 255, 255));
+            ubuntu10.drawText(setting.getName(), x + ubuntu10.getHeight() + 5, y + 1, new Color(255, 255, 255, 255));
         }
 
-        NVGRenderUtil.drawRectWH(x, y, MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10), MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10), new Color(255, 255, 255, 255));
+        NVGRenderUtil.drawRectWH(x, y, ubuntu10.getHeight(), ubuntu10.getHeight(), new Color(255, 255, 255, 255));
 
-        NVGRenderUtil.drawRectWH(x + 0.5f, y + 0.5f, MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10) - 1, MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10) - 1, new Color(30, 30, 30, 255));
+        NVGRenderUtil.drawRectWH(x + 0.5f, y + 0.5f, ubuntu10.getHeight() - 1, ubuntu10.getHeight() - 1, new Color(30, 30, 30, 255));
 
-        NVGRenderUtil.drawRectWH(x + 0.5f, y + 0.5f, MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10) - 1, MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10) - 1, colorSetting.getValue());
+        NVGRenderUtil.drawRectWH(x + 0.5f, y + 0.5f, ubuntu10.getHeight() - 1, ubuntu10.getHeight() - 1, colorSetting.getValue());
 
         if (open) {
             drawPicker(mouseX, mouseY);
         }
 
-        if (MouseUtil.isHoveringWH(x, y, MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10) + 5 + MelyClient.fontManager.getWidth(MelyClient.fontManager.ubuntu, setting.getName(), 10), MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10), mouseX, mouseY)) {
+        if (MouseUtil.isHoveringWH(x, y, ubuntu10.getHeight() + 5 + ubuntu10.getWidth(setting.getName()), ubuntu10.getHeight(), mouseX, mouseY)) {
             ClickGui.INSTANCE.description = setting.getDescription();
         }
 
         setting = colorSetting;
 
-        return maxHeight + MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10) + (open ? 105 : 0);
+        return maxHeight + ubuntu10.getHeight() + (open ? 105 : 0);
     }
 
     private void drawPicker(int mouseX, int mouseY) {
+        FontUtil ubuntu10 = new FontUtil(MelyClient.fontManager.ubuntu, 10);
+
         offsetY = 0.0f;
         NVGRenderUtil.drawRoundedRectWH(x, y + fontHeight + 5, 200, 100, fontHeight / 2f, new Color(30, 30, 30, 255));
         drawRainbowCheckBox(mouseX, mouseY);
@@ -97,10 +105,10 @@ public class ColorSetting extends SettingBase {
             drawBar(mouseX, mouseY);
         }
 
-        float tempX = x + MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10) / 2f;
-        float tempY = y + MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10) + 5 + MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10) / 2f;
-        float tempW = tempX + 100 - ((MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10) / 2f) * 2) + 1;
-        float tempH = tempY + 100 - ((MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10) / 2f) * 2);
+        float tempX = x + ubuntu10.getHeight() / 2f;
+        float tempY = y + ubuntu10.getHeight() + 5 + ubuntu10.getHeight() / 2f;
+        float tempW = tempX + 100 - ((ubuntu10.getHeight() / 2f) * 2) + 1;
+        float tempH = tempY + 100 - ((ubuntu10.getHeight() / 2f) * 2);
         if (pickerBoxDrag) {
             circleX = mouseX;
             circleY = mouseY;
@@ -137,6 +145,9 @@ public class ColorSetting extends SettingBase {
     }
 
     public void drawRainbowCheckBox(int mouseX, int mouseY) {
+        FontUtil bonIcon10 = new FontUtil(MelyClient.fontManager.bonIcon, 10);
+        FontUtil ubuntu10 = new FontUtil(MelyClient.fontManager.ubuntu, 10);
+
         if (colorSetting.isRainbow()) {
             if (fontSize < 10) {
                 fontSize += 1;
@@ -151,15 +162,17 @@ public class ColorSetting extends SettingBase {
             }
         }
 
-        NVGRenderUtil.drawText("Rainbow", MelyClient.fontManager.ubuntu, x + fontHeight / 2f + pickerBoxScale + 1 + 5 + MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10) + 5, y + fontHeight + 5 + fontHeight / 2f + offsetY, 10, new Color(255, 255, 255, 255));
+        ubuntu10.drawText("Rainbow", x + fontHeight / 2f + pickerBoxScale + 1 + 5 + ubuntu10.getHeight() + 5, y + fontHeight + 5 + fontHeight / 2f + offsetY, new Color(255, 255, 255, 255));
 
-        NVGRenderUtil.drawRectWH(x + fontHeight / 2f + pickerBoxScale + 1 + 5, y + fontHeight + 5 + fontHeight / 2f + offsetY, MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10), MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10), new Color(255, 255, 255, 255));
+        NVGRenderUtil.drawRectWH(x + fontHeight / 2f + pickerBoxScale + 1 + 5, y + fontHeight + 5 + fontHeight / 2f + offsetY, ubuntu10.getHeight(), ubuntu10.getHeight(), new Color(255, 255, 255, 255));
 
-        NVGRenderUtil.drawRectWH(x + fontHeight / 2f + pickerBoxScale + 1 + 5 + 0.5f, y + fontHeight + 5 + fontHeight / 2f + offsetY + 0.5f, MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10) - 1, MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10) - 1, new Color(30, 30, 30, 255));
+        NVGRenderUtil.drawRectWH(x + fontHeight / 2f + pickerBoxScale + 1 + 5 + 0.5f, y + fontHeight + 5 + fontHeight / 2f + offsetY + 0.5f, ubuntu10.getHeight() - 1, ubuntu10.getHeight() - 1, new Color(30, 30, 30, 255));
 
-        NVGRenderUtil.drawTextCenter(BonIcon.CHECK, MelyClient.fontManager.bonIcon, x + fontHeight / 2f + pickerBoxScale + 1 + 5 + (MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10) / 2f), y + fontHeight + 5 + fontHeight / 2f + offsetY + (MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10) / 2f) + 1, fontSize, new Color(255, 255, 255, 255), 5, ColorUtil.getRainbow(20, 255, 255));
+        bonIcon10.setSize(fontSize);
+        bonIcon10.drawBlurTextCenter(BonIcon.CHECK, x + fontHeight / 2f + pickerBoxScale + 1 + 5 + (ubuntu10.getHeight() / 2f), y + fontHeight + 5 + fontHeight / 2f + offsetY + (ubuntu10.getHeight() / 2f) + 1, new Color(255, 255, 255, 255), 5, ColorUtil.getRainbow(20, 255, 255));
+        bonIcon10.setSize(10f);
 
-        offsetY += MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10) + 5;
+        offsetY += ubuntu10.getHeight() + 5;
     }
 
     public void drawPickerBox(int mouseX, int mouseY) {
@@ -175,9 +188,11 @@ public class ColorSetting extends SettingBase {
     }
 
     public void drawBar(int mouseX, int mouseY) {
-        NVGRenderUtil.drawText("Red : " + colorSetting.getValue().getRed(), MelyClient.fontManager.ubuntu, x + fontHeight / 2f + pickerBoxScale + 1 + 5, y + fontHeight + 5 + fontHeight / 2f + offsetY, 10, new Color(255, 255, 255, 255));
-        NVGRenderUtil.drawLinearGradientRoundedRect(x + fontHeight / 2f + pickerBoxScale + 1 + 5, y + fontHeight + 5 + fontHeight / 2f + MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10) + offsetY, 90, 5, 2.5f, new Color(0, 0, 0, 255), new Color(255, 0, 0, 255));
-        NVGRenderUtil.drawCircle(x + fontHeight / 2f + pickerBoxScale + 1 + 5 + getColorBarX(colorSetting.getValue().getRed()), y + fontHeight + 5 + fontHeight / 2f + MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10) + 2.5f + offsetY, 2.5f, new Color(100, 100, 255, 255));
+        FontUtil ubuntu10 = new FontUtil(MelyClient.fontManager.ubuntu, 10);
+
+        ubuntu10.drawText("Red : " + colorSetting.getValue().getRed(), x + fontHeight / 2f + pickerBoxScale + 1 + 5, y + fontHeight + 5 + fontHeight / 2f + offsetY, new Color(255, 255, 255, 255));
+        NVGRenderUtil.drawLinearGradientRoundedRect(x + fontHeight / 2f + pickerBoxScale + 1 + 5, y + fontHeight + 5 + fontHeight / 2f + ubuntu10.getHeight() + offsetY, 90, 5, 2.5f, new Color(0, 0, 0, 255), new Color(255, 0, 0, 255));
+        NVGRenderUtil.drawCircle(x + fontHeight / 2f + pickerBoxScale + 1 + 5 + getColorBarX(colorSetting.getValue().getRed()), y + fontHeight + 5 + fontHeight / 2f + ubuntu10.getHeight() + 2.5f + offsetY, 2.5f, new Color(100, 100, 255, 255));
 
         if (redBarDrag) {
             int red;
@@ -193,10 +208,10 @@ public class ColorSetting extends SettingBase {
             colorSetting.setValue(maxColor);
         }
 
-        offsetY += MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10) + 5 + 5;
-        NVGRenderUtil.drawText("Green : " + colorSetting.getValue().getGreen(), MelyClient.fontManager.ubuntu, x + fontHeight / 2f + pickerBoxScale + 1 + 5, y + fontHeight + 5 + fontHeight / 2f + offsetY, 10, new Color(255, 255, 255, 255));
-        NVGRenderUtil.drawLinearGradientRoundedRect(x + fontHeight / 2f + pickerBoxScale + 1 + 5, y + fontHeight + 5 + fontHeight / 2f + MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10) + offsetY, 90, 5, 2.5f, new Color(0, 0, 0, 255), new Color(0, 255, 0, 255));
-        NVGRenderUtil.drawCircle(x + fontHeight / 2f + pickerBoxScale + 1 + 5 + getColorBarX(colorSetting.getValue().getGreen()), y + fontHeight + 5 + fontHeight / 2f + MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10) + 2.5f + offsetY, 2.5f, new Color(100, 100, 255, 255));
+        offsetY += ubuntu10.getHeight() + 5 + 5;
+        ubuntu10.drawText("Green : " + colorSetting.getValue().getGreen(), x + fontHeight / 2f + pickerBoxScale + 1 + 5, y + fontHeight + 5 + fontHeight / 2f + offsetY, new Color(255, 255, 255, 255));
+        NVGRenderUtil.drawLinearGradientRoundedRect(x + fontHeight / 2f + pickerBoxScale + 1 + 5, y + fontHeight + 5 + fontHeight / 2f + ubuntu10.getHeight() + offsetY, 90, 5, 2.5f, new Color(0, 0, 0, 255), new Color(0, 255, 0, 255));
+        NVGRenderUtil.drawCircle(x + fontHeight / 2f + pickerBoxScale + 1 + 5 + getColorBarX(colorSetting.getValue().getGreen()), y + fontHeight + 5 + fontHeight / 2f + ubuntu10.getHeight() + 2.5f + offsetY, 2.5f, new Color(100, 100, 255, 255));
 
         if (greenBarDrag) {
             int green;
@@ -212,10 +227,10 @@ public class ColorSetting extends SettingBase {
             colorSetting.setValue(maxColor);
         }
 
-        offsetY += MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10) + 5 + 5;
-        NVGRenderUtil.drawText("Blue : " + colorSetting.getValue().getBlue(), MelyClient.fontManager.ubuntu, x + fontHeight / 2f + pickerBoxScale + 1 + 5, y + fontHeight + 5 + fontHeight / 2f + offsetY, 10, new Color(255, 255, 255, 255));
-        NVGRenderUtil.drawLinearGradientRoundedRect(x + fontHeight / 2f + pickerBoxScale + 1 + 5, y + fontHeight + 5 + fontHeight / 2f + MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10) + offsetY, 90, 5, 2.5f, new Color(0, 0, 0, 255), new Color(0, 0, 255, 255));
-        NVGRenderUtil.drawCircle(x + fontHeight / 2f + pickerBoxScale + 1 + 5 + getColorBarX(colorSetting.getValue().getBlue()), y + fontHeight + 5 + fontHeight / 2f + MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10) + 2.5f + offsetY, 2.5f, new Color(100, 100, 255, 255));
+        offsetY += ubuntu10.getHeight() + 5 + 5;
+        ubuntu10.drawText("Blue : " + colorSetting.getValue().getBlue(), x + fontHeight / 2f + pickerBoxScale + 1 + 5, y + fontHeight + 5 + fontHeight / 2f + offsetY, new Color(255, 255, 255, 255));
+        NVGRenderUtil.drawLinearGradientRoundedRect(x + fontHeight / 2f + pickerBoxScale + 1 + 5, y + fontHeight + 5 + fontHeight / 2f + ubuntu10.getHeight() + offsetY, 90, 5, 2.5f, new Color(0, 0, 0, 255), new Color(0, 0, 255, 255));
+        NVGRenderUtil.drawCircle(x + fontHeight / 2f + pickerBoxScale + 1 + 5 + getColorBarX(colorSetting.getValue().getBlue()), y + fontHeight + 5 + fontHeight / 2f + ubuntu10.getHeight() + 2.5f + offsetY, 2.5f, new Color(100, 100, 255, 255));
 
         if (blueBarDrag) {
             int blue;
@@ -231,10 +246,10 @@ public class ColorSetting extends SettingBase {
             colorSetting.setValue(maxColor);
         }
 
-        offsetY += MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10) + 5 + 5;
-        NVGRenderUtil.drawText("Alpha : " + colorSetting.getValue().getAlpha(), MelyClient.fontManager.ubuntu, x + fontHeight / 2f + pickerBoxScale + 1 + 5, y + fontHeight + 5 + fontHeight / 2f + offsetY, 10, new Color(255, 255, 255, 255));
-        NVGRenderUtil.drawLinearGradientRoundedRect(x + fontHeight / 2f + pickerBoxScale + 1 + 5, y + fontHeight + 5 + fontHeight / 2f + MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10) + offsetY, 90, 5, 2.5f, new Color(30, 30, 30, 255), ColorUtil.setAlpha(colorSetting.getValue(), 255));
-        NVGRenderUtil.drawCircle(x + fontHeight / 2f + pickerBoxScale + 1 + 5 + getColorBarX(colorSetting.getValue().getAlpha()), y + fontHeight + 5 + fontHeight / 2f + MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10) + 2.5f + offsetY, 2.5f, new Color(100, 100, 255, 255));
+        offsetY += ubuntu10.getHeight() + 5 + 5;
+        ubuntu10.drawText("Alpha : " + colorSetting.getValue().getAlpha(), x + fontHeight / 2f + pickerBoxScale + 1 + 5, y + fontHeight + 5 + fontHeight / 2f + offsetY, new Color(255, 255, 255, 255));
+        NVGRenderUtil.drawLinearGradientRoundedRect(x + fontHeight / 2f + pickerBoxScale + 1 + 5, y + fontHeight + 5 + fontHeight / 2f + ubuntu10.getHeight() + offsetY, 90, 5, 2.5f, new Color(30, 30, 30, 255), ColorUtil.setAlpha(colorSetting.getValue(), 255));
+        NVGRenderUtil.drawCircle(x + fontHeight / 2f + pickerBoxScale + 1 + 5 + getColorBarX(colorSetting.getValue().getAlpha()), y + fontHeight + 5 + fontHeight / 2f + ubuntu10.getHeight() + 2.5f + offsetY, 2.5f, new Color(100, 100, 255, 255));
 
         if (alphaBarDrag) {
             int alpha;
@@ -252,9 +267,11 @@ public class ColorSetting extends SettingBase {
     }
 
     public void drawRainbowSetting(int mouseX, int mouseY) {
-        NVGRenderUtil.drawText("Saturation : " + colorSetting.getSaturation(), MelyClient.fontManager.ubuntu, x + fontHeight / 2f + pickerBoxScale + 1 + 5, y + fontHeight + 5 + fontHeight / 2f + offsetY, 10, new Color(255, 255, 255, 255));
-        NVGRenderUtil.drawRoundedRectWH(x + fontHeight / 2f + pickerBoxScale + 1 + 5, y + fontHeight + 5 + fontHeight / 2f + MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10) + offsetY, 90, 5, 2.5f, new Color(20, 20, 20, 255));
-        NVGRenderUtil.drawCircle(x + fontHeight / 2f + pickerBoxScale + 1 + 5 + getColorBarX(colorSetting.getSaturation()), y + fontHeight + 5 + fontHeight / 2f + MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10) + 2.5f + offsetY, 2.5f, new Color(100, 100, 255, 255));
+        FontUtil ubuntu10 = new FontUtil(MelyClient.fontManager.ubuntu, 10);
+
+        ubuntu10.drawText("Saturation : " + colorSetting.getSaturation(), x + fontHeight / 2f + pickerBoxScale + 1 + 5, y + fontHeight + 5 + fontHeight / 2f + offsetY, new Color(255, 255, 255, 255));
+        NVGRenderUtil.drawRoundedRectWH(x + fontHeight / 2f + pickerBoxScale + 1 + 5, y + fontHeight + 5 + fontHeight / 2f + ubuntu10.getHeight() + offsetY, 90, 5, 2.5f, new Color(20, 20, 20, 255));
+        NVGRenderUtil.drawCircle(x + fontHeight / 2f + pickerBoxScale + 1 + 5 + getColorBarX(colorSetting.getSaturation()), y + fontHeight + 5 + fontHeight / 2f + ubuntu10.getHeight() + 2.5f + offsetY, 2.5f, new Color(100, 100, 255, 255));
 
         if (saturationDrag) {
             int saturation;
@@ -269,10 +286,10 @@ public class ColorSetting extends SettingBase {
             colorSetting.setSaturation(saturation);
         }
 
-        offsetY += MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10) + 5 + 5;
-        NVGRenderUtil.drawText("Brightness : " + colorSetting.getBrightness(), MelyClient.fontManager.ubuntu, x + fontHeight / 2f + pickerBoxScale + 1 + 5, y + fontHeight + 5 + fontHeight / 2f + offsetY, 10, new Color(255, 255, 255, 255));
-        NVGRenderUtil.drawRoundedRectWH(x + fontHeight / 2f + pickerBoxScale + 1 + 5, y + fontHeight + 5 + fontHeight / 2f + MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10) + offsetY, 90, 5, 2.5f, new Color(20, 20, 20, 255));
-        NVGRenderUtil.drawCircle(x + fontHeight / 2f + pickerBoxScale + 1 + 5 + getColorBarX(colorSetting.getBrightness()), y + fontHeight + 5 + fontHeight / 2f + MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10) + 2.5f + offsetY, 2.5f, new Color(100, 100, 255, 255));
+        offsetY += ubuntu10.getHeight() + 5 + 5;
+        ubuntu10.drawText("Brightness : " + colorSetting.getBrightness(), x + fontHeight / 2f + pickerBoxScale + 1 + 5, y + fontHeight + 5 + fontHeight / 2f + offsetY, new Color(255, 255, 255, 255));
+        NVGRenderUtil.drawRoundedRectWH(x + fontHeight / 2f + pickerBoxScale + 1 + 5, y + fontHeight + 5 + fontHeight / 2f + ubuntu10.getHeight() + offsetY, 90, 5, 2.5f, new Color(20, 20, 20, 255));
+        NVGRenderUtil.drawCircle(x + fontHeight / 2f + pickerBoxScale + 1 + 5 + getColorBarX(colorSetting.getBrightness()), y + fontHeight + 5 + fontHeight / 2f + ubuntu10.getHeight() + 2.5f + offsetY, 2.5f, new Color(100, 100, 255, 255));
 
         if (brightnessDrag) {
             int brightness;
@@ -287,10 +304,10 @@ public class ColorSetting extends SettingBase {
             colorSetting.setBrightness(brightness);
         }
 
-        offsetY += MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10) + 5 + 5;
-        NVGRenderUtil.drawText("Delay : " + colorSetting.getDelay(), MelyClient.fontManager.ubuntu, x + fontHeight / 2f + pickerBoxScale + 1 + 5, y + fontHeight + 5 + fontHeight / 2f + offsetY, 10, new Color(255, 255, 255, 255));
-        NVGRenderUtil.drawRoundedRectWH(x + fontHeight / 2f + pickerBoxScale + 1 + 5, y + fontHeight + 5 + fontHeight / 2f + MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10) + offsetY, 90, 5, 2.5f, new Color(20, 20, 20, 255));
-        NVGRenderUtil.drawCircle(x + fontHeight / 2f + pickerBoxScale + 1 + 5 + getDelayBarX(colorSetting.getDelay()), y + fontHeight + 5 + fontHeight / 2f + MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10) + 2.5f + offsetY, 2.5f, new Color(100, 100, 255, 255));
+        offsetY += ubuntu10.getHeight() + 5 + 5;
+        ubuntu10.drawText("Delay : " + colorSetting.getDelay(), x + fontHeight / 2f + pickerBoxScale + 1 + 5, y + fontHeight + 5 + fontHeight / 2f + offsetY, new Color(255, 255, 255, 255));
+        NVGRenderUtil.drawRoundedRectWH(x + fontHeight / 2f + pickerBoxScale + 1 + 5, y + fontHeight + 5 + fontHeight / 2f + ubuntu10.getHeight() + offsetY, 90, 5, 2.5f, new Color(20, 20, 20, 255));
+        NVGRenderUtil.drawCircle(x + fontHeight / 2f + pickerBoxScale + 1 + 5 + getDelayBarX(colorSetting.getDelay()), y + fontHeight + 5 + fontHeight / 2f + ubuntu10.getHeight() + 2.5f + offsetY, 2.5f, new Color(100, 100, 255, 255));
 
         if (delayBarDrag) {
             int delay;
@@ -305,10 +322,10 @@ public class ColorSetting extends SettingBase {
             colorSetting.setDelay(delay);
         }
 
-        offsetY += MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10) + 5 + 5;
-        NVGRenderUtil.drawText("Alpha : " + colorSetting.getValue().getAlpha(), MelyClient.fontManager.ubuntu, x + fontHeight / 2f + pickerBoxScale + 1 + 5, y + fontHeight + 5 + fontHeight / 2f + offsetY, 10, new Color(255, 255, 255, 255));
-        NVGRenderUtil.drawLinearGradientRoundedRect(x + fontHeight / 2f + pickerBoxScale + 1 + 5, y + fontHeight + 5 + fontHeight / 2f + MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10) + offsetY, 90, 5, 2.5f, new Color(30, 30, 30, 255), ColorUtil.setAlpha(colorSetting.getValue(), 255));
-        NVGRenderUtil.drawCircle(x + fontHeight / 2f + pickerBoxScale + 1 + 5 + getColorBarX(colorSetting.getValue().getAlpha()), y + fontHeight + 5 + fontHeight / 2f + MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10) + 2.5f + offsetY, 2.5f, new Color(100, 100, 255, 255));
+        offsetY += ubuntu10.getHeight() + 5 + 5;
+        ubuntu10.drawText("Alpha : " + colorSetting.getValue().getAlpha(), x + fontHeight / 2f + pickerBoxScale + 1 + 5, y + fontHeight + 5 + fontHeight / 2f + offsetY, new Color(255, 255, 255, 255));
+        NVGRenderUtil.drawLinearGradientRoundedRect(x + fontHeight / 2f + pickerBoxScale + 1 + 5, y + fontHeight + 5 + fontHeight / 2f + ubuntu10.getHeight() + offsetY, 90, 5, 2.5f, new Color(30, 30, 30, 255), ColorUtil.setAlpha(colorSetting.getValue(), 255));
+        NVGRenderUtil.drawCircle(x + fontHeight / 2f + pickerBoxScale + 1 + 5 + getColorBarX(colorSetting.getValue().getAlpha()), y + fontHeight + 5 + fontHeight / 2f + ubuntu10.getHeight() + 2.5f + offsetY, 2.5f, new Color(100, 100, 255, 255));
 
         if (alphaBarDrag) {
             int alpha;
@@ -328,38 +345,40 @@ public class ColorSetting extends SettingBase {
     @Override
     @SuppressWarnings("unchecked")
     public void mouseClicked(int mouseX, int mouseY, int mouseButton) {
-        if (MouseUtil.isHoveringWH(x, y, MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10), MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10), mouseX, mouseY)) {
+        FontUtil ubuntu10 = new FontUtil(MelyClient.fontManager.ubuntu, 10);
+
+        if (MouseUtil.isHoveringWH(x, y, ubuntu10.getHeight(), ubuntu10.getHeight(), mouseX, mouseY)) {
             open = !open;
         }
 
         offsetY = 0.0f;
-        if (MouseUtil.isHoveringWH(x + fontHeight / 2f + pickerBoxScale + 1 + 5, y + fontHeight + 5 + fontHeight / 2f + offsetY, MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10), MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10), mouseX, mouseY)) {
+        if (MouseUtil.isHoveringWH(x + fontHeight / 2f + pickerBoxScale + 1 + 5, y + fontHeight + 5 + fontHeight / 2f + offsetY, ubuntu10.getHeight(), ubuntu10.getHeight(), mouseX, mouseY)) {
             colorSetting.setRainbow(!colorSetting.isRainbow());
         }
         if (colorSetting.isRainbow()) {
-            offsetY += MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10) + 5;
-            saturationDrag = MouseUtil.isHoveringWH(x + fontHeight / 2f + pickerBoxScale + 1 + 5, y + fontHeight + 5 + fontHeight / 2f + MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10) + offsetY, 90, 5, mouseX, mouseY);
+            offsetY += ubuntu10.getHeight() + 5;
+            saturationDrag = MouseUtil.isHoveringWH(x + fontHeight / 2f + pickerBoxScale + 1 + 5, y + fontHeight + 5 + fontHeight / 2f + ubuntu10.getHeight() + offsetY, 90, 5, mouseX, mouseY);
 
-            offsetY += MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10) + 5 + 5;
-            brightnessDrag = MouseUtil.isHoveringWH(x + fontHeight / 2f + pickerBoxScale + 1 + 5, y + fontHeight + 5 + fontHeight / 2f + MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10) + offsetY, 90, 5, mouseX, mouseY);
+            offsetY += ubuntu10.getHeight() + 5 + 5;
+            brightnessDrag = MouseUtil.isHoveringWH(x + fontHeight / 2f + pickerBoxScale + 1 + 5, y + fontHeight + 5 + fontHeight / 2f + ubuntu10.getHeight() + offsetY, 90, 5, mouseX, mouseY);
 
-            offsetY += MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10) + 5 + 5;
-            delayBarDrag = MouseUtil.isHoveringWH(x + fontHeight / 2f + pickerBoxScale + 1 + 5, y + fontHeight + 5 + fontHeight / 2f + MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10) + offsetY, 90, 5, mouseX, mouseY);
+            offsetY += ubuntu10.getHeight() + 5 + 5;
+            delayBarDrag = MouseUtil.isHoveringWH(x + fontHeight / 2f + pickerBoxScale + 1 + 5, y + fontHeight + 5 + fontHeight / 2f + ubuntu10.getHeight() + offsetY, 90, 5, mouseX, mouseY);
         } else {
-            offsetY += MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10) + 5;
-            pickerBoxDrag = MouseUtil.isHoveringWH(x + MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10) / 2f, y + MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10) + 5 + MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10) / 2f, 100 - ((MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10) / 2f) * 2) + 1, 100 - ((MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10) / 2f) * 2), mouseX, mouseY);
+            offsetY += ubuntu10.getHeight() + 5;
+            pickerBoxDrag = MouseUtil.isHoveringWH(x + ubuntu10.getHeight() / 2f, y + ubuntu10.getHeight() + 5 + ubuntu10.getHeight() / 2f, 100 - ((ubuntu10.getHeight() / 2f) * 2) + 1, 100 - ((ubuntu10.getHeight() / 2f) * 2), mouseX, mouseY);
 
-            redBarDrag = MouseUtil.isHoveringWH(x + fontHeight / 2f + pickerBoxScale + 1 + 5, y + fontHeight + 5 + fontHeight / 2f + MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10) + offsetY, 90, 5, mouseX, mouseY);
+            redBarDrag = MouseUtil.isHoveringWH(x + fontHeight / 2f + pickerBoxScale + 1 + 5, y + fontHeight + 5 + fontHeight / 2f + ubuntu10.getHeight() + offsetY, 90, 5, mouseX, mouseY);
 
-            offsetY += MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10) + 5 + 5;
-            greenBarDrag = MouseUtil.isHoveringWH(x + fontHeight / 2f + pickerBoxScale + 1 + 5, y + fontHeight + 5 + fontHeight / 2f + MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10) + offsetY, 90, 5, mouseX, mouseY);
+            offsetY += ubuntu10.getHeight() + 5 + 5;
+            greenBarDrag = MouseUtil.isHoveringWH(x + fontHeight / 2f + pickerBoxScale + 1 + 5, y + fontHeight + 5 + fontHeight / 2f + ubuntu10.getHeight() + offsetY, 90, 5, mouseX, mouseY);
 
-            offsetY += MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10) + 5 + 5;
-            blueBarDrag = MouseUtil.isHoveringWH(x + fontHeight / 2f + pickerBoxScale + 1 + 5, y + fontHeight + 5 + fontHeight / 2f + MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10) + offsetY, 90, 5, mouseX, mouseY);
+            offsetY += ubuntu10.getHeight() + 5 + 5;
+            blueBarDrag = MouseUtil.isHoveringWH(x + fontHeight / 2f + pickerBoxScale + 1 + 5, y + fontHeight + 5 + fontHeight / 2f + ubuntu10.getHeight() + offsetY, 90, 5, mouseX, mouseY);
         }
 
-        offsetY += MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10) + 5 + 5;
-        alphaBarDrag = MouseUtil.isHoveringWH(x + fontHeight / 2f + pickerBoxScale + 1 + 5, y + fontHeight + 5 + fontHeight / 2f + MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10) + offsetY, 90, 5, mouseX, mouseY);
+        offsetY += ubuntu10.getHeight() + 5 + 5;
+        alphaBarDrag = MouseUtil.isHoveringWH(x + fontHeight / 2f + pickerBoxScale + 1 + 5, y + fontHeight + 5 + fontHeight / 2f + ubuntu10.getHeight() + offsetY, 90, 5, mouseX, mouseY);
 
         super.mouseClicked(mouseX, mouseY, mouseButton);
     }
@@ -385,16 +404,18 @@ public class ColorSetting extends SettingBase {
     }
 
     public Color getColor(int x, int y) {
+        FontUtil ubuntu10 = new FontUtil(MelyClient.fontManager.ubuntu, 10);
+
         int maxRed = maxColor.getRed() / 2;
         int maxGreen = maxColor.getGreen() / 2;
         int maxBlue = maxColor.getBlue() / 2;
 
-        int redX = (int) (maxRed * x / (100 - ((MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10) / 2f) * 2)));
-        int redY = (int) (maxRed * y / (100 - ((MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10) / 2f) * 2)));
-        int greenX = (int) (maxGreen * x / (100 - ((MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10) / 2f) * 2)));
-        int greenY = (int) (maxGreen * y / (100 - ((MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10) / 2f) * 2)));
-        int blueX = (int) (maxBlue * x / (100 - ((MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10) / 2f) * 2)));
-        int blueY = (int) (maxBlue * y / (100 - ((MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10) / 2f) * 2)));
+        int redX = (int) (maxRed * x / (100 - ((ubuntu10.getHeight() / 2f) * 2)));
+        int redY = (int) (maxRed * y / (100 - ((ubuntu10.getHeight() / 2f) * 2)));
+        int greenX = (int) (maxGreen * x / (100 - ((ubuntu10.getHeight() / 2f) * 2)));
+        int greenY = (int) (maxGreen * y / (100 - ((ubuntu10.getHeight() / 2f) * 2)));
+        int blueX = (int) (maxBlue * x / (100 - ((ubuntu10.getHeight() / 2f) * 2)));
+        int blueY = (int) (maxBlue * y / (100 - ((ubuntu10.getHeight() / 2f) * 2)));
         int red = (redX + redY);
         int green = (greenX + greenY);
         int blue = (blueX + blueY);

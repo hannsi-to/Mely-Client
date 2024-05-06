@@ -3,6 +3,7 @@ package me.hannsi.melyclient.gui.clickGui;
 import me.hannsi.melyclient.MelyClient;
 import me.hannsi.melyclient.module.system.Category;
 import me.hannsi.melyclient.util.render.nanovg.render.NVGRenderUtil;
+import me.hannsi.melyclient.util.render.nanovg.render.font.FontUtil;
 import me.hannsi.melyclient.util.system.math.MouseUtil;
 import me.hannsi.melyclient.util.system.math.animation.Easing;
 import me.hannsi.melyclient.util.system.math.animation.EasingUtil;
@@ -29,29 +30,32 @@ public class CategoryPanel {
     }
 
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-        boolean hover = MouseUtil.isHoveringWH(x, y, MelyClient.fontManager.getWidth(MelyClient.fontManager.bonIcon, category.getIcon() + " ", 10) + MelyClient.fontManager.getWidth(MelyClient.fontManager.ubuntu, category.getDisplay(), 10), MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10), mouseX, mouseY);
+        FontUtil bonIcon10 = new FontUtil(MelyClient.fontManager.bonIcon, 10);
+        FontUtil ubuntu10 = new FontUtil(MelyClient.fontManager.ubuntu,10);
+
+        boolean hover = MouseUtil.isHoveringWH(x, y, bonIcon10.getWidth(category.getIcon() + " ") + ubuntu10.getWidth(category.getDisplay()), ubuntu10.getHeight(), mouseX, mouseY);
         float lineW;
 
         if (hover) {
             easingUtil1.setReverse(true);
             easingUtil2.reset();
-            lineW = easingUtil1.get(500) * (MelyClient.fontManager.getWidth(MelyClient.fontManager.ubuntu, category.getDisplay(), 10) / 2);
+            lineW = easingUtil1.get(500) * (ubuntu10.getWidth(category.getDisplay()) / 2);
 
-            NVGRenderUtil.drawText(category.getIcon() + " ", MelyClient.fontManager.bonIcon, x, y, 10, new Color(255, 255, 255, 255), 5, ColorUtil.getRainbow(20, 255, 255));
+            bonIcon10.drawBlurText(category.getIcon() + " ", x, y, new Color(255, 255, 255, 255), 5, ColorUtil.getRainbow(20, 255, 255));
         } else {
             easingUtil2.setReverse(false);
             easingUtil1.reset();
-            lineW = easingUtil2.get(500) * (MelyClient.fontManager.getWidth(MelyClient.fontManager.ubuntu, category.getDisplay(), 10) / 2);
+            lineW = easingUtil2.get(500) * (ubuntu10.getWidth(category.getDisplay()) / 2);
 
-            NVGRenderUtil.drawText(category.getIcon() + " ", MelyClient.fontManager.bonIcon, x, y, 10, new Color(255, 255, 255, 255));
+            bonIcon10.drawText(category.getIcon() + " ", x, y, new Color(255, 255, 255, 255));
         }
-        NVGRenderUtil.drawText(category.getDisplay(), MelyClient.fontManager.ubuntu, x + MelyClient.fontManager.getWidth(MelyClient.fontManager.bonIcon, category.getIcon() + " ", 10), y, 10, new Color(255, 255, 255, 255));
+        ubuntu10.drawText(category.getDisplay(), x + bonIcon10.getWidth(category.getIcon() + " "), y, new Color(255, 255, 255, 255));
 
         if (category == ClickGui.INSTANCE.selectCategory) {
-            lineW = (MelyClient.fontManager.getWidth(MelyClient.fontManager.ubuntu, category.getDisplay(), 10) / 2) * 0;
+            lineW = (ubuntu10.getWidth(category.getDisplay()) / 2) * 0;
         }
 
-        NVGRenderUtil.drawLineWH(x + MelyClient.fontManager.getWidth(MelyClient.fontManager.bonIcon, category.getIcon() + " ", 10) + lineW, y + MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10), MelyClient.fontManager.getWidth(MelyClient.fontManager.ubuntu, category.getDisplay(), 10) - (lineW * 2), 0, 1, new Color(255, 255, 255, 255));
+        NVGRenderUtil.drawLineWH(x + bonIcon10.getWidth(category.getIcon() + " ") + lineW, y + ubuntu10.getHeight(), ubuntu10.getWidth(category.getDisplay()) - (lineW * 2), 0, 1, new Color(255, 255, 255, 255));
 
         if (hover) {
             if (Mouse.isButtonDown(0)) {

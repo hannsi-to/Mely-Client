@@ -3,6 +3,7 @@ package me.hannsi.melyclient.gui.clickGui2.Panels.altManager;
 import me.hannsi.melyclient.MelyClient;
 import me.hannsi.melyclient.gui.clickGui2.ClickGui2;
 import me.hannsi.melyclient.util.render.nanovg.render.NVGRenderUtil;
+import me.hannsi.melyclient.util.render.nanovg.render.font.FontUtil;
 import me.hannsi.melyclient.util.system.auth.LoginMode;
 import me.hannsi.melyclient.util.system.math.MouseUtil;
 import net.minecraft.util.ResourceLocation;
@@ -49,6 +50,9 @@ public class LoginModeButton {
     }
 
     public void draw(int mouseX, int mouseY, float width, float height) {
+        FontUtil ubuntu10 = new FontUtil(MelyClient.fontManager.ubuntu, 10);
+        FontUtil ubuntu12 = new FontUtil(MelyClient.fontManager.ubuntu, 12);
+
         NVGRenderUtil.drawRadialGradientRect(x - 1, y - 1, width / 9f + 2, height / 3f + 2, mouseX, mouseY, 0, 70, new Color(91, 91, 91, 255), new Color(4, 4, 4, 255));
 
         NVGRenderUtil.drawRectWH(x, y, width / 9f, height / 3f, new Color(0, 0, 0, 255));
@@ -59,7 +63,7 @@ public class LoginModeButton {
             NVGRenderUtil.drawRadialGradientRect(x, y, width / 9f, height / 3f, mouseX, mouseY, 0, 70, new Color(255, 255, 255, 50), new Color(4, 4, 4, 255));
         }
 
-        NVGRenderUtil.drawText(loginMode.getDisplay(), MelyClient.fontManager.ubuntu, x + 5, y + 2.5f, 12, new Color(255, 255, 255, 255));
+        ubuntu12.drawText(loginMode.getDisplay(), x + 5, y + 2.5f, new Color(255, 255, 255, 255));
 
         String[] descriptionArray = description.split("");
         String tempDescription = "";
@@ -68,7 +72,7 @@ public class LoginModeButton {
         for (String s : descriptionArray) {
             tempDescription = tempDescription + s;
 
-            float descriptionWidth = MelyClient.fontManager.getWidth(MelyClient.fontManager.ubuntu, tempDescription, 10);
+            float descriptionWidth = ubuntu10.getWidth(tempDescription);
 
             if (width / 9f - 15 < descriptionWidth) {
                 nDescription.add(tempDescription);
@@ -77,11 +81,11 @@ public class LoginModeButton {
         }
         nDescription.add(tempDescription);
 
-        float textOffsetY = 2.5f + MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 12);
+        float textOffsetY = 2.5f + ubuntu12.getHeight();
         for (String text : nDescription) {
-            NVGRenderUtil.drawText(text, MelyClient.fontManager.ubuntu, x + 5, y + textOffsetY, 10, new Color(91, 91, 91, 255));
+            ubuntu10.drawText(text, x + 5, y + textOffsetY, new Color(91, 91, 91, 255));
 
-            textOffsetY += MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10);
+            textOffsetY += ubuntu10.getHeight();
         }
     }
 

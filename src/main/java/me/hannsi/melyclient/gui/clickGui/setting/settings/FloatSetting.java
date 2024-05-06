@@ -6,6 +6,7 @@ import me.hannsi.melyclient.gui.clickGui.setting.system.SettingBase;
 import me.hannsi.melyclient.module.system.Module;
 import me.hannsi.melyclient.module.system.settings.Setting;
 import me.hannsi.melyclient.util.render.nanovg.render.NVGRenderUtil;
+import me.hannsi.melyclient.util.render.nanovg.render.font.FontUtil;
 import me.hannsi.melyclient.util.system.conversion.BonIcon;
 import me.hannsi.melyclient.util.system.conversion.Keyboard;
 import me.hannsi.melyclient.util.system.math.MathUtil;
@@ -28,50 +29,56 @@ public class FloatSetting extends SettingBase {
 
     @Override
     public float drawScreen(int mouseX, int mouseY, float partialTicks) {
-        if (MouseUtil.isHoveringWH(x, y, MelyClient.fontManager.getWidth(MelyClient.fontManager.ubuntu, floatSetting.getName(), 10), MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10), mouseX, mouseY)) {
-            NVGRenderUtil.drawText(floatSetting.getName(), MelyClient.fontManager.ubuntu, x + MelyClient.fontManager.getWidth(MelyClient.fontManager.ubuntu, "AA" + floatSetting.getValue(), 10) + 5 + MelyClient.fontManager.getWidth(MelyClient.fontManager.bonIcon, BonIcon.ARROW_BACK + BonIcon.ARROW_FORWARD, 10), y + 1, 10, new Color(255, 255, 255, 255), 5f, ColorUtil.getRainbow(20, 255, 255));
+        FontUtil ubuntu10 = new FontUtil(MelyClient.fontManager.ubuntu, 10);
+        FontUtil bonIcon10 = new FontUtil(MelyClient.fontManager.bonIcon, 10);
+
+        if (MouseUtil.isHoveringWH(x, y, ubuntu10.getWidth(floatSetting.getName()), ubuntu10.getHeight(), mouseX, mouseY)) {
+            ubuntu10.drawBlurText(floatSetting.getName(), x + ubuntu10.getWidth("AA" + floatSetting.getValue()) + 5 + bonIcon10.getWidth(BonIcon.ARROW_BACK + BonIcon.ARROW_FORWARD), y + 1, new Color(255, 255, 255, 255), 5f, ColorUtil.getRainbow(20, 255, 255));
         } else {
-            NVGRenderUtil.drawText(floatSetting.getName(), MelyClient.fontManager.ubuntu, x + MelyClient.fontManager.getWidth(MelyClient.fontManager.ubuntu, "AA" + floatSetting.getValue(), 10) + 5 + MelyClient.fontManager.getWidth(MelyClient.fontManager.bonIcon, "RS", 10), y + 1, 10, new Color(255, 255, 255, 255));
+            ubuntu10.drawText(floatSetting.getName(), x + ubuntu10.getWidth("AA" + floatSetting.getValue()) + 5 + bonIcon10.getWidth("RS"), y + 1, new Color(255, 255, 255, 255));
         }
 
-        if (MouseUtil.isHoveringWH(x + MelyClient.fontManager.getWidth(MelyClient.fontManager.ubuntu, "AA" + floatSetting.getValue(), 10) + 5 + MelyClient.fontManager.getWidth(MelyClient.fontManager.bonIcon, "RS", 10), y + 1, MelyClient.fontManager.getWidth(MelyClient.fontManager.ubuntu, floatSetting.getName(), 10), MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10), mouseX, mouseY)) {
+        if (MouseUtil.isHoveringWH(x + ubuntu10.getWidth("AA" + floatSetting.getValue()) + 5 + ubuntu10.getWidth("RS"), y + 1, ubuntu10.getWidth(floatSetting.getName()), ubuntu10.getHeight(), mouseX, mouseY)) {
             ClickGui.getINSTANCE().setDescription(floatSetting.getDescription());
         }
 
-        NVGRenderUtil.drawRoundedRectWH(x, y - 1, MelyClient.fontManager.getWidth(MelyClient.fontManager.ubuntu, "AA" + (typed ? floatText : floatSetting.getValue() + ""), 10) + MelyClient.fontManager.getWidth(MelyClient.fontManager.bonIcon, BonIcon.ARROW_BACK + BonIcon.ARROW_FORWARD, 10), MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10) + 2, MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10) / 2f, new Color(30, 30, 30, 255));
+        NVGRenderUtil.drawRoundedRectWH(x, y - 1, ubuntu10.getWidth("AA" + (typed ? floatText : floatSetting.getValue() + "")) + bonIcon10.getWidth(BonIcon.ARROW_BACK + BonIcon.ARROW_FORWARD), ubuntu10.getHeight() + 2, ubuntu10.getHeight() / 2f, new Color(30, 30, 30, 255));
 
-        if (MouseUtil.isHoveringWH(x, y - 1, MelyClient.fontManager.getWidth(MelyClient.fontManager.ubuntu, "AA" + (typed ? floatText : floatSetting.getValue() + ""), 10) + MelyClient.fontManager.getWidth(MelyClient.fontManager.bonIcon, BonIcon.ARROW_BACK + BonIcon.ARROW_FORWARD, 10), MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10) + 2, mouseX, mouseY)) {
+        if (MouseUtil.isHoveringWH(x, y - 1, ubuntu10.getWidth("AA" + (typed ? floatText : floatSetting.getValue() + "")) + bonIcon10.getWidth(BonIcon.ARROW_BACK + BonIcon.ARROW_FORWARD), ubuntu10.getHeight() + 2, mouseX, mouseY)) {
             ClickGui.getINSTANCE().setDescription("Min : " + floatSetting.getMin() + ".   Max : " + floatSetting.getMax() + ".   Step : " + floatSetting.getStep() + ".");
         }
 
-        NVGRenderUtil.drawText(typed ? floatText : floatSetting.getValue() + "", MelyClient.fontManager.ubuntu, x + MelyClient.fontManager.getWidth(MelyClient.fontManager.ubuntu, "A", 10) + (MelyClient.fontManager.getWidth(MelyClient.fontManager.bonIcon, BonIcon.ARROW_BACK + BonIcon.ARROW_FORWARD, 10) / 2f), y, 10, new Color(255, 255, 255, 255));
+        ubuntu10.drawText(typed ? floatText : floatSetting.getValue() + "", x + ubuntu10.getWidth("A") + (bonIcon10.getWidth(BonIcon.ARROW_BACK + BonIcon.ARROW_FORWARD) / 2f), y, new Color(255, 255, 255, 255));
 
-        NVGRenderUtil.drawText(BonIcon.ARROW_BACK, MelyClient.fontManager.bonIcon, x + 2.5f, y, 10, new Color(255, 255, 255, 255));
+        bonIcon10.drawText(BonIcon.ARROW_BACK, x + 2.5f, y, new Color(255, 255, 255, 255));
 
-        NVGRenderUtil.drawText(BonIcon.ARROW_FORWARD, MelyClient.fontManager.bonIcon, x + MelyClient.fontManager.getWidth(MelyClient.fontManager.ubuntu, "AA" + (typed ? floatText : floatSetting.getValue() + ""), 10) + MelyClient.fontManager.getWidth(MelyClient.fontManager.bonIcon, BonIcon.ARROW_BACK, 10) - 2.5f, y, 10, new Color(255, 255, 255, 255));
+        bonIcon10.drawText(BonIcon.ARROW_FORWARD, x + ubuntu10.getWidth("AA" + (typed ? floatText : floatSetting.getValue() + "")) + bonIcon10.getWidth(BonIcon.ARROW_BACK) - 2.5f, y, new Color(255, 255, 255, 255));
 
         if (typed) {
-            NVGRenderUtil.drawLineWH(x + MelyClient.fontManager.getWidth(MelyClient.fontManager.ubuntu, "AA" + floatText, 10) + MelyClient.fontManager.getWidth(MelyClient.fontManager.bonIcon, BonIcon.ARROW_BACK, 10) - 5, y, 0, MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10), 1, new Color(255, 255, 255, 255));
+            NVGRenderUtil.drawLineWH(x + ubuntu10.getWidth("AA" + floatText) + ubuntu10.getWidth(BonIcon.ARROW_BACK) - 5, y, 0, ubuntu10.getHeight(), 1, new Color(255, 255, 255, 255));
         }
 
         setting = floatSetting;
 
-        return maxHeight + MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10) + 1;
+        return maxHeight + ubuntu10.getHeight() + 1;
     }
 
     @Override
     public void mouseClicked(int mouseX, int mouseY, int mouseButton) {
-        if (MouseUtil.isHoveringWH(x + 2.5f, y, MelyClient.fontManager.getWidth(MelyClient.fontManager.bonIcon, BonIcon.ARROW_BACK, 10), MelyClient.fontManager.getHeight(MelyClient.fontManager.bonIcon, 10), mouseX, mouseY)) {
+        FontUtil bonIcon10 = new FontUtil(MelyClient.fontManager.bonIcon, 10);
+        FontUtil ubuntu10 = new FontUtil(MelyClient.fontManager.ubuntu, 10);
+
+        if (MouseUtil.isHoveringWH(x + 2.5f, y, bonIcon10.getWidth(BonIcon.ARROW_BACK), bonIcon10.getHeight(), mouseX, mouseY)) {
             float value = updateValueForClick(true);
             floatSetting.setValue(value);
         }
 
-        if (MouseUtil.isHoveringWH(x + MelyClient.fontManager.getWidth(MelyClient.fontManager.ubuntu, "AA" + floatSetting.getValue(), 10) + MelyClient.fontManager.getWidth(MelyClient.fontManager.bonIcon, BonIcon.ARROW_BACK, 10) - 2.5f, y, MelyClient.fontManager.getWidth(MelyClient.fontManager.bonIcon, BonIcon.ARROW_FORWARD, 10), MelyClient.fontManager.getHeight(MelyClient.fontManager.bonIcon, 10), mouseX, mouseY)) {
+        if (MouseUtil.isHoveringWH(x + ubuntu10.getWidth("AA" + floatSetting.getValue()) + bonIcon10.getWidth(BonIcon.ARROW_BACK) - 2.5f, y, bonIcon10.getWidth(BonIcon.ARROW_FORWARD), bonIcon10.getHeight(), mouseX, mouseY)) {
             float value = updateValueForClick(false);
             floatSetting.setValue(value);
         }
 
-        if (MouseUtil.isHoveringWH(x + MelyClient.fontManager.getWidth(MelyClient.fontManager.ubuntu, "A", 10) + (MelyClient.fontManager.getWidth(MelyClient.fontManager.bonIcon, BonIcon.ARROW_BACK + BonIcon.ARROW_FORWARD, 10) / 2f), y, MelyClient.fontManager.getWidth(MelyClient.fontManager.ubuntu, floatSetting.getValue() + "", 10), MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10), mouseX, mouseY)) {
+        if (MouseUtil.isHoveringWH(x + ubuntu10.getWidth("A") + (bonIcon10.getWidth(BonIcon.ARROW_BACK + BonIcon.ARROW_FORWARD) / 2f), y, ubuntu10.getWidth(floatSetting.getValue() + ""), ubuntu10.getHeight(), mouseX, mouseY)) {
             typed = !typed;
             floatText = floatSetting.getValue().toString();
         }

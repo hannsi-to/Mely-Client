@@ -1,9 +1,7 @@
-package me.hannsi.melyclient.util.render.nanovg.render;
+package me.hannsi.melyclient.util.render.nanovg.render.font;
 
-import me.hannsi.melyclient.MelyClient;
 import org.lwjgl.nanovg.NanoVG;
 
-import java.awt.*;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -60,33 +58,5 @@ public class Font {
 
     public String getPath() {
         return path;
-    }
-
-    public float getWidth(String text, float size) {
-        return MelyClient.fontManager.getWidth(this, text, size);
-    }
-
-    public float getHeight(float size) {
-        return MelyClient.fontManager.getHeight(this, size);
-    }
-
-    public void drawText(String text, float x, float y, float size, Color color) {
-        NVGRenderUtil.drawText(text, this, x, y, size, color, NanoVG.NVG_ALIGN_LEFT | NanoVG.NVG_ALIGN_TOP);
-    }
-
-    public void drawTextCenter(String text, float x, float y, float size, Color color) {
-        NVGRenderUtil.drawText(text, this, x, y, size, color, NanoVG.NVG_ALIGN_CENTER | NanoVG.NVG_ALIGN_MIDDLE);
-    }
-
-    public void drawText(String text, float x, float y, float size, Color color, int align) {
-        NVGRenderUtil.drawText(text, this, x, y, size, color, align);
-    }
-
-    public void drawText(String text, float x, float y, float size, Color color, float blur, Color blurColor) {
-        NVGRenderUtil.drawText(text, this, x, y, size, color, blur, blurColor);
-    }
-
-    public void drawTextCenter(String text, float x, float y, float size, Color color, float blur, Color blurColor) {
-        NVGRenderUtil.drawTextCenter(text, this, x, y, size, color, blur, blurColor);
     }
 }

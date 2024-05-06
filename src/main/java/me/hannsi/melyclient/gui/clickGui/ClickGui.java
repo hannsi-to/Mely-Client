@@ -6,6 +6,7 @@ import me.hannsi.melyclient.module.system.Category;
 import me.hannsi.melyclient.module.system.Module;
 import me.hannsi.melyclient.util.render.GLUtil;
 import me.hannsi.melyclient.util.render.nanovg.render.NVGRenderUtil;
+import me.hannsi.melyclient.util.render.nanovg.render.font.FontUtil;
 import me.hannsi.melyclient.util.system.debug.DebugLevel;
 import me.hannsi.melyclient.util.system.debug.DebugLog;
 import me.hannsi.melyclient.util.system.math.MouseUtil;
@@ -62,6 +63,10 @@ public class ClickGui extends GuiScreen {
 
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
+        FontUtil bonIcon10 = new FontUtil(MelyClient.fontManager.bonIcon, 10);
+        FontUtil ubuntu10 = new FontUtil(MelyClient.fontManager.ubuntu, 10);
+        FontUtil ubuntu15 = new FontUtil(MelyClient.fontManager.ubuntu, 15);
+
         GLUtil.nvgPush();
 
         if (!loaded) {
@@ -72,7 +77,7 @@ public class ClickGui extends GuiScreen {
         GLUtil.nvgScale(easingUtil2.get(300), easingUtil2.get(300));
         GLUtil.nvgTranslate(-this.width / 2f, -this.height / 2f);
 
-        NVGRenderUtil.drawTextCenter(MelyClient.MOD_NAME + " v" + MelyClient.MOD_VER, MelyClient.fontManager.ubuntu, this.width / 2f, (this.height / 4f) - MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 15), 15, new Color(255, 255, 255, 255), 5, ColorUtil.getRainbow(20, 255, 255));
+        ubuntu15.drawBlurTextCenter(MelyClient.MOD_NAME + " v" + MelyClient.MOD_VER, this.width / 2f, (this.height / 4f) - ubuntu15.getHeight(), new Color(255, 255, 255, 255), 5, ColorUtil.getRainbow(20, 255, 255));
 
         NVGRenderUtil.drawRoundedRectWH(this.width / 4f, this.height / 4f, 100, (this.height / 4f) * 2, 5, true, false, false, true, new Color(25, 25, 25, 200));
 
@@ -120,7 +125,7 @@ public class ClickGui extends GuiScreen {
             } else if (scrollCount < 0) {
                 for (Module module : MelyClient.moduleManager.modules) {
                     if (module.getCategory() == selectCategory) {
-                        offSetY3 += MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10) + 10;
+                        offSetY3 += ubuntu10.getHeight() + 10;
                     }
                 }
 
@@ -135,7 +140,7 @@ public class ClickGui extends GuiScreen {
             }
         }
 
-        NVGRenderUtil.drawLineWH(ClickGui.this.width / 4f + 105 + ((ClickGui.this.width / 4f) - 100) + 5 + MelyClient.fontManager.getWidth(MelyClient.fontManager.bonIcon, "u", 10) + 5, ClickGui.this.height / 4f + 26, 0, (ClickGui.this.height / 4f) * 2 - 51, 1, new Color(100, 100, 100, 100));
+        NVGRenderUtil.drawLineWH(ClickGui.this.width / 4f + 105 + ((ClickGui.this.width / 4f) - 100) + 5 + bonIcon10.getWidth("u") + 5, ClickGui.this.height / 4f + 26, 0, (ClickGui.this.height / 4f) * 2 - 51, 1, new Color(100, 100, 100, 100));
 
         if (easingUtil2.get(300) == 1) {
             for (ModulePanel modulePanel : modulePanels) {
@@ -155,21 +160,21 @@ public class ClickGui extends GuiScreen {
         GLUtil.nvgTranslate(value, 0);
         NanoVG.nvgResetScissor(nvg);
 
-        NanoVG.nvgScissor(nvg, ClickGui.this.width / 4f + 105 + ((ClickGui.this.width / 4f) - 100) + 5 + MelyClient.fontManager.getWidth(MelyClient.fontManager.bonIcon, "u", 10) + 5 + (ClickGui.this.value * (MelyClient.moduleManager.getModulesCountByCategory(selectCategory) - 1)), ClickGui.this.height / 4f + 26, 215, 201);
+        NanoVG.nvgScissor(nvg, ClickGui.this.width / 4f + 105 + ((ClickGui.this.width / 4f) - 100) + 5 + bonIcon10.getWidth("u") + 5 + (ClickGui.this.value * (MelyClient.moduleManager.getModulesCountByCategory(selectCategory) - 1)), ClickGui.this.height / 4f + 26, 215, 201);
         if (settingPanel == null) {
-            NVGRenderUtil.drawText("Setting Panel", MelyClient.fontManager.ubuntu, ClickGui.this.width / 4f + 110 + ((ClickGui.this.width / 4f) - 100) + 5 + MelyClient.fontManager.getWidth(MelyClient.fontManager.bonIcon, "u", 10) + 5, ClickGui.this.height / 4f + 31, 15, new Color(255, 255, 255, 255));
+            ubuntu15.drawText("Setting Panel", ClickGui.this.width / 4f + 110 + ((ClickGui.this.width / 4f) - 100) + 5 + bonIcon10.getWidth("u") + 5, ClickGui.this.height / 4f + 31, new Color(255, 255, 255, 255));
         } else {
             settingPanel.drawScreen(mouseX, mouseY, partialTicks);
         }
         NanoVG.nvgResetScissor(nvg);
 
         NanoVG.nvgScissor(nvg, ClickGui.this.width / 4f + 100 + (ClickGui.this.value * (MelyClient.moduleManager.getModulesCountByCategory(selectCategory) - 1)), (ClickGui.this.height / 4f) * 3 - 25, (ClickGui.this.width / 4f) * 2 - 100, 25);
-        NVGRenderUtil.drawText(description, MelyClient.fontManager.ubuntu, ClickGui.this.width / 4f + 105 - fontOffSetX1, (ClickGui.this.height / 4f) * 3 - (25 / 2f), 10, new Color(255, 255, 255, 255), NanoVG.NVG_ALIGN_LEFT | NanoVG.NVG_ALIGN_MIDDLE);
+        ubuntu10.drawText(description, ClickGui.this.width / 4f + 105 - fontOffSetX1, (ClickGui.this.height / 4f) * 3 - (25 / 2f), new Color(255, 255, 255, 255), NanoVG.NVG_ALIGN_LEFT | NanoVG.NVG_ALIGN_MIDDLE);
         NanoVG.nvgResetScissor(nvg);
 
         if (!description.isEmpty()) {
             if (timerUtil.passedMs(1000)) {
-                if (MelyClient.fontManager.getWidth(MelyClient.fontManager.ubuntu, description, 10) > (ClickGui.this.width / 4f) * 2 - 100 && MelyClient.fontManager.getWidth(MelyClient.fontManager.ubuntu, description, 10) - (ClickGui.this.width / 4f) * 2 + 110 > fontOffSetX1) {
+                if (ubuntu10.getWidth(description) > (ClickGui.this.width / 4f) * 2 - 100 && ubuntu10.getWidth(description) - (ClickGui.this.width / 4f) * 2 + 110 > fontOffSetX1) {
                     fontOffSetX1 += 0.5f;
                     timerUtil2.reset();
                 } else {
@@ -246,6 +251,8 @@ public class ClickGui extends GuiScreen {
     }
 
     public void load() {
+        FontUtil ubuntu10 = new FontUtil(MelyClient.fontManager.ubuntu, 10);
+
         selectCategory = Category.COMBAT;
         oldSelectCategory = null;
         description = "";
@@ -263,11 +270,11 @@ public class ClickGui extends GuiScreen {
         scrollCount = 0;
         INSTANCE = this;
 
-        offSetY1 = MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10);
+        offSetY1 = ubuntu10.getHeight();
 
         for (Category category : Category.values()) {
-            categoryPanels.add(new CategoryPanel(category, this.width / 4f + MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10), this.height / 4f + offSetY1, ColorUtil.getRainbow(20, 255, 255)));
-            offSetY1 += MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10) * 2;
+            categoryPanels.add(new CategoryPanel(category, this.width / 4f + ubuntu10.getHeight(), this.height / 4f + offSetY1, ColorUtil.getRainbow(20, 255, 255)));
+            offSetY1 += ubuntu10.getHeight() * 2;
         }
 
         for (Category category : Category.values()) {
@@ -276,7 +283,7 @@ public class ClickGui extends GuiScreen {
             for (Module module : MelyClient.moduleManager.modules) {
                 if (module.getCategory() == category) {
                     modulePanels.add(new ModulePanel(width / 4f + 105, height / 4f + 30 + offSetY2, module.getCategory(), module, ColorUtil.getRainbow(20, 255, 255)));
-                    offSetY2 += MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10) + 10;
+                    offSetY2 += ubuntu10.getHeight() + 10;
                 }
             }
         }

@@ -6,6 +6,7 @@ import me.hannsi.melyclient.gui.clickGui2.Panels.altManager.AltManagerScreen;
 import me.hannsi.melyclient.util.render.GLUtil;
 import me.hannsi.melyclient.util.render.guiScreen.GuiScreenUtil;
 import me.hannsi.melyclient.util.render.nanovg.render.NVGRenderUtil;
+import me.hannsi.melyclient.util.render.nanovg.render.font.FontUtil;
 import me.hannsi.melyclient.util.system.conversion.BonIcon;
 import me.hannsi.melyclient.util.system.math.MouseUtil;
 import net.minecraft.client.gui.*;
@@ -52,6 +53,11 @@ public class ClickGui2 extends GuiScreen {
 
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
+        FontUtil bonIcon15 = new FontUtil(MelyClient.fontManager.bonIcon, 15);
+        FontUtil ubuntu10 = new FontUtil(MelyClient.fontManager.ubuntu, 10);
+        FontUtil ubuntu12 = new FontUtil(MelyClient.fontManager.ubuntu, 12);
+        FontUtil ubuntu15 = new FontUtil(MelyClient.fontManager.ubuntu, 15);
+
         INSTANCE = this;
 
         GLUtil.nvgPush();
@@ -60,26 +66,26 @@ public class ClickGui2 extends GuiScreen {
 
         NVGRenderUtil.drawRectWH(0, 0, menuBarWidth, this.height, new Color(31, 31, 31, 255));
 
-        if (MouseUtil.isHoveringWH(0, 0, MelyClient.fontManager.getWidth(MelyClient.fontManager.bonIcon, BonIcon.REORDER, 15) + 10, MelyClient.fontManager.getHeight(MelyClient.fontManager.bonIcon, 15) + 10, mouseX, mouseY)) {
-            NVGRenderUtil.drawRadialGradientRect(0, 0, MelyClient.fontManager.getWidth(MelyClient.fontManager.bonIcon, BonIcon.REORDER, 15) + 10, MelyClient.fontManager.getHeight(MelyClient.fontManager.bonIcon, 15) + 10, mouseX, mouseY, 0, 70, new Color(255, 255, 255, 50), new Color(4, 4, 4, 255));
-            NVGRenderUtil.drawOutLineRectWH(0, 0, MelyClient.fontManager.getWidth(MelyClient.fontManager.bonIcon, BonIcon.REORDER, 15) + 10, MelyClient.fontManager.getHeight(MelyClient.fontManager.bonIcon, 15) + 10, 1f, new Color(91, 91, 91, 255));
+        if (MouseUtil.isHoveringWH(0, 0, bonIcon15.getWidth(BonIcon.REORDER) + 10, bonIcon15.getHeight() + 10, mouseX, mouseY)) {
+            NVGRenderUtil.drawRadialGradientRect(0, 0, bonIcon15.getWidth(BonIcon.REORDER) + 10, bonIcon15.getHeight() + 10, mouseX, mouseY, 0, 70, new Color(255, 255, 255, 50), new Color(4, 4, 4, 255));
+            NVGRenderUtil.drawOutLineRectWH(0, 0, bonIcon15.getWidth(BonIcon.REORDER) + 10, bonIcon15.getHeight() + 10, 1f, new Color(91, 91, 91, 255));
         }
-        NVGRenderUtil.drawText(BonIcon.ARROW_BACK, MelyClient.fontManager.bonIcon, 5, 5, 15, new Color(255, 255, 255, 255));
+        bonIcon15.drawText(BonIcon.ARROW_BACK, 5, 5, new Color(255, 255, 255, 255));
 
-        if (MouseUtil.isHoveringWH(0, MelyClient.fontManager.getHeight(MelyClient.fontManager.bonIcon, 15) + 10, MelyClient.fontManager.getWidth(MelyClient.fontManager.bonIcon, BonIcon.REORDER, 15) + 10, MelyClient.fontManager.getHeight(MelyClient.fontManager.bonIcon, 15) + 10, mouseX, mouseY)) {
-            NVGRenderUtil.drawRadialGradientRect(0, MelyClient.fontManager.getHeight(MelyClient.fontManager.bonIcon, 15) + 10, MelyClient.fontManager.getWidth(MelyClient.fontManager.bonIcon, BonIcon.REORDER, 15) + 10, MelyClient.fontManager.getHeight(MelyClient.fontManager.bonIcon, 15) + 10, mouseX, mouseY, 0, 70, new Color(255, 255, 255, 50), new Color(4, 4, 4, 255));
-            NVGRenderUtil.drawOutLineRectWH(0, MelyClient.fontManager.getHeight(MelyClient.fontManager.bonIcon, 15) + 10, MelyClient.fontManager.getWidth(MelyClient.fontManager.bonIcon, BonIcon.REORDER, 15) + 10, MelyClient.fontManager.getHeight(MelyClient.fontManager.bonIcon, 15) + 10, 1f, new Color(91, 91, 91, 255));
+        if (MouseUtil.isHoveringWH(0, bonIcon15.getHeight() + 10, bonIcon15.getWidth(BonIcon.REORDER) + 10, bonIcon15.getHeight() + 10, mouseX, mouseY)) {
+            NVGRenderUtil.drawRadialGradientRect(0, bonIcon15.getHeight() + 10, bonIcon15.getWidth(BonIcon.REORDER) + 10, bonIcon15.getHeight() + 10, mouseX, mouseY, 0, 70, new Color(255, 255, 255, 50), new Color(4, 4, 4, 255));
+            NVGRenderUtil.drawOutLineRectWH(0, bonIcon15.getHeight() + 10, bonIcon15.getWidth(BonIcon.REORDER) + 10, bonIcon15.getHeight() + 10, 1f, new Color(91, 91, 91, 255));
         }
-        NVGRenderUtil.drawText(BonIcon.REORDER, MelyClient.fontManager.bonIcon, 5, 5 + MelyClient.fontManager.getHeight(MelyClient.fontManager.bonIcon, 15) + 10, 15, new Color(255, 255, 255, 255));
+        bonIcon15.drawText(BonIcon.REORDER, 5, 5 + bonIcon15.getHeight() + 10, new Color(255, 255, 255, 255));
 
         if (nowScreen == Screen.Home) {
-            NVGRenderUtil.drawText(MelyClient.MOD_NAME, MelyClient.fontManager.ubuntu, menuBarWidth + offsetX, 5 + MelyClient.fontManager.getHeight(MelyClient.fontManager.bonIcon, 15) + 5, 15, new Color(255, 255, 255, 255));
-            NVGRenderUtil.drawText("v" + MelyClient.MOD_VER, MelyClient.fontManager.ubuntu, menuBarWidth + offsetX, 5 + (MelyClient.fontManager.getHeight(MelyClient.fontManager.bonIcon, 15) * 2) + 10, 10, new Color(91, 91, 91, 255));
+            ubuntu15.drawText(MelyClient.MOD_NAME, menuBarWidth + offsetX, 5 + bonIcon15.getHeight() + 5, new Color(255, 255, 255, 255));
+            ubuntu10.drawText("v" + MelyClient.MOD_VER, menuBarWidth + offsetX, 5 + (bonIcon15.getHeight() * 2) + 10, new Color(91, 91, 91, 255));
 
             float homeButtonOffsetX = menuBarWidth + offsetX;
             for (HomeButton homeButton : homeButtons) {
                 homeButton.setX(homeButtonOffsetX);
-                homeButton.setY(5 + (MelyClient.fontManager.getHeight(MelyClient.fontManager.bonIcon, 15) * 2) + 10 + offsetX);
+                homeButton.setY(5 + (bonIcon15.getHeight() * 2) + 10 + offsetX);
                 homeButton.draw(mouseX, mouseY, this.width, this.height);
                 homeButtonOffsetX += this.width / 9f + this.width / 100f;
             }
@@ -87,12 +93,12 @@ public class ClickGui2 extends GuiScreen {
             AltManagerScreen.drawScreen(mouseX, mouseY, this.width, this.height);
         }
 
-        float menuBarOffsetY = (5 + MelyClient.fontManager.getHeight(MelyClient.fontManager.bonIcon, 15) + 5 + this.height / 15f) - MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 12) / 2f + MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 12);
+        float menuBarOffsetY = (5 + bonIcon15.getHeight() + 5 + this.height / 15f) - ubuntu12.getHeight() / 2f + ubuntu12.getHeight();
         for (MenuBarButton menuBarButton : menuBarButtons) {
             menuBarButton.setY(menuBarOffsetY);
             menuBarButton.draw(mouseX, mouseY, this.width, this.height);
 
-            menuBarOffsetY += (MelyClient.fontManager.getHeight(MelyClient.fontManager.bonIcon, 15) + ((MelyClient.fontManager.getHeight(MelyClient.fontManager.bonIcon, 15) / 2f)));
+            menuBarOffsetY += (bonIcon15.getHeight() + ((bonIcon15.getHeight() / 2f)));
         }
 
         if (!MelyClient.moduleManager.getModuleByClass(me.hannsi.melyclient.module.modules.client.ClickGui.class).isToggle()) {
@@ -123,7 +129,10 @@ public class ClickGui2 extends GuiScreen {
 
     @Override
     protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {
-        if (MouseUtil.isHoveringWH(0, 0, MelyClient.fontManager.getWidth(MelyClient.fontManager.bonIcon, BonIcon.REORDER, 15) + 10, MelyClient.fontManager.getHeight(MelyClient.fontManager.bonIcon, 15) + 10, mouseX, mouseY)) {
+        FontUtil bonIcon15 = new FontUtil(MelyClient.fontManager.bonIcon, 15);
+        FontUtil ubuntu12 = new FontUtil(MelyClient.fontManager.ubuntu, 12);
+
+        if (MouseUtil.isHoveringWH(0, 0, bonIcon15.getWidth(BonIcon.REORDER) + 10, bonIcon15.getHeight() + 10, mouseX, mouseY)) {
             if (nowScreen == Screen.Home) {
                 close();
             } else if (nowScreen == Screen.AltManager) {
@@ -143,12 +152,12 @@ public class ClickGui2 extends GuiScreen {
             }
         }
 
-        if (MouseUtil.isHoveringWH(0, MelyClient.fontManager.getHeight(MelyClient.fontManager.bonIcon, 15) + 10, MelyClient.fontManager.getWidth(MelyClient.fontManager.bonIcon, BonIcon.REORDER, 15) + 10, MelyClient.fontManager.getHeight(MelyClient.fontManager.bonIcon, 15) + 10, mouseX, mouseY)) {
+        if (MouseUtil.isHoveringWH(0, bonIcon15.getHeight() + 10, bonIcon15.getWidth(BonIcon.REORDER) + 10, bonIcon15.getHeight() + 10, mouseX, mouseY)) {
             menuBarOpen = !menuBarOpen;
             if (menuBarOpen) {
                 menuBarWidth = this.width / 6f;
             } else {
-                menuBarWidth = MelyClient.fontManager.getWidth(MelyClient.fontManager.bonIcon, BonIcon.PERSON, 15) + 10;
+                menuBarWidth = bonIcon15.getWidth(BonIcon.PERSON) + 10;
             }
         }
 
@@ -156,7 +165,7 @@ public class ClickGui2 extends GuiScreen {
             float homeButtonOffsetX = menuBarWidth + offsetX;
             for (HomeButton homeButton : homeButtons) {
                 homeButton.setX(homeButtonOffsetX);
-                homeButton.setY(5 + (MelyClient.fontManager.getHeight(MelyClient.fontManager.bonIcon, 15) * 2) + 10 + offsetX);
+                homeButton.setY(5 + (bonIcon15.getHeight() * 2) + 10 + offsetX);
                 homeButton.mouseClicked(mouseX, mouseY, mouseButton);
                 homeButtonOffsetX += this.width / 9f + this.width / 100f;
             }
@@ -164,11 +173,11 @@ public class ClickGui2 extends GuiScreen {
             AltManagerScreen.mouseClicked(mouseX, mouseY, mouseButton);
         }
 
-        float menuBarOffsetY = (5 + MelyClient.fontManager.getHeight(MelyClient.fontManager.bonIcon, 15) + 5 + this.height / 15f) - MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 12) / 2f + MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 12);
+        float menuBarOffsetY = (5 + bonIcon15.getHeight() + 5 + this.height / 15f) - ubuntu12.getHeight() / 2f + ubuntu12.getHeight();
         for (MenuBarButton menuBarButton : menuBarButtons) {
             menuBarButton.setY(menuBarOffsetY);
             menuBarButton.mouseClicked(mouseX, mouseY, mouseButton);
-            menuBarOffsetY += (MelyClient.fontManager.getHeight(MelyClient.fontManager.bonIcon, 15) + ((MelyClient.fontManager.getHeight(MelyClient.fontManager.bonIcon, 15) / 2f)));
+            menuBarOffsetY += (bonIcon15.getHeight() + ((bonIcon15.getHeight() / 2f)));
         }
 
         super.mouseClicked(mouseX, mouseY, mouseButton);
@@ -198,6 +207,10 @@ public class ClickGui2 extends GuiScreen {
         }
 
         public void draw(int mouseX, int mouseY, float width, float height) {
+            FontUtil bonIcon40 = new FontUtil(MelyClient.fontManager.bonIcon, 40);
+            FontUtil ubuntu10 = new FontUtil(MelyClient.fontManager.ubuntu, 10);
+            FontUtil ubuntu12 = new FontUtil(MelyClient.fontManager.ubuntu, 12);
+
             NVGRenderUtil.drawRadialGradientRect(x - 1, y - 1, width / 9f + 2, height / 3f + 2, mouseX, mouseY, 0, 70, new Color(91, 91, 91, 255), new Color(4, 4, 4, 255));
 
             NVGRenderUtil.drawRectWH(x, y, width / 9f, height / 3f, new Color(0, 0, 0, 255));
@@ -208,9 +221,9 @@ public class ClickGui2 extends GuiScreen {
                 NVGRenderUtil.drawRadialGradientRect(x, y, width / 9f, height / 3f, mouseX, mouseY, 0, 70, new Color(255, 255, 255, 50), new Color(4, 4, 4, 255));
             }
 
-            NVGRenderUtil.drawText(icon, MelyClient.fontManager.bonIcon, x + 5, y + 2.5f, 40, new Color(0, 120, 212, 255));
+            bonIcon40.drawText(icon, x + 5, y + 2.5f, new Color(0, 120, 212, 255));
 
-            NVGRenderUtil.drawText(name, MelyClient.fontManager.ubuntu, x + 5, y + 2.5f + MelyClient.fontManager.getHeight(MelyClient.fontManager.bonIcon, 40), 12, new Color(255, 255, 255, 255));
+            ubuntu12.drawText(name, x + 5, y + 2.5f + bonIcon40.getHeight(), new Color(255, 255, 255, 255));
 
             String[] descriptionArray = description.split("");
             String tempDescription = "";
@@ -219,7 +232,7 @@ public class ClickGui2 extends GuiScreen {
             for (String s : descriptionArray) {
                 tempDescription = tempDescription + s;
 
-                float descriptionWidth = MelyClient.fontManager.getWidth(MelyClient.fontManager.ubuntu, tempDescription, 10);
+                float descriptionWidth = ubuntu10.getWidth(tempDescription);
 
                 if (width / 9f - 15 < descriptionWidth) {
                     nDescription.add(tempDescription);
@@ -228,11 +241,11 @@ public class ClickGui2 extends GuiScreen {
             }
             nDescription.add(tempDescription);
 
-            float textOffsetY = 2.5f + MelyClient.fontManager.getHeight(MelyClient.fontManager.bonIcon, 40) + MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 12);
+            float textOffsetY = 2.5f + bonIcon40.getHeight() + ubuntu12.getHeight();
             for (String text : nDescription) {
-                NVGRenderUtil.drawText(text, MelyClient.fontManager.ubuntu, x + 5, y + textOffsetY, 10, new Color(91, 91, 91, 255));
+                ubuntu10.drawText(text, x + 5, y + textOffsetY, new Color(91, 91, 91, 255));
 
-                textOffsetY += MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 10);
+                textOffsetY += ubuntu10.getHeight();
             }
         }
 
@@ -301,20 +314,26 @@ public class ClickGui2 extends GuiScreen {
         }
 
         public void draw(int mouseX, int mouseY, float width, float height) {
-            if (MouseUtil.isHoveringWH(x, y, menuBarWidth, MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 12) + (MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 12)), mouseX, mouseY)) {
-                NVGRenderUtil.drawRadialGradientRect(x, y, menuBarWidth, MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 12) + (MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 12)), mouseX, mouseY, 0, 70, new Color(255, 255, 255, 50), new Color(31, 31, 31, 255));
+            FontUtil bonIcon12 = new FontUtil(MelyClient.fontManager.bonIcon, 12);
+            FontUtil bonIcon15 = new FontUtil(MelyClient.fontManager.bonIcon, 15);
+            FontUtil ubuntu12 = new FontUtil(MelyClient.fontManager.ubuntu, 12);
 
-                NVGRenderUtil.drawOutLineRectWH(x, y, menuBarWidth, MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 12) + (MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 12)), 1f, new Color(91, 91, 91, 255));
+            if (MouseUtil.isHoveringWH(x, y, menuBarWidth, ubuntu12.getHeight() + (ubuntu12.getHeight()), mouseX, mouseY)) {
+                NVGRenderUtil.drawRadialGradientRect(x, y, menuBarWidth, ubuntu12.getHeight() + (ubuntu12.getHeight()), mouseX, mouseY, 0, 70, new Color(255, 255, 255, 50), new Color(31, 31, 31, 255));
+
+                NVGRenderUtil.drawOutLineRectWH(x, y, menuBarWidth, ubuntu12.getHeight() + (ubuntu12.getHeight()), 1f, new Color(91, 91, 91, 255));
             }
-            NVGRenderUtil.drawText(icon, MelyClient.fontManager.bonIcon, x + 5, y + MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 12) / 2f, 12, new Color(255, 255, 255, 255));
+            bonIcon12.drawText(icon, x + 5, y + ubuntu12.getHeight() / 2f, new Color(255, 255, 255, 255));
 
             if (menuBarOpen) {
-                NVGRenderUtil.drawText(name, MelyClient.fontManager.ubuntu, x + 5 + MelyClient.fontManager.getWidth(MelyClient.fontManager.bonIcon, BonIcon.HOME, 15) + height / 50f, y + MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 12) / 2f, 12, new Color(255, 255, 255, 255));
+                ubuntu12.drawText(name, x + 5 + bonIcon15.getWidth(BonIcon.HOME) + height / 50f, y + ubuntu12.getHeight() / 2f, new Color(255, 255, 255, 255));
             }
         }
 
         public void mouseClicked(int mouseX, int mouseY, int mouseButton) {
-            if (MouseUtil.isHoveringWH(x, y, menuBarWidth, MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 12) + (MelyClient.fontManager.getHeight(MelyClient.fontManager.ubuntu, 12)), mouseX, mouseY)) {
+            FontUtil ubuntu12 = new FontUtil(MelyClient.fontManager.ubuntu, 12);
+
+            if (MouseUtil.isHoveringWH(x, y, menuBarWidth, ubuntu12.getHeight() + (ubuntu12.getHeight()), mouseX, mouseY)) {
                 mc.displayGuiScreen(guiScreen);
             }
         }

@@ -30,54 +30,6 @@ public class NVGRenderUtil implements InterfaceMinecraft {
         GL11.glPopAttrib();
     }
 
-    public static void drawText(String text, Font font, float x, float y, float size, Color color) {
-        drawText(text, font, x, y, size, color, NanoVG.NVG_ALIGN_LEFT | NanoVG.NVG_ALIGN_TOP);
-    }
-
-    public static void drawText(String text, Font font, float x, float y, float size, Color color, float blur, Color blurColor) {
-        NanoVG.nvgFontBlur(nvg, blur);
-        drawText(text, font, x, y, size, blurColor, NanoVG.NVG_ALIGN_LEFT | NanoVG.NVG_ALIGN_TOP);
-        NanoVG.nvgFontBlur(nvg, 0f);
-        drawText(text, font, x, y, size, color, NanoVG.NVG_ALIGN_LEFT | NanoVG.NVG_ALIGN_TOP);
-    }
-
-    public static void drawText(String text, Font font, float x, float y, float size, Color color, float blur, Color blurColor, int align) {
-        NanoVG.nvgFontBlur(nvg, blur);
-        drawText(text, font, x, y, size, blurColor, align);
-        NanoVG.nvgFontBlur(nvg, 0f);
-        drawText(text, font, x, y, size, color, align);
-    }
-
-    public static void drawTextCenter(String text, Font font, float x, float y, float size, Color color) {
-        drawText(text, font, x, y, size, color, NanoVG.NVG_ALIGN_CENTER | NanoVG.NVG_ALIGN_MIDDLE);
-    }
-
-    public static void drawTextCenter(String text, Font font, float x, float y, float size, Color color, float blur, Color blurColor) {
-        NanoVG.nvgFontBlur(nvg, blur);
-        drawText(text, font, x, y, size, blurColor, NanoVG.NVG_ALIGN_CENTER | NanoVG.NVG_ALIGN_MIDDLE);
-        NanoVG.nvgFontBlur(nvg, 0f);
-        drawText(text, font, x, y, size, color, NanoVG.NVG_ALIGN_CENTER | NanoVG.NVG_ALIGN_MIDDLE);
-    }
-
-    public static void drawText(String text, Font font, float x, float y, float size, Color color, int align) {
-        NanoVG.nvgBeginPath(nvg);
-
-        NVGColor nvgColor = NVGColor.calloc();
-        color(color, nvgColor);
-        NanoVG.nvgFillColor(nvg, nvgColor);
-
-        NanoVG.nvgFontSize(nvg, size);
-        NanoVG.nvgTextAlign(nvg, align);
-        NanoVG.nvgFontFace(nvg, font.getName());
-        NanoVG.nvgText(nvg, x, y, text);
-
-        NanoVG.nvgRGBAf(0, 0, 0, 0, nvgColor);
-        NanoVG.nvgFillColor(nvg, nvgColor);
-        NanoVG.nvgFill(nvg);
-
-        NanoVG.nvgClosePath(nvg);
-    }
-
     public static void fillColor(Color color) {
         NVGColor nvgColor = NVGColor.calloc();
         color(color, nvgColor);
