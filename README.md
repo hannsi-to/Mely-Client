@@ -162,7 +162,8 @@ Minecraft Client
 ｜｜｜      ｜｜｜└Keyboard.java
 ｜｜｜      ｜｜├debug
 ｜｜｜      ｜｜｜├DebugLevel.java
-｜｜｜      ｜｜｜└DebugLog.java
+｜｜｜      ｜｜｜├DebugLog.java
+｜｜｜      ｜｜｜└DebugType.java
 ｜｜｜      ｜｜└math
 ｜｜｜      ｜｜  ├animation
 ｜｜｜      ｜｜  ｜├Easing.java
