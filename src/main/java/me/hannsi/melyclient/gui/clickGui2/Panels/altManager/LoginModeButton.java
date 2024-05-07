@@ -33,14 +33,20 @@ public class LoginModeButton {
         this.description = description;
     }
 
-    public void keyTyped(char typedChar, int keyCode) {
-
-    }
-
     public void mouseClicked(int mouseX, int mouseY, int mouseButton) {
         if (MouseUtil.isHoveringWH(x, y, ClickGui2.INSTANCE.width / 9f, ClickGui2.INSTANCE.height / 3f, mouseX, mouseY)) {
             if (loginMode == LoginMode.MICROSOFT) {
-                new Thread(() -> MelyClient.altManager.loginWithWebView()).start();
+                new Thread(() -> {
+                    boolean checkLogin = MelyClient.altManager.loginWithWebView();
+                    if (checkLogin) {
+                        AltManagerScreen.screen = AccountScreen.SelectAccountScreen;
+                        AltManagerScreen.tempAccount.setSession(MelyClient.altManager.getSession(AltManagerScreen.tempAccount));
+                        AltManagerScreen.accountButtons.add(new AccountButton(AltManagerScreen.tempAccount, 0, 0));
+                    } else {
+                        AltManagerScreen.screen = AccountScreen.LoginModeScreen;
+                    }
+                }).start();
+
                 AltManagerScreen.screen = AccountScreen.CheckingAccountScreen;
             } else if (loginMode == LoginMode.MINECRAFT) {
                 AltManagerScreen.tempAccount.setLoginMode(loginMode);

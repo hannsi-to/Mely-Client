@@ -8,6 +8,9 @@ import me.hannsi.melyclient.util.render.nanovg.render.font.FontUtil;
 import me.hannsi.melyclient.util.system.auth.AccountData;
 import me.hannsi.melyclient.util.system.auth.LoginMode;
 import me.hannsi.melyclient.util.system.conversion.BonIcon;
+import me.hannsi.melyclient.util.system.debug.DebugLevel;
+import me.hannsi.melyclient.util.system.debug.DebugLog;
+import me.hannsi.melyclient.util.system.math.MouseUtil;
 import me.hannsi.melyclient.util.system.math.time.TimerUtil;
 
 import java.awt.*;
@@ -18,6 +21,7 @@ public class AltManagerScreen {
     public static List<AccountButton> accountButtons;
     public static List<LoginModeButton> loginModeButtons;
     public static List<InputAccountInfoBorder> inputAccountInfoBorders;
+    public static float inputAccountInfoBorderOffsetY;
     public static AccountScreen screen;
     public static AccountData tempAccount;
     public static String loadText;
@@ -43,10 +47,11 @@ public class AltManagerScreen {
         inputAccountInfoBorders = new ArrayList<>();
         inputAccountInfoBorders.add(new InputAccountInfoBorder("Email", BonIcon.MAIL, "", 0, 0));
         inputAccountInfoBorders.add(new InputAccountInfoBorder("Password", BonIcon.PASSWORD, "", 0, 0));
+        inputAccountInfoBorderOffsetY = 0f;
 
         screen = AccountScreen.SelectAccountScreen;
 
-        tempAccount = new AccountData(null, null, null, null);
+        tempAccount = new AccountData("", "", null, null);
 
         loadText = "Checking Account";
         loadingBarX = ClickGui2.INSTANCE.menuBarWidth + (ClickGui2.INSTANCE.width - ClickGui2.INSTANCE.menuBarWidth) / 2f - (ubuntu15.getWidth(loadText) / 2f) - 10 - ClickGui2.INSTANCE.menuBarWidth;
@@ -59,6 +64,7 @@ public class AltManagerScreen {
 
     public static void mouseClicked(int mouseX, int mouseY, int mouseButton) {
         FontUtil bonIcon15 = new FontUtil(MelyClient.fontManager.bonIcon, 15);
+        FontUtil ubuntu15 = new FontUtil(MelyClient.fontManager.ubuntu, 15);
 
         if (screen == AccountScreen.SelectAccountScreen) {
             float homeButtonOffsetX = ClickGui2.INSTANCE.menuBarWidth + ClickGui2.INSTANCE.offsetX;
@@ -77,15 +83,34 @@ public class AltManagerScreen {
                 loginModeButtonOffsetX += ClickGui2.INSTANCE.width / 9f + ClickGui2.INSTANCE.width / 100f;
             }
         } else if (screen == AccountScreen.InputEmailAndPasswordScreen) {
+            for (InputAccountInfoBorder inputAccountInfoBorder : inputAccountInfoBorders) {
+                inputAccountInfoBorder.mouseClicked(mouseX, mouseY, mouseButton);
+            }
 
+            if (MouseUtil.isHoveringWH(ClickGui2.INSTANCE.menuBarWidth + ClickGui2.INSTANCE.offsetX + ClickGui2.INSTANCE.width / 3f - ubuntu15.getWidth("    Login    "), inputAccountInfoBorderOffsetY, ubuntu15.getWidth("    Login    "), ubuntu15.getHeight() + 10f, mouseX, mouseY)) {
+                new Thread(() -> {
+                    boolean checkLogin = MelyClient.altManager.login(tempAccount);
+                    if (checkLogin) {
+                        screen = AccountScreen.SelectAccountScreen;
+                        tempAccount.setSession(MelyClient.altManager.getSession(tempAccount));
+                        accountButtons.add(new AccountButton(tempAccount, 0, 0));
+                    } else {
+                        screen = AccountScreen.InputEmailAndPasswordScreen;
+                    }
+                }).start();
+
+                screen = AccountScreen.CheckingAccountScreen;
+            }
         }
     }
 
     public static void drawScreen(int mouseX, int mouseY, float width, float height) {
         FontUtil bonIcon15 = new FontUtil(MelyClient.fontManager.bonIcon, 15);
+        FontUtil bonIcon40 = new FontUtil(MelyClient.fontManager.bonIcon, 40);
         FontUtil bonIcon100 = new FontUtil(MelyClient.fontManager.bonIcon, 100);
         FontUtil ubuntu10 = new FontUtil(MelyClient.fontManager.ubuntu, 10);
         FontUtil ubuntu15 = new FontUtil(MelyClient.fontManager.ubuntu, 15);
+        FontUtil ubuntu20 = new FontUtil(MelyClient.fontManager.ubuntu, 20);
 
         ClickGui2.HomeButton altManagerInfo = null;
 
@@ -97,7 +122,7 @@ public class AltManagerScreen {
         }
 
         if (altManagerInfo == null) {
-            MelyClient.logger.error("Can not load alt manager screen.");
+            new DebugLog("Can not load alt manager screen.", DebugLevel.WARNING);
             return;
         }
 
@@ -121,7 +146,18 @@ public class AltManagerScreen {
                 loginModeButtonOffsetX += width / 9f + width / 100f;
             }
         } else if (screen == AccountScreen.InputEmailAndPasswordScreen) {
+            inputAccountInfoBorderOffsetY = 5 + (bonIcon15.getHeight() * 2) + 10 + ClickGui2.INSTANCE.offsetX;
+            for (InputAccountInfoBorder inputAccountInfoBorder : inputAccountInfoBorders) {
+                inputAccountInfoBorder.setX(ClickGui2.INSTANCE.menuBarWidth + ClickGui2.INSTANCE.offsetX);
+                inputAccountInfoBorder.setY(inputAccountInfoBorderOffsetY);
+                inputAccountInfoBorder.draw(mouseX, mouseY, width / 3f, bonIcon40.getHeight());
+                inputAccountInfoBorderOffsetY += bonIcon15.getHeight() * 4 + ubuntu20.getHeight();
+            }
 
+            inputAccountInfoBorderOffsetY += ubuntu10.getHeight();
+
+            NVGRenderUtil.drawRectWH(ClickGui2.INSTANCE.menuBarWidth + ClickGui2.INSTANCE.offsetX + width / 3f - ubuntu15.getWidth("    Login    "), inputAccountInfoBorderOffsetY, ubuntu15.getWidth("    Login    "), ubuntu15.getHeight() + 10f, new Color(0, 120, 212, 255));
+            ubuntu15.drawText("    Login    ", ClickGui2.INSTANCE.menuBarWidth + ClickGui2.INSTANCE.offsetX + width / 3f - ubuntu15.getWidth("    Login    "), inputAccountInfoBorderOffsetY + 5f, new Color(255, 255, 255, 255));
         } else if (screen == AccountScreen.CheckingAccountScreen) {
             bonIcon100.drawTextCenter(BonIcon.DEPLOYEDCODE, ClickGui2.INSTANCE.menuBarWidth + (ClickGui2.INSTANCE.width - ClickGui2.INSTANCE.menuBarWidth) / 2f, ClickGui2.INSTANCE.height / 2f - (ubuntu15.getHeight() * 4), new Color(255, 255, 255, 255));
 
@@ -146,8 +182,10 @@ public class AltManagerScreen {
     }
 
     public static void keyTyped(char typedChar, int keyCode) {
-        for (LoginModeButton loginModeButton : loginModeButtons) {
-            loginModeButton.keyTyped(typedChar, keyCode);
+        if (screen == AccountScreen.InputEmailAndPasswordScreen) {
+            for (InputAccountInfoBorder inputAccountInfoBorder : inputAccountInfoBorders) {
+                inputAccountInfoBorder.keyTyped(typedChar, keyCode);
+            }
         }
     }
 }

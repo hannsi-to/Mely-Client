@@ -61,11 +61,13 @@ public class AccountButton {
                 ubuntu10.drawTextCenter("Add", x + (width / 9f) / 2f, y + (height / 3f) / 2f + ubuntu30.getHeight(), new Color(255, 255, 255, 255));
             }
         } else {
-            ubuntu12.drawText(accountData.getSession().getUsername(), x + 5, y + 2.5f + bonIcon40.getHeight(), new Color(255, 255, 255, 255));
+            //MelyClient.logger.info(accountData);
+            //MelyClient.logger.info(accountData.getLoginMode() + " : " + accountData.getEmail() + " : " + accountData.getPassword() + " : " + accountData.getSession());
+            //ubuntu12.drawText(accountData.getSession().getUsername(), x + 5, y + 2.5f + bonIcon40.getHeight(), new Color(255, 255, 255, 255));
 
-            float textOffsetY = 2.5f + bonIcon40.getHeight() + ubuntu12.getHeight();
-            ubuntu10.drawText("PlayerID : " + accountData.getSession().getPlayerID(), x + 5, y + textOffsetY, new Color(91, 91, 91, 255));
-            textOffsetY += ubuntu10.getHeight();
+            //float textOffsetY = 2.5f + bonIcon40.getHeight() + ubuntu12.getHeight();
+            //ubuntu10.drawText("PlayerID : " + accountData.getSession().getPlayerID(), x + 5, y + textOffsetY, new Color(91, 91, 91, 255));
+            //textOffsetY += ubuntu10.getHeight();
         }
     }
 

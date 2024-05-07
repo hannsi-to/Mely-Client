@@ -118,7 +118,7 @@ public class ClickGui2 extends GuiScreen {
 
     @Override
     protected void keyTyped(char typedChar, int keyCode) throws IOException {
-        if ((keyCode == MelyClient.moduleManager.getModuleByClass(me.hannsi.melyclient.module.modules.client.ClickGui.class).getKeyBind().getValue().getKeyCode() || keyCode == Keyboard.KEY_ESCAPE)) {
+        if ((keyCode == Keyboard.KEY_ESCAPE)) {
             close();
         }
 

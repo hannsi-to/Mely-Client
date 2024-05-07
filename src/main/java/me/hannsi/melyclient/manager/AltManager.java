@@ -13,6 +13,7 @@ import me.hannsi.melyclient.mixin.net.minecraft.client.IMinecraft;
 import me.hannsi.melyclient.util.InterfaceMinecraft;
 import me.hannsi.melyclient.util.system.auth.AccountData;
 import me.hannsi.melyclient.util.system.auth.LoginMode;
+import me.hannsi.melyclient.util.system.auth.MicrosoftWebView;
 import me.hannsi.melyclient.util.system.debug.DebugLevel;
 import me.hannsi.melyclient.util.system.debug.DebugLog;
 import net.minecraft.client.Minecraft;
@@ -63,6 +64,7 @@ public class AltManager implements InterfaceMinecraft {
             MicrosoftAuthResult acc = authenticator.loginWithCredentials(email, password);
             Session session = new Session(acc.getProfile().getName(), acc.getProfile().getId(), acc.getAccessToken(), "legacy");
             setSession(session);
+            nowLoginAccountData = new AccountData(email, password, session, LoginMode.MICROSOFT);
         } catch (MicrosoftAuthenticationException e) {
             new DebugLog(e, DebugLevel.WARNING);
             return false;
@@ -103,6 +105,14 @@ public class AltManager implements InterfaceMinecraft {
         return session;
     }
 
+    public Session getSession(AccountData accountData) {
+        if (accountData.getLoginMode() == LoginMode.MICROSOFT) {
+            return getUserMicrosoftSession(accountData.getEmail(), accountData.getPassword());
+        } else {
+            return getUserMinecraftSession(accountData.getEmail(), accountData.getPassword());
+        }
+    }
+
     public Session getUserOfflineSession(String username) {
         this.userAuthentication.logOut();
         return new Session(username, username, "0", "legacy");
@@ -110,7 +120,7 @@ public class AltManager implements InterfaceMinecraft {
 
     private void setSession(Session session) {
         ((IMinecraft) mc).setSession(session);
-        MelyClient.logger.info("Setting user: " + session.getUsername());
+        new DebugLog("Setting user: " + session.getUsername(), DebugLevel.INFO);
     }
 
     public void setUserOffline(String username) {
@@ -119,15 +129,16 @@ public class AltManager implements InterfaceMinecraft {
         setSession(session);
     }
 
-    public void loginWithWebView() {
+    public boolean loginWithWebView() {
         Session session;
         try {
-            MicrosoftAuthenticator authenticator = new MicrosoftAuthenticator();
-            MicrosoftAuthResult acc = authenticator.loginWithWebview();
+            MicrosoftAuthResult acc = MicrosoftWebView.loginWithWebview();
             session = new Session(acc.getProfile().getName(), acc.getProfile().getId(), acc.getAccessToken(), "legacy");
             setSession(session);
-        } catch (MicrosoftAuthenticationException e) {
+            return true;
+        } catch (Exception e) {
             new DebugLog(e, DebugLevel.WARNING);
+            return false;
         }
     }
 
