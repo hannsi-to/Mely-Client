@@ -1,11 +1,11 @@
 package me.hannsi.melyclient.util.render.render2D;
 
 import me.hannsi.melyclient.util.InterfaceMinecraft;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
-import net.minecraft.client.gui.Gui;
-import net.minecraft.client.renderer.BufferBuilder;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.entity.EntityPlayerSP;
+import net.minecraft.client.renderer.*;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
@@ -13,10 +13,71 @@ import org.lwjgl.opengl.GL11;
 import java.awt.*;
 
 public class Render2DUtil implements InterfaceMinecraft {
-    public static void drawPlayerHeadImage(int x, int y, int width, int height, AbstractClientPlayer entity) {
+    public static void drawEntityOnScreen(float posX, float posY, float scale, float mouseX, float mouseY, EntityPlayerSP ent) {
+        GlStateManager.enableColorMaterial();
+        GlStateManager.pushMatrix();
+        GlStateManager.translate(posX, posY, 50.0F);
+        GlStateManager.scale(-scale, scale, scale);
+        GlStateManager.rotate(180.0F, 0.0F, 0.0F, 1.0F);
+        float f = ent.renderYawOffset;
+        float f1 = ent.rotationYaw;
+        float f2 = ent.rotationPitch;
+        float f3 = ent.prevRotationYawHead;
+        float f4 = ent.rotationYawHead;
+        GlStateManager.rotate(135.0F, 0.0F, 1.0F, 0.0F);
+        RenderHelper.enableStandardItemLighting();
+        GlStateManager.rotate(-135.0F, 0.0F, 1.0F, 0.0F);
+        GlStateManager.rotate(-((float) Math.atan(mouseY / 40.0F)) * 20.0F, 1.0F, 0.0F, 0.0F);
+        ent.renderYawOffset = (float) Math.atan(mouseX / 40.0F) * 20.0F;
+        ent.rotationYaw = (float) Math.atan(mouseX / 40.0F) * 40.0F;
+        ent.rotationPitch = -((float) Math.atan(mouseY / 40.0F)) * 20.0F;
+        ent.rotationYawHead = ent.rotationYaw;
+        ent.prevRotationYawHead = ent.rotationYaw;
+        GlStateManager.translate(0.0F, 0.0F, 0.0F);
+
+        RenderManager rendermanager = Minecraft.getMinecraft().getRenderManager();
+        rendermanager.setPlayerViewY(180.0F);
+        rendermanager.setRenderShadow(false);
+        rendermanager.renderEntity(ent, 0.0D, 0.0D, 0.0D, 0.0F, 1.0F, false);
+        rendermanager.setRenderShadow(true);
+
+        ent.renderYawOffset = f;
+        ent.rotationYaw = f1;
+        ent.rotationPitch = f2;
+        ent.prevRotationYawHead = f3;
+        ent.rotationYawHead = f4;
+        GlStateManager.popMatrix();
+        RenderHelper.disableStandardItemLighting();
+        GlStateManager.disableRescaleNormal();
+        GlStateManager.setActiveTexture(OpenGlHelper.lightmapTexUnit);
+        GlStateManager.disableTexture2D();
+        GlStateManager.setActiveTexture(OpenGlHelper.defaultTexUnit);
+    }
+
+    public static void drawScaledCustomSizeModalRect(float x, float y, float u, float v, float uWidth, float vHeight, float width, float height, float tileWidth, float tileHeight) {
+        float f = 1.0F / tileWidth;
+        float f1 = 1.0F / tileHeight;
+        Tessellator tessellator = Tessellator.getInstance();
+        BufferBuilder bufferbuilder = tessellator.getBuffer();
+        bufferbuilder.begin(7, DefaultVertexFormats.POSITION_TEX);
+        bufferbuilder.pos(x, y + height, 0.0D).tex(u * f, (v + vHeight) * f1).endVertex();
+        bufferbuilder.pos(x + width, y + height, 0.0D).tex((u + uWidth) * f, (v + vHeight) * f1).endVertex();
+        bufferbuilder.pos(x + width, y, 0.0D).tex((u + uWidth) * f, v * f1).endVertex();
+        bufferbuilder.pos(x, y, 0.0D).tex(u * f, v * f1).endVertex();
+        tessellator.draw();
+    }
+
+    public static void drawPlayerHeadImage(float x, float y, float width, float height, AbstractClientPlayer entity) {
         GlStateManager.pushMatrix();
         mc.getTextureManager().bindTexture(entity.getLocationSkin());
-        Gui.drawScaledCustomSizeModalRect(x, y, 8.0F, 8.0F, 8, 8, width, height, 64, 64);
+        drawScaledCustomSizeModalRect(x, y, 8.0F, 8.0F, 8, 8, width, height, 64, 64);
+        GlStateManager.popMatrix();
+    }
+
+    public static void drawPlayerHeadImage(float x, float y, float width, float height, ResourceLocation resourceLocation) {
+        GlStateManager.pushMatrix();
+        mc.getTextureManager().bindTexture(resourceLocation);
+        drawScaledCustomSizeModalRect(x, y, 8.0F, 8.0F, 8, 8, width, height, 64, 64);
         GlStateManager.popMatrix();
     }
 

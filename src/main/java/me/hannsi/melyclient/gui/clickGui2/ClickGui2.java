@@ -26,6 +26,22 @@ public class ClickGui2 extends GuiScreen {
     public float offsetX;
     public Screen nowScreen;
 
+    public static void openGLStart() {
+        GLUtil.glPush();
+    }
+
+    public static void openGLEnd() {
+        GLUtil.glPop();
+    }
+
+    public static void nanoVGStart() {
+        GLUtil.nvgPush();
+    }
+
+    public static void nanoVGEnd() {
+        GLUtil.nvgPop();
+    }
+
     @Override
     public void initGui() {
         homeButtons = new ArrayList<>();
@@ -57,31 +73,31 @@ public class ClickGui2 extends GuiScreen {
         FontUtil ubuntu10 = new FontUtil(MelyClient.fontManager.ubuntu, 10);
         FontUtil ubuntu12 = new FontUtil(MelyClient.fontManager.ubuntu, 12);
         FontUtil ubuntu15 = new FontUtil(MelyClient.fontManager.ubuntu, 15);
-
+//
         INSTANCE = this;
-
-        GLUtil.nvgPush();
-
+//
+        nanoVGStart();
+//
         NVGRenderUtil.drawRectWH(0, 0, this.width, this.height, new Color(4, 4, 4, 255));
-
+//
         NVGRenderUtil.drawRectWH(0, 0, menuBarWidth, this.height, new Color(31, 31, 31, 255));
-
+//
         if (MouseUtil.isHoveringWH(0, 0, bonIcon15.getWidth(BonIcon.REORDER) + 10, bonIcon15.getHeight() + 10, mouseX, mouseY)) {
             NVGRenderUtil.drawRadialGradientRect(0, 0, bonIcon15.getWidth(BonIcon.REORDER) + 10, bonIcon15.getHeight() + 10, mouseX, mouseY, 0, 70, new Color(255, 255, 255, 50), new Color(4, 4, 4, 255));
             NVGRenderUtil.drawOutLineRectWH(0, 0, bonIcon15.getWidth(BonIcon.REORDER) + 10, bonIcon15.getHeight() + 10, 1f, new Color(91, 91, 91, 255));
         }
         bonIcon15.drawText(BonIcon.ARROW_BACK, 5, 5, new Color(255, 255, 255, 255));
-
+//
         if (MouseUtil.isHoveringWH(0, bonIcon15.getHeight() + 10, bonIcon15.getWidth(BonIcon.REORDER) + 10, bonIcon15.getHeight() + 10, mouseX, mouseY)) {
             NVGRenderUtil.drawRadialGradientRect(0, bonIcon15.getHeight() + 10, bonIcon15.getWidth(BonIcon.REORDER) + 10, bonIcon15.getHeight() + 10, mouseX, mouseY, 0, 70, new Color(255, 255, 255, 50), new Color(4, 4, 4, 255));
             NVGRenderUtil.drawOutLineRectWH(0, bonIcon15.getHeight() + 10, bonIcon15.getWidth(BonIcon.REORDER) + 10, bonIcon15.getHeight() + 10, 1f, new Color(91, 91, 91, 255));
         }
         bonIcon15.drawText(BonIcon.REORDER, 5, 5 + bonIcon15.getHeight() + 10, new Color(255, 255, 255, 255));
-
+//
         if (nowScreen == Screen.Home) {
             ubuntu15.drawText(MelyClient.MOD_NAME, menuBarWidth + offsetX, 5 + bonIcon15.getHeight() + 5, new Color(255, 255, 255, 255));
             ubuntu10.drawText("v" + MelyClient.MOD_VER, menuBarWidth + offsetX, 5 + (bonIcon15.getHeight() * 2) + 10, new Color(91, 91, 91, 255));
-
+//
             float homeButtonOffsetX = menuBarWidth + offsetX;
             for (HomeButton homeButton : homeButtons) {
                 homeButton.setX(homeButtonOffsetX);
@@ -92,20 +108,20 @@ public class ClickGui2 extends GuiScreen {
         } else if (nowScreen == Screen.AltManager) {
             AltManagerScreen.drawScreen(mouseX, mouseY, this.width, this.height);
         }
-
+//
         float menuBarOffsetY = (5 + bonIcon15.getHeight() + 5 + this.height / 15f) - ubuntu12.getHeight() / 2f + ubuntu12.getHeight();
         for (MenuBarButton menuBarButton : menuBarButtons) {
             menuBarButton.setY(menuBarOffsetY);
             menuBarButton.draw(mouseX, mouseY, this.width, this.height);
-
+//
             menuBarOffsetY += (bonIcon15.getHeight() + ((bonIcon15.getHeight() / 2f)));
         }
-
+//
         if (!MelyClient.moduleManager.getModuleByClass(me.hannsi.melyclient.module.modules.client.ClickGui.class).isToggle()) {
             close();
         }
-
-        GLUtil.nvgPop();
+//
+        nanoVGEnd();
     }
 
     public void close() {
@@ -202,6 +218,11 @@ public class ClickGui2 extends GuiScreen {
 
         public void mouseClicked(int mouseX, int mouseY, int mouseButton) {
             if (MouseUtil.isHoveringWH(x, y, width / 9f, height / 3f, mouseX, mouseY)) {
+                if (screen == Screen.AltManager) {
+                    if (!(mc.currentScreen instanceof GuiMainMenu)) {
+                        return;
+                    }
+                }
                 nowScreen = screen;
             }
         }

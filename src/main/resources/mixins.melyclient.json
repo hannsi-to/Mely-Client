@@ -4,11 +4,14 @@
   "refmap": "refmap.example.json",
   "mixins": [
     "net.minecraft.client.entity.IEntity",
+    "net.minecraft.entity.player.IEntityPlayer",
     "org.lwjgl.nanovg.MixinNanoVGGLConfig"
   ],
   "client": [
     "net.minecraft.client.IMinecraft",
     "net.minecraft.client.MixinMinecraft",
+    "net.minecraft.client.entity.IAbstractClientPlayer",
+    "net.minecraft.client.entity.IEntityPlayerSP",
     "net.minecraft.client.entity.MixinEntityPlayerSP",
     "net.minecraft.client.shader.IShaderGroup",
     "net.minecraft.client.shader.MixinShaderGroup",

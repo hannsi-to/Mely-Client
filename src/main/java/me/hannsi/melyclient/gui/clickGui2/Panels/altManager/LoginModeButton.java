@@ -7,6 +7,7 @@ import me.hannsi.melyclient.util.render.nanovg.render.font.FontUtil;
 import me.hannsi.melyclient.util.system.auth.LoginMode;
 import me.hannsi.melyclient.util.system.math.MouseUtil;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.Session;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -37,10 +38,11 @@ public class LoginModeButton {
         if (MouseUtil.isHoveringWH(x, y, ClickGui2.INSTANCE.width / 9f, ClickGui2.INSTANCE.height / 3f, mouseX, mouseY)) {
             if (loginMode == LoginMode.MICROSOFT) {
                 new Thread(() -> {
-                    boolean checkLogin = MelyClient.altManager.loginWithWebView();
-                    if (checkLogin) {
+                    Session session = MelyClient.altManager.loginWithWebView();
+                    if (session != null) {
                         AltManagerScreen.screen = AccountScreen.SelectAccountScreen;
-                        AltManagerScreen.tempAccount.setSession(MelyClient.altManager.getSession(AltManagerScreen.tempAccount));
+                        AltManagerScreen.tempAccount.setSession(session);
+                        AltManagerScreen.tempAccount.setLoginMode(loginMode);
                         AltManagerScreen.accountButtons.add(new AccountButton(AltManagerScreen.tempAccount, 0, 0));
                     } else {
                         AltManagerScreen.screen = AccountScreen.LoginModeScreen;

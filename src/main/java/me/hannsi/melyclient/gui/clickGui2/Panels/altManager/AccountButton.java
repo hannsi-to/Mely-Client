@@ -21,10 +21,22 @@ public class AccountButton {
     }
 
     public void mouseClicked(int mouseX, int mouseY, int mouseButton) {
+        FontUtil ubuntu30 = new FontUtil(MelyClient.fontManager.ubuntu, 30);
+
         if (MouseUtil.isHoveringWH(x, y, ClickGui2.INSTANCE.width / 9f, ClickGui2.INSTANCE.height / 3f, mouseX, mouseY)) {
             if (accountData == null) {
                 AltManagerScreen.screen = AccountScreen.LoginModeScreen;
             }
+        }
+
+        if (MouseUtil.isHoveringWH(x + 1, y + ClickGui2.INSTANCE.height / 3f - ubuntu30.getHeight() + 1, ClickGui2.INSTANCE.width / 9f - 2, ubuntu30.getHeight() - 2, mouseX, mouseY)) {
+            MelyClient.altManager.setSession(accountData.getSession());
+            MelyClient.altManager.nowLoginAccountData = accountData;
+        }
+
+        if (MouseUtil.isHoveringWH(x + 1, y + ClickGui2.INSTANCE.height / 3f - ubuntu30.getHeight() + 1 - (ubuntu30.getHeight() - 2), ClickGui2.INSTANCE.width / 9f - 2, ubuntu30.getHeight() - 2, mouseX, mouseY)) {
+            AltManagerScreen.screen = AccountScreen.AccountInfoScreen;
+            AltManagerScreen.infoAccountData = accountData;
         }
     }
 
@@ -61,13 +73,13 @@ public class AccountButton {
                 ubuntu10.drawTextCenter("Add", x + (width / 9f) / 2f, y + (height / 3f) / 2f + ubuntu30.getHeight(), new Color(255, 255, 255, 255));
             }
         } else {
-            //MelyClient.logger.info(accountData);
-            //MelyClient.logger.info(accountData.getLoginMode() + " : " + accountData.getEmail() + " : " + accountData.getPassword() + " : " + accountData.getSession());
-            //ubuntu12.drawText(accountData.getSession().getUsername(), x + 5, y + 2.5f + bonIcon40.getHeight(), new Color(255, 255, 255, 255));
+            ubuntu12.drawText(accountData.getSession().getUsername(), x + 5, y + 5, new Color(255, 255, 255, 255));
 
-            //float textOffsetY = 2.5f + bonIcon40.getHeight() + ubuntu12.getHeight();
-            //ubuntu10.drawText("PlayerID : " + accountData.getSession().getPlayerID(), x + 5, y + textOffsetY, new Color(91, 91, 91, 255));
-            //textOffsetY += ubuntu10.getHeight();
+            NVGRenderUtil.drawRadialGradientRect(x + 1, y + height / 3f - ubuntu30.getHeight() + 1, width / 9f - 2, ubuntu30.getHeight() - 2, mouseX, mouseY, 0, 70, new Color(255, 255, 255, 50), new Color(4, 4, 4, 255));
+            ubuntu12.drawText("Change", x + (width / 9f) / 2f - ubuntu12.getWidth("Change") / 2f, y + height / 3f - (ubuntu30.getHeight() - 2) / 2f - ubuntu12.getHeight() / 2f, new Color(255, 255, 255, 255));
+
+            NVGRenderUtil.drawRadialGradientRect(x + 1, y + height / 3f - ubuntu30.getHeight() + 1 - (ubuntu30.getHeight() - 2), width / 9f - 2, ubuntu30.getHeight() - 2, mouseX, mouseY, 0, 70, new Color(255, 255, 255, 50), new Color(4, 4, 4, 255));
+            ubuntu12.drawText("Info", x + (width / 9f) / 2f - ubuntu12.getWidth("Info") / 2f, y + height / 3f - (ubuntu30.getHeight() - 2) - (ubuntu30.getHeight() + 1) / 2f - ubuntu12.getHeight() / 2f, new Color(255, 255, 255, 255));
         }
     }
 

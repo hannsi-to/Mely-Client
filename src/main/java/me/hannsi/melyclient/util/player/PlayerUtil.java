@@ -63,4 +63,5 @@ public class PlayerUtil implements InterfaceMinecraft {
     public static BlockPos getPosition() {
         return new BlockPos(mc.player.posX, mc.player.posY, mc.player.posZ);
     }
+
 }

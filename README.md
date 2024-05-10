@@ -64,7 +64,9 @@ Minecraft Client
 ｜｜｜      ｜｜├minecraft
 ｜｜｜      ｜｜｜├client
 ｜｜｜      ｜｜｜｜├entity
+｜｜｜      ｜｜｜｜｜├IAbstractClientPlayer.java
 ｜｜｜      ｜｜｜｜｜├IEntity.java
+｜｜｜      ｜｜｜｜｜├IEntityPlayerSP.java
 ｜｜｜      ｜｜｜｜｜└MixinEntityPlayerSP.java
 ｜｜｜      ｜｜｜｜├gui
 ｜｜｜      ｜｜｜｜├shader
@@ -72,6 +74,9 @@ Minecraft Client
 ｜｜｜      ｜｜｜｜｜└MixinShaderGroup.java
 ｜｜｜      ｜｜｜｜├IMinecraft.java
 ｜｜｜      ｜｜｜｜└MixinMinecraft.java
+｜｜｜      ｜｜｜├entity
+｜｜｜      ｜｜｜｜└player
+｜｜｜      ｜｜｜｜  └IEntityPlayer.java
 ｜｜｜      ｜｜｜└util
 ｜｜｜      ｜｜｜  ├ISession.java
 ｜｜｜      ｜｜｜  └MixinMovementInputFromOptions.java

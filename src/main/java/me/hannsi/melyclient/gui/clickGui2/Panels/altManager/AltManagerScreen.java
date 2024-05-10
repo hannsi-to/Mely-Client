@@ -30,6 +30,8 @@ public class AltManagerScreen {
     public static LoadingCircles loadingCircles;
     public static TimerUtil loadTextTimer;
     public static int loadTextCounter;
+    public static boolean loginFailed;
+    public static AccountData infoAccountData;
 
     public static void initGui() {
         FontUtil ubuntu15 = new FontUtil(MelyClient.fontManager.ubuntu, 15);
@@ -51,7 +53,7 @@ public class AltManagerScreen {
 
         screen = AccountScreen.SelectAccountScreen;
 
-        tempAccount = new AccountData("", "", null, null);
+        tempAccount = new AccountData(null, "", "");
 
         loadText = "Checking Account";
         loadingBarX = ClickGui2.INSTANCE.menuBarWidth + (ClickGui2.INSTANCE.width - ClickGui2.INSTANCE.menuBarWidth) / 2f - (ubuntu15.getWidth(loadText) / 2f) - 10 - ClickGui2.INSTANCE.menuBarWidth;
@@ -60,6 +62,10 @@ public class AltManagerScreen {
 
         loadTextTimer = new TimerUtil();
         loadTextCounter = 0;
+
+        loginFailed = false;
+
+        infoAccountData = null;
     }
 
     public static void mouseClicked(int mouseX, int mouseY, int mouseButton) {
@@ -96,6 +102,8 @@ public class AltManagerScreen {
                         accountButtons.add(new AccountButton(tempAccount, 0, 0));
                     } else {
                         screen = AccountScreen.InputEmailAndPasswordScreen;
+                        new DebugLog("Login Failed.", DebugLevel.ERROR);
+                        loginFailed = true;
                     }
                 }).start();
 
@@ -158,6 +166,10 @@ public class AltManagerScreen {
 
             NVGRenderUtil.drawRectWH(ClickGui2.INSTANCE.menuBarWidth + ClickGui2.INSTANCE.offsetX + width / 3f - ubuntu15.getWidth("    Login    "), inputAccountInfoBorderOffsetY, ubuntu15.getWidth("    Login    "), ubuntu15.getHeight() + 10f, new Color(0, 120, 212, 255));
             ubuntu15.drawText("    Login    ", ClickGui2.INSTANCE.menuBarWidth + ClickGui2.INSTANCE.offsetX + width / 3f - ubuntu15.getWidth("    Login    "), inputAccountInfoBorderOffsetY + 5f, new Color(255, 255, 255, 255));
+
+            if (loginFailed) {
+                ubuntu10.drawText("Login Failed.", ClickGui2.INSTANCE.menuBarWidth + ClickGui2.INSTANCE.offsetX + width / 3f + 5f, inputAccountInfoBorderOffsetY + ubuntu15.getHeight() + 10f - ubuntu10.getHeight(), DebugLevel.ERROR.getColor());
+            }
         } else if (screen == AccountScreen.CheckingAccountScreen) {
             bonIcon100.drawTextCenter(BonIcon.DEPLOYEDCODE, ClickGui2.INSTANCE.menuBarWidth + (ClickGui2.INSTANCE.width - ClickGui2.INSTANCE.menuBarWidth) / 2f, ClickGui2.INSTANCE.height / 2f - (ubuntu15.getHeight() * 4), new Color(255, 255, 255, 255));
 
@@ -178,6 +190,27 @@ public class AltManagerScreen {
             NVGRenderUtil.drawOutLineRoundedRectWH(loadingBarX, ClickGui2.INSTANCE.height / 2f + ubuntu15.getHeight() * 2 - 10, loadingBarWidth, (ClickGui2.INSTANCE.height / 2f + ubuntu15.getHeight() * 2) - (ClickGui2.INSTANCE.height / 2f + ubuntu15.getHeight() * 2) + 20, 10, 1, new Color(255, 255, 255, 255));
 
             loadingCircles.draw(2500, loadingBarWidth);
+        } else if (screen == AccountScreen.AccountInfoScreen) {
+            if (infoAccountData == null) {
+                return;
+            }
+
+            float infoAccountDataOffsetY = 5 + (bonIcon15.getHeight() * 2) + 10 + ubuntu10.getHeight() * 2;
+            ubuntu15.drawText("Name : " + infoAccountData.getSession().getUsername(), ClickGui2.INSTANCE.menuBarWidth + ClickGui2.INSTANCE.offsetX, infoAccountDataOffsetY, new Color(255, 255, 255, 255));
+            infoAccountDataOffsetY += (ubuntu15.getHeight() + ubuntu10.getHeight() + 2);
+            ubuntu10.drawText("ID : " + infoAccountData.getSession().getProfile().getId(), ClickGui2.INSTANCE.menuBarWidth + ClickGui2.INSTANCE.offsetX, infoAccountDataOffsetY, new Color(255, 255, 255, 255));
+            infoAccountDataOffsetY += (ubuntu10.getHeight());
+            ubuntu10.drawText("PlayerID : " + infoAccountData.getSession().getPlayerID(), ClickGui2.INSTANCE.menuBarWidth + ClickGui2.INSTANCE.offsetX, infoAccountDataOffsetY, new Color(255, 255, 255, 255));
+            infoAccountDataOffsetY += (ubuntu10.getHeight() * 2);
+            ubuntu10.drawText("LoginMode : " + infoAccountData.getLoginMode().getDisplay(), ClickGui2.INSTANCE.menuBarWidth + ClickGui2.INSTANCE.offsetX, infoAccountDataOffsetY, new Color(255, 255, 255, 255));
+            infoAccountDataOffsetY += (ubuntu10.getHeight());
+            ubuntu10.drawText("Email : " + (LoginMode.MICROSOFT == infoAccountData.getLoginMode() ? "If you are logged in with Microsoft, your email information will not be saved." : infoAccountData.getEmail()), ClickGui2.INSTANCE.menuBarWidth + ClickGui2.INSTANCE.offsetX, infoAccountDataOffsetY, new Color(255, 255, 255, 255));
+            infoAccountDataOffsetY += (ubuntu10.getHeight());
+            ubuntu10.drawText("Password : " + (LoginMode.MICROSOFT == infoAccountData.getLoginMode() ? "If you are logged in with Microsoft, your password information will not be saved." : infoAccountData.getEmail()), ClickGui2.INSTANCE.menuBarWidth + ClickGui2.INSTANCE.offsetX, infoAccountDataOffsetY, new Color(255, 255, 255, 255));
+            infoAccountDataOffsetY += (ubuntu10.getHeight());
+            ubuntu10.drawText("Complete : " + infoAccountData.getSession().getProfile().isComplete(), ClickGui2.INSTANCE.menuBarWidth + ClickGui2.INSTANCE.offsetX, infoAccountDataOffsetY, new Color(255, 255, 255, 255));
+            infoAccountDataOffsetY += (ubuntu10.getHeight());
+            ubuntu10.drawText("Legacy : " + infoAccountData.getSession().getProfile().isLegacy(), ClickGui2.INSTANCE.menuBarWidth + ClickGui2.INSTANCE.offsetX, infoAccountDataOffsetY, new Color(255, 255, 255, 255));
         }
     }
 

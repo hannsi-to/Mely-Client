@@ -50,7 +50,7 @@ public class AltManager implements InterfaceMinecraft {
                 this.userAuthentication.logIn();
                 Session session = new Session(this.userAuthentication.getSelectedProfile().getName(), UUIDTypeAdapter.fromUUID(userAuthentication.getSelectedProfile().getId()), this.userAuthentication.getAuthenticatedToken(), this.userAuthentication.getUserType().getName());
                 setSession(session);
-                nowLoginAccountData = new AccountData(email, password, session, LoginMode.MINECRAFT);
+                nowLoginAccountData = new AccountData(LoginMode.MINECRAFT, email, password);
             } catch (Exception ignore) {
                 return false;
             }
@@ -64,7 +64,7 @@ public class AltManager implements InterfaceMinecraft {
             MicrosoftAuthResult acc = authenticator.loginWithCredentials(email, password);
             Session session = new Session(acc.getProfile().getName(), acc.getProfile().getId(), acc.getAccessToken(), "legacy");
             setSession(session);
-            nowLoginAccountData = new AccountData(email, password, session, LoginMode.MICROSOFT);
+            nowLoginAccountData = new AccountData(LoginMode.MICROSOFT, session);
         } catch (MicrosoftAuthenticationException e) {
             new DebugLog(e, DebugLevel.WARNING);
             return false;
@@ -118,7 +118,7 @@ public class AltManager implements InterfaceMinecraft {
         return new Session(username, username, "0", "legacy");
     }
 
-    private void setSession(Session session) {
+    public void setSession(Session session) {
         ((IMinecraft) mc).setSession(session);
         new DebugLog("Setting user: " + session.getUsername(), DebugLevel.INFO);
     }
@@ -129,16 +129,16 @@ public class AltManager implements InterfaceMinecraft {
         setSession(session);
     }
 
-    public boolean loginWithWebView() {
+    public Session loginWithWebView() {
         Session session;
         try {
             MicrosoftAuthResult acc = MicrosoftWebView.loginWithWebview();
             session = new Session(acc.getProfile().getName(), acc.getProfile().getId(), acc.getAccessToken(), "legacy");
             setSession(session);
-            return true;
+            return session;
         } catch (Exception e) {
             new DebugLog(e, DebugLevel.WARNING);
-            return false;
+            return null;
         }
     }
 
@@ -151,17 +151,6 @@ public class AltManager implements InterfaceMinecraft {
         return false;
     }
 
-    public AccountData getAccountData(String email, String password, LoginMode loginMode) {
-        AccountData accountData = null;
-
-        if (loginMode == LoginMode.MICROSOFT) {
-            accountData = new AccountData(email, password, getUserMicrosoftSession(email, password), loginMode);
-        } else if (loginMode == LoginMode.MINECRAFT) {
-            accountData = new AccountData(email, password, getUserMinecraftSession(email, password), loginMode);
-        }
-
-        return accountData;
-    }
 
     public void addAccountData(AccountData accountData) {
         for (AccountData tempAccountData : accountDataList) {

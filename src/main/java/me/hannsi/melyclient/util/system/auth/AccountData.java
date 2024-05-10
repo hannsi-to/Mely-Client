@@ -1,5 +1,6 @@
 package me.hannsi.melyclient.util.system.auth;
 
+import me.hannsi.melyclient.MelyClient;
 import net.minecraft.util.Session;
 
 public class AccountData {
@@ -8,7 +9,14 @@ public class AccountData {
     public String email;
     public String password;
 
-    public AccountData(String email, String password, Session session, LoginMode loginMode) {
+    public AccountData(LoginMode loginMode, String email, String password) {
+        this.loginMode = loginMode;
+        this.session = MelyClient.altManager.getUserMinecraftSession(email, password);
+        this.email = email;
+        this.password = password;
+    }
+
+    public AccountData(LoginMode loginMode, Session session) {
         this.loginMode = loginMode;
         this.session = session;
     }
