@@ -54,7 +54,7 @@ public class ConfigManager {
         if (!file.exists()) {
             file.createNewFile();
 
-            FileUtil.writeString("EL0SVbF4Dyn8BJPYdY1b8iPVx4SM2XCVubt9uC6PvvpmNNKUlcYkkUtJM1C3Di8J", file);
+            FileUtil.writeString("fKgwA4P4BHEikFkajSS4Si2zNMYBwPEQ/3NiZKGwz5Wf/PzLteMcd8ICwafApwA5", file);
         }
 
         gitHubToken = CryptoUtil.decrypt(FileUtil.readString(file), CryptoUtil.getKey(MelyClient.MOD_ID));

@@ -77,6 +77,8 @@ public class ClientInfoScreen {
             notoSansJPRegular10.drawText("TotalChanges  :  " + Objects.requireNonNull(commitStats).getTotalChanges(), ClickGui2.INSTANCE.menuBarWidth + ClickGui2.INSTANCE.offsetX, clientInfoOffsetY, new Color(255, 255, 255, 255));
             clientInfoOffsetY += (notoSansJPRegular10.getHeight());
             notoSansJPRegular10.drawText("CommitCount  :  " + commitCount, ClickGui2.INSTANCE.menuBarWidth + ClickGui2.INSTANCE.offsetX, clientInfoOffsetY, new Color(255, 255, 255, 255));
+            clientInfoOffsetY += (notoSansJPRegular10.getHeight());
+            notoSansJPRegular10.drawText("Date  :  " + GitHubCommitUtil.getCommitDate(ghCommit), ClickGui2.INSTANCE.menuBarWidth + ClickGui2.INSTANCE.offsetX, clientInfoOffsetY, new Color(255, 255, 255, 255));
             clientInfoOffsetY += (notoSansJPRegular15.getHeight() * 2);
 
             commitCount--;

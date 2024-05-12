@@ -12,6 +12,16 @@ import java.util.Date;
 import java.util.List;
 
 public class GitHubCommitUtil {
+    public static Date getCommitDate(GHCommit ghCommit) {
+        try {
+            return ghCommit.getCommitDate();
+        } catch (IOException e) {
+            new DebugLog(e, DebugLevel.ERROR);
+        }
+
+        return null;
+    }
+
     public static CommitStats getCommitStatistics(GHCommit ghCommit) {
         try {
             return GitHubCommitStatistics.calculateCommitStatistics(ghCommit);

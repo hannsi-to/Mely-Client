@@ -11,6 +11,7 @@ import me.hannsi.melyclient.util.system.debug.DebugLog;
 import me.hannsi.melyclient.util.system.math.time.TimeCalculator;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.net.*;
@@ -23,6 +24,11 @@ public class LoginFrame extends JFrame {
 
     public LoginFrame() {
         this.setTitle("Microsoft Authentication");
+        try {
+            this.setIconImage(Toolkit.getDefaultToolkit().createImage(new URL("https://cdn-icons-png.flaticon.com/512/732/732221.png")));
+        } catch (MalformedURLException e) {
+            new DebugLog(e, DebugLevel.ERROR);
+        }
         this.setSize(750, 750);
         this.setLocationRelativeTo(null);
 

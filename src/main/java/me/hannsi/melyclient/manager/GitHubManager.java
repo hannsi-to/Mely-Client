@@ -21,8 +21,6 @@ public class GitHubManager {
 
     public GitHubManager() {
         this.gitHubToken = MelyClient.configManager.gitHubToken;
-
-        MelyClient.logger.info(gitHubToken);
         this.gitHub = GitHubUtil.getGitHub(gitHubToken);
         this.userName = "hannsi-to";
         this.repositoryName = "Mely-Client";
