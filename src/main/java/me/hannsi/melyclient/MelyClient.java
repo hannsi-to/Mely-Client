@@ -1,13 +1,10 @@
 package me.hannsi.melyclient;
 
 import com.mojang.realmsclient.gui.ChatFormatting;
-import me.hannsi.melyclient.manager.AltManager;
-import me.hannsi.melyclient.manager.EventManager;
-import me.hannsi.melyclient.manager.FontManager;
-import me.hannsi.melyclient.manager.ModuleManager;
-import me.hannsi.melyclient.util.system.math.time.TimeCalculator;
+import me.hannsi.melyclient.manager.*;
 import me.hannsi.melyclient.util.render.nanovg.system.NVGUtil;
 import me.hannsi.melyclient.util.render.shader.ShaderUtil;
+import me.hannsi.melyclient.util.system.math.time.TimeCalculator;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import org.apache.logging.log4j.LogManager;
@@ -15,7 +12,7 @@ import org.apache.logging.log4j.Logger;
 import org.lwjgl.nanovg.NanoVGGL2;
 import org.lwjgl.opengl.Display;
 
-@Mod(name = MelyClient.MOD_NAME,version = MelyClient.MOD_VER,modid = MelyClient.MOD_ID)
+@Mod(name = MelyClient.MOD_NAME, version = MelyClient.MOD_VER, modid = MelyClient.MOD_ID)
 public class MelyClient {
     public static final String MOD_NAME = "MelyClient";
     public static final String MOD_VER = "1.0-beta";
@@ -30,6 +27,19 @@ public class MelyClient {
     public static AltManager altManager;
 
     public static ShaderUtil shaderUtil;
+    public static GitHubManager gitHubManager;
+
+    public static void unLoad() {
+        logger.info(MOD_NAME + " v" + MOD_VER + " unloading...");
+        long tookTime = TimeCalculator.calculate(() -> {
+            eventManager.unLoad();
+            moduleManager.unLoad();
+            fontManager = null;
+            gitHubManager.unLoad();
+            shaderUtil.unLoad();
+        });
+        logger.info(MOD_NAME + " v" + MOD_VER + " took " + tookTime + "ms to unload!");
+    }
 
     @Mod.EventHandler
     public void onPreInit(FMLPreInitializationEvent event) {
@@ -38,7 +48,7 @@ public class MelyClient {
         logger.info(MOD_NAME + " v" + MOD_VER + " took " + tookTime + "ms to load!");
     }
 
-    public void load(){
+    public void load() {
         Display.setTitle(MOD_NAME + " " + MOD_VER);
         Runtime.getRuntime().addShutdownHook(new Thread(MelyClient::unLoad));
 
@@ -48,17 +58,6 @@ public class MelyClient {
         moduleManager = new ModuleManager();
         fontManager = new FontManager();
         altManager = new AltManager();
-    }
-
-    public static void unLoad(){
-        logger.info(MOD_NAME + " v" + MOD_VER + " unloading...");
-        long tookTime = TimeCalculator.calculate(() -> {
-            eventManager.unLoad();
-            moduleManager.unLoad();
-            fontManager = null;
-
-            shaderUtil.unLoad();
-        });
-        logger.info(MOD_NAME + " v" + MOD_VER + " took " + tookTime + "ms to unload!");
+        gitHubManager = new GitHubManager();
     }
 }

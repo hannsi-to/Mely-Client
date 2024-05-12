@@ -196,21 +196,21 @@ public class AltManagerScreen {
             }
 
             float infoAccountDataOffsetY = 5 + (bonIcon15.getHeight() * 2) + 10 + ubuntu10.getHeight() * 2;
-            ubuntu15.drawText("Name : " + infoAccountData.getSession().getUsername(), ClickGui2.INSTANCE.menuBarWidth + ClickGui2.INSTANCE.offsetX, infoAccountDataOffsetY, new Color(255, 255, 255, 255));
+            ubuntu15.drawText("Name  :  " + infoAccountData.getSession().getUsername(), ClickGui2.INSTANCE.menuBarWidth + ClickGui2.INSTANCE.offsetX, infoAccountDataOffsetY, new Color(255, 255, 255, 255));
             infoAccountDataOffsetY += (ubuntu15.getHeight() + ubuntu10.getHeight() + 2);
-            ubuntu10.drawText("ID : " + infoAccountData.getSession().getProfile().getId(), ClickGui2.INSTANCE.menuBarWidth + ClickGui2.INSTANCE.offsetX, infoAccountDataOffsetY, new Color(255, 255, 255, 255));
+            ubuntu10.drawText("ID  :  " + infoAccountData.getSession().getProfile().getId(), ClickGui2.INSTANCE.menuBarWidth + ClickGui2.INSTANCE.offsetX, infoAccountDataOffsetY, new Color(255, 255, 255, 255));
             infoAccountDataOffsetY += (ubuntu10.getHeight());
-            ubuntu10.drawText("PlayerID : " + infoAccountData.getSession().getPlayerID(), ClickGui2.INSTANCE.menuBarWidth + ClickGui2.INSTANCE.offsetX, infoAccountDataOffsetY, new Color(255, 255, 255, 255));
+            ubuntu10.drawText("PlayerID  :  " + infoAccountData.getSession().getPlayerID(), ClickGui2.INSTANCE.menuBarWidth + ClickGui2.INSTANCE.offsetX, infoAccountDataOffsetY, new Color(255, 255, 255, 255));
             infoAccountDataOffsetY += (ubuntu10.getHeight() * 2);
-            ubuntu10.drawText("LoginMode : " + infoAccountData.getLoginMode().getDisplay(), ClickGui2.INSTANCE.menuBarWidth + ClickGui2.INSTANCE.offsetX, infoAccountDataOffsetY, new Color(255, 255, 255, 255));
+            ubuntu10.drawText("LoginMode  :  " + infoAccountData.getLoginMode().getDisplay(), ClickGui2.INSTANCE.menuBarWidth + ClickGui2.INSTANCE.offsetX, infoAccountDataOffsetY, new Color(255, 255, 255, 255));
             infoAccountDataOffsetY += (ubuntu10.getHeight());
-            ubuntu10.drawText("Email : " + (LoginMode.MICROSOFT == infoAccountData.getLoginMode() ? "If you are logged in with Microsoft, your email information will not be saved." : infoAccountData.getEmail()), ClickGui2.INSTANCE.menuBarWidth + ClickGui2.INSTANCE.offsetX, infoAccountDataOffsetY, new Color(255, 255, 255, 255));
+            ubuntu10.drawText("Email  :  " + (LoginMode.MICROSOFT == infoAccountData.getLoginMode() ? "If you are logged in with Microsoft, your email information will not be saved." : infoAccountData.getEmail()), ClickGui2.INSTANCE.menuBarWidth + ClickGui2.INSTANCE.offsetX, infoAccountDataOffsetY, new Color(255, 255, 255, 255));
             infoAccountDataOffsetY += (ubuntu10.getHeight());
-            ubuntu10.drawText("Password : " + (LoginMode.MICROSOFT == infoAccountData.getLoginMode() ? "If you are logged in with Microsoft, your password information will not be saved." : infoAccountData.getEmail()), ClickGui2.INSTANCE.menuBarWidth + ClickGui2.INSTANCE.offsetX, infoAccountDataOffsetY, new Color(255, 255, 255, 255));
+            ubuntu10.drawText("Password  :  " + (LoginMode.MICROSOFT == infoAccountData.getLoginMode() ? "If you are logged in with Microsoft, your password information will not be saved." : infoAccountData.getEmail()), ClickGui2.INSTANCE.menuBarWidth + ClickGui2.INSTANCE.offsetX, infoAccountDataOffsetY, new Color(255, 255, 255, 255));
             infoAccountDataOffsetY += (ubuntu10.getHeight());
-            ubuntu10.drawText("Complete : " + infoAccountData.getSession().getProfile().isComplete(), ClickGui2.INSTANCE.menuBarWidth + ClickGui2.INSTANCE.offsetX, infoAccountDataOffsetY, new Color(255, 255, 255, 255));
+            ubuntu10.drawText("Complete  :  " + infoAccountData.getSession().getProfile().isComplete(), ClickGui2.INSTANCE.menuBarWidth + ClickGui2.INSTANCE.offsetX, infoAccountDataOffsetY, new Color(255, 255, 255, 255));
             infoAccountDataOffsetY += (ubuntu10.getHeight());
-            ubuntu10.drawText("Legacy : " + infoAccountData.getSession().getProfile().isLegacy(), ClickGui2.INSTANCE.menuBarWidth + ClickGui2.INSTANCE.offsetX, infoAccountDataOffsetY, new Color(255, 255, 255, 255));
+            ubuntu10.drawText("Legacy  :  " + infoAccountData.getSession().getProfile().isLegacy(), ClickGui2.INSTANCE.menuBarWidth + ClickGui2.INSTANCE.offsetX, infoAccountDataOffsetY, new Color(255, 255, 255, 255));
         }
     }
 

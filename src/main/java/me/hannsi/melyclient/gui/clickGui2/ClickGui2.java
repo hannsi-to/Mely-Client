@@ -3,6 +3,7 @@ package me.hannsi.melyclient.gui.clickGui2;
 import me.hannsi.melyclient.MelyClient;
 import me.hannsi.melyclient.gui.clickGui2.Panels.altManager.AccountScreen;
 import me.hannsi.melyclient.gui.clickGui2.Panels.altManager.AltManagerScreen;
+import me.hannsi.melyclient.gui.clickGui2.Panels.clientInfo.ClientInfoScreen;
 import me.hannsi.melyclient.util.render.GLUtil;
 import me.hannsi.melyclient.util.render.guiScreen.GuiScreenUtil;
 import me.hannsi.melyclient.util.render.nanovg.render.NVGRenderUtil;
@@ -107,6 +108,8 @@ public class ClickGui2 extends GuiScreen {
             }
         } else if (nowScreen == Screen.AltManager) {
             AltManagerScreen.drawScreen(mouseX, mouseY, this.width, this.height);
+        } else if (nowScreen == Screen.ClientInfo) {
+            ClientInfoScreen.drawScreen(mouseX, mouseY, this.width, this.height);
         }
 //
         float menuBarOffsetY = (5 + bonIcon15.getHeight() + 5 + this.height / 15f) - ubuntu12.getHeight() / 2f + ubuntu12.getHeight();

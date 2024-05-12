@@ -38,14 +38,16 @@ Minecraft Client
 ｜｜｜      ｜｜└ModulePanel.java
 ｜｜｜      ｜├clickGui2
 ｜｜｜      ｜｜├Panels
-｜｜｜      ｜｜｜└altManager
-｜｜｜      ｜｜｜  ├AccountButton.java
-｜｜｜      ｜｜｜  ├AccountScreen.java
-｜｜｜      ｜｜｜  ├AltManagerScreen.java
-｜｜｜      ｜｜｜  ├Circle.java
-｜｜｜      ｜｜｜  ├InputAccountInfoBorder.java
-｜｜｜      ｜｜｜  ├LoadingCircles.java
-｜｜｜      ｜｜｜  └LoginModeButton.java
+｜｜｜      ｜｜｜├altManager
+｜｜｜      ｜｜｜｜├AccountButton.java
+｜｜｜      ｜｜｜｜├AccountScreen.java
+｜｜｜      ｜｜｜｜├AltManagerScreen.java
+｜｜｜      ｜｜｜｜├Circle.java
+｜｜｜      ｜｜｜｜├InputAccountInfoBorder.java
+｜｜｜      ｜｜｜｜├LoadingCircles.java
+｜｜｜      ｜｜｜｜└LoginModeButton.java
+｜｜｜      ｜｜｜└clientInfo
+｜｜｜      ｜｜｜  └ClientInfoScreen.java
 ｜｜｜      ｜｜├ClickGui2.java
 ｜｜｜      ｜｜└Screen.java
 ｜｜｜      ｜└guiScreen
@@ -58,6 +60,7 @@ Minecraft Client
 ｜｜｜      ｜├AltManager.java
 ｜｜｜      ｜├EventManager.java
 ｜｜｜      ｜├FontManager.java
+｜｜｜      ｜├GitHubManager.java
 ｜｜｜      ｜└ModuleManager.java
 ｜｜｜      ├mixin
 ｜｜｜      ｜├net
@@ -172,6 +175,11 @@ Minecraft Client
 ｜｜｜      ｜｜｜├DebugLevel.java
 ｜｜｜      ｜｜｜├DebugLog.java
 ｜｜｜      ｜｜｜└DebugType.java
+｜｜｜      ｜｜├github
+｜｜｜      ｜｜｜├CommitStats.java
+｜｜｜      ｜｜｜├GitHubCommitStatistics.java
+｜｜｜      ｜｜｜├GitHubCommitUtil.java
+｜｜｜      ｜｜｜└GitHubUtil.java
 ｜｜｜      ｜｜└math
 ｜｜｜      ｜｜  ├animation
 ｜｜｜      ｜｜  ｜├Easing.java
@@ -201,6 +209,7 @@ Minecraft Client
 ｜｜  ｜└minecraft
 ｜｜  ｜  └mely
 ｜｜  ｜    ├font
+｜｜  ｜    ｜├NotoSansJP-Regular.ttf
 ｜｜  ｜    ｜├Ubuntu-M.ttf
 ｜｜  ｜    ｜└hannsi-BonIcon2.3.ttf
 ｜｜  ｜    ├img

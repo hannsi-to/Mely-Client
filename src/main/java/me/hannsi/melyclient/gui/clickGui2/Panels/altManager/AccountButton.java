@@ -41,7 +41,6 @@ public class AccountButton {
     }
 
     public void draw(int mouseX, int mouseY, float width, float height) {
-        FontUtil bonIcon40 = new FontUtil(MelyClient.fontManager.bonIcon, 40);
         FontUtil ubuntu10 = new FontUtil(MelyClient.fontManager.ubuntu, 10);
         FontUtil ubuntu12 = new FontUtil(MelyClient.fontManager.ubuntu, 12);
         FontUtil ubuntu30 = new FontUtil(MelyClient.fontManager.ubuntu, 30);
