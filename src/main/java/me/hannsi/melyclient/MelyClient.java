@@ -28,6 +28,7 @@ public class MelyClient {
 
     public static ShaderUtil shaderUtil;
     public static GitHubManager gitHubManager;
+    public static ConfigManager configManager;
 
     public static void unLoad() {
         logger.info(MOD_NAME + " v" + MOD_VER + " unloading...");
@@ -37,6 +38,7 @@ public class MelyClient {
             fontManager = null;
             gitHubManager.unLoad();
             shaderUtil.unLoad();
+            configManager.unLoad();
         });
         logger.info(MOD_NAME + " v" + MOD_VER + " took " + tookTime + "ms to unload!");
     }
@@ -50,7 +52,6 @@ public class MelyClient {
 
     public void load() {
         Display.setTitle(MOD_NAME + " " + MOD_VER);
-        Runtime.getRuntime().addShutdownHook(new Thread(MelyClient::unLoad));
 
         NVGUtil.nvg = NanoVGGL2.nvgCreate(NanoVGGL2.NVG_ANTIALIAS);
         MelyClient.shaderUtil = new ShaderUtil();
@@ -58,6 +59,7 @@ public class MelyClient {
         moduleManager = new ModuleManager();
         fontManager = new FontManager();
         altManager = new AltManager();
+        configManager = new ConfigManager();
         gitHubManager = new GitHubManager();
     }
 }

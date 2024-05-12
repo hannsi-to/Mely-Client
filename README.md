@@ -58,6 +58,7 @@ Minecraft Client
 ｜｜｜      ｜    └SplashProgress.java
 ｜｜｜      ├manager
 ｜｜｜      ｜├AltManager.java
+｜｜｜      ｜├ConfigManager.java
 ｜｜｜      ｜├EventManager.java
 ｜｜｜      ｜├FontManager.java
 ｜｜｜      ｜├GitHubManager.java
@@ -180,28 +181,31 @@ Minecraft Client
 ｜｜｜      ｜｜｜├GitHubCommitStatistics.java
 ｜｜｜      ｜｜｜├GitHubCommitUtil.java
 ｜｜｜      ｜｜｜└GitHubUtil.java
-｜｜｜      ｜｜└math
-｜｜｜      ｜｜  ├animation
-｜｜｜      ｜｜  ｜├Easing.java
-｜｜｜      ｜｜  ｜└EasingUtil.java
-｜｜｜      ｜｜  ├color
-｜｜｜      ｜｜  ｜├theme
-｜｜｜      ｜｜  ｜｜├clickGui
-｜｜｜      ｜｜  ｜｜｜└ThemeClickGui.java
-｜｜｜      ｜｜  ｜｜└parts
-｜｜｜      ｜｜  ｜｜  ├Border.java
-｜｜｜      ｜｜  ｜｜  ├Font.java
-｜｜｜      ｜｜  ｜｜  └Line.java
-｜｜｜      ｜｜  ｜└ColorUtil.java
-｜｜｜      ｜｜  ├time
-｜｜｜      ｜｜  ｜├TimeCalculator.java
-｜｜｜      ｜｜  ｜└TimerUtil.java
-｜｜｜      ｜｜  ├vector
-｜｜｜      ｜｜  ｜└Vector2f.java
-｜｜｜      ｜｜  ├DisplayUtil.java
-｜｜｜      ｜｜  ├MathUtil.java
-｜｜｜      ｜｜  ├MouseUtil.java
-｜｜｜      ｜｜  └StringUtil.java
+｜｜｜      ｜｜├math
+｜｜｜      ｜｜｜├animation
+｜｜｜      ｜｜｜｜├Easing.java
+｜｜｜      ｜｜｜｜└EasingUtil.java
+｜｜｜      ｜｜｜├color
+｜｜｜      ｜｜｜｜├theme
+｜｜｜      ｜｜｜｜｜├clickGui
+｜｜｜      ｜｜｜｜｜｜└ThemeClickGui.java
+｜｜｜      ｜｜｜｜｜└parts
+｜｜｜      ｜｜｜｜｜  ├Border.java
+｜｜｜      ｜｜｜｜｜  ├Font.java
+｜｜｜      ｜｜｜｜｜  └Line.java
+｜｜｜      ｜｜｜｜└ColorUtil.java
+｜｜｜      ｜｜｜├crypto
+｜｜｜      ｜｜｜｜└CryptoUtil.java
+｜｜｜      ｜｜｜├time
+｜｜｜      ｜｜｜｜├TimeCalculator.java
+｜｜｜      ｜｜｜｜└TimerUtil.java
+｜｜｜      ｜｜｜├vector
+｜｜｜      ｜｜｜｜└Vector2f.java
+｜｜｜      ｜｜｜├DisplayUtil.java
+｜｜｜      ｜｜｜├MathUtil.java
+｜｜｜      ｜｜｜├MouseUtil.java
+｜｜｜      ｜｜｜└StringUtil.java
+｜｜｜      ｜｜└FileUtil.java
 ｜｜｜      ｜└InterfaceMinecraft.java
 ｜｜｜      └MelyClient.java
 ｜｜└resources

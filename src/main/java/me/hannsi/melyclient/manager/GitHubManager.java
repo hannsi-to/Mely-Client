@@ -20,7 +20,9 @@ public class GitHubManager {
     public List<GHCommit> commits;
 
     public GitHubManager() {
-        this.gitHubToken = "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";
+        this.gitHubToken = MelyClient.configManager.gitHubToken;
+
+        MelyClient.logger.info(gitHubToken);
         this.gitHub = GitHubUtil.getGitHub(gitHubToken);
         this.userName = "hannsi-to";
         this.repositoryName = "Mely-Client";
