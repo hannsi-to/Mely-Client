@@ -1,4 +1,4 @@
-package me.hannsi.melyclient.util.system;
+package me.hannsi.melyclient.util.system.file;
 
 import java.io.File;
 import java.io.FileNotFoundException;

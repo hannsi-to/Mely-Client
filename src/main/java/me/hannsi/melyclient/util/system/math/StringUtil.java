@@ -1,6 +1,28 @@
 package me.hannsi.melyclient.util.system.math;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class StringUtil {
+    public static List<String> splitlnAsList(String str) {
+        return Arrays.asList(splitln(str));
+    }
+
+    public static String[] splitln(String str) {
+        return str.split("\n");
+    }
+
+    public static String extractString(String input, String startDelimiter, String endDelimiter) {
+        int startIndex = input.indexOf(startDelimiter);
+        int endIndex = input.indexOf(endDelimiter, startIndex + startDelimiter.length());
+
+        if (startIndex == -1 || endIndex == -1) {
+            return "";
+        }
+
+        return input.substring(startIndex + startDelimiter.length(), endIndex);
+    }
+
     public static String removeLastChar(String str) {
         String output = "";
         if (str != null && !str.isEmpty()) {

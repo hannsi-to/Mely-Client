@@ -1,9 +1,9 @@
 package me.hannsi.melyclient.manager;
 
 import me.hannsi.melyclient.MelyClient;
-import me.hannsi.melyclient.util.system.FileUtil;
 import me.hannsi.melyclient.util.system.debug.DebugLevel;
 import me.hannsi.melyclient.util.system.debug.DebugLog;
+import me.hannsi.melyclient.util.system.file.FileUtil;
 import me.hannsi.melyclient.util.system.math.crypto.CryptoUtil;
 
 import java.io.File;

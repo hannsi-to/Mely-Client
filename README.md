@@ -47,6 +47,7 @@ Minecraft Client
 ｜｜｜      ｜｜｜｜├LoadingCircles.java
 ｜｜｜      ｜｜｜｜└LoginModeButton.java
 ｜｜｜      ｜｜｜└clientInfo
+｜｜｜      ｜｜｜  ├ClientInfo.java
 ｜｜｜      ｜｜｜  └ClientInfoScreen.java
 ｜｜｜      ｜｜├ClickGui2.java
 ｜｜｜      ｜｜└Screen.java
@@ -176,36 +177,37 @@ Minecraft Client
 ｜｜｜      ｜｜｜├DebugLevel.java
 ｜｜｜      ｜｜｜├DebugLog.java
 ｜｜｜      ｜｜｜└DebugType.java
+｜｜｜      ｜｜├file
+｜｜｜      ｜｜｜└FileUtil.java
 ｜｜｜      ｜｜├github
 ｜｜｜      ｜｜｜├CommitStats.java
 ｜｜｜      ｜｜｜├GitHubCommitStatistics.java
 ｜｜｜      ｜｜｜├GitHubCommitUtil.java
 ｜｜｜      ｜｜｜└GitHubUtil.java
-｜｜｜      ｜｜├math
-｜｜｜      ｜｜｜├animation
-｜｜｜      ｜｜｜｜├Easing.java
-｜｜｜      ｜｜｜｜└EasingUtil.java
-｜｜｜      ｜｜｜├color
-｜｜｜      ｜｜｜｜├theme
-｜｜｜      ｜｜｜｜｜├clickGui
-｜｜｜      ｜｜｜｜｜｜└ThemeClickGui.java
-｜｜｜      ｜｜｜｜｜└parts
-｜｜｜      ｜｜｜｜｜  ├Border.java
-｜｜｜      ｜｜｜｜｜  ├Font.java
-｜｜｜      ｜｜｜｜｜  └Line.java
-｜｜｜      ｜｜｜｜└ColorUtil.java
-｜｜｜      ｜｜｜├crypto
-｜｜｜      ｜｜｜｜└CryptoUtil.java
-｜｜｜      ｜｜｜├time
-｜｜｜      ｜｜｜｜├TimeCalculator.java
-｜｜｜      ｜｜｜｜└TimerUtil.java
-｜｜｜      ｜｜｜├vector
-｜｜｜      ｜｜｜｜└Vector2f.java
-｜｜｜      ｜｜｜├DisplayUtil.java
-｜｜｜      ｜｜｜├MathUtil.java
-｜｜｜      ｜｜｜├MouseUtil.java
-｜｜｜      ｜｜｜└StringUtil.java
-｜｜｜      ｜｜└FileUtil.java
+｜｜｜      ｜｜└math
+｜｜｜      ｜｜  ├animation
+｜｜｜      ｜｜  ｜├Easing.java
+｜｜｜      ｜｜  ｜└EasingUtil.java
+｜｜｜      ｜｜  ├color
+｜｜｜      ｜｜  ｜├theme
+｜｜｜      ｜｜  ｜｜├clickGui
+｜｜｜      ｜｜  ｜｜｜└ThemeClickGui.java
+｜｜｜      ｜｜  ｜｜└parts
+｜｜｜      ｜｜  ｜｜  ├Border.java
+｜｜｜      ｜｜  ｜｜  ├Font.java
+｜｜｜      ｜｜  ｜｜  └Line.java
+｜｜｜      ｜｜  ｜└ColorUtil.java
+｜｜｜      ｜｜  ├crypto
+｜｜｜      ｜｜  ｜└CryptoUtil.java
+｜｜｜      ｜｜  ├time
+｜｜｜      ｜｜  ｜├TimeCalculator.java
+｜｜｜      ｜｜  ｜└TimerUtil.java
+｜｜｜      ｜｜  ├vector
+｜｜｜      ｜｜  ｜└Vector2f.java
+｜｜｜      ｜｜  ├DisplayUtil.java
+｜｜｜      ｜｜  ├MathUtil.java
+｜｜｜      ｜｜  ├MouseUtil.java
+｜｜｜      ｜｜  └StringUtil.java
 ｜｜｜      ｜└InterfaceMinecraft.java
 ｜｜｜      └MelyClient.java
 ｜｜└resources
