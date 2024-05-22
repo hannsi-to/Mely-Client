@@ -1,13 +1,12 @@
 package me.hannsi.melyclient.util.render.render2D;
 
 import me.hannsi.melyclient.util.InterfaceMinecraft;
+import me.hannsi.melyclient.util.render.GLUtil;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.renderer.*;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
@@ -54,54 +53,6 @@ public class Render2DUtil implements InterfaceMinecraft {
         GlStateManager.setActiveTexture(OpenGlHelper.defaultTexUnit);
     }
 
-    public static void drawScaledCustomSizeModalRect(float x, float y, float u, float v, float uWidth, float vHeight, float width, float height, float tileWidth, float tileHeight) {
-        float f = 1.0F / tileWidth;
-        float f1 = 1.0F / tileHeight;
-        Tessellator tessellator = Tessellator.getInstance();
-        BufferBuilder bufferbuilder = tessellator.getBuffer();
-        bufferbuilder.begin(7, DefaultVertexFormats.POSITION_TEX);
-        bufferbuilder.pos(x, y + height, 0.0D).tex(u * f, (v + vHeight) * f1).endVertex();
-        bufferbuilder.pos(x + width, y + height, 0.0D).tex((u + uWidth) * f, (v + vHeight) * f1).endVertex();
-        bufferbuilder.pos(x + width, y, 0.0D).tex((u + uWidth) * f, v * f1).endVertex();
-        bufferbuilder.pos(x, y, 0.0D).tex(u * f, v * f1).endVertex();
-        tessellator.draw();
-    }
-
-    public static void drawPlayerHeadImage(float x, float y, float width, float height, AbstractClientPlayer entity) {
-        GlStateManager.pushMatrix();
-        mc.getTextureManager().bindTexture(entity.getLocationSkin());
-        drawScaledCustomSizeModalRect(x, y, 8.0F, 8.0F, 8, 8, width, height, 64, 64);
-        GlStateManager.popMatrix();
-    }
-
-    public static void drawPlayerHeadImage(float x, float y, float width, float height, ResourceLocation resourceLocation) {
-        GlStateManager.pushMatrix();
-        mc.getTextureManager().bindTexture(resourceLocation);
-        drawScaledCustomSizeModalRect(x, y, 8.0F, 8.0F, 8, 8, width, height, 64, 64);
-        GlStateManager.popMatrix();
-    }
-
-    public static void drawCustomImage(float x, float y, float width, float height, ResourceLocation image) {
-        GL11.glPushMatrix();
-        GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
-        mc.getTextureManager().bindTexture(image);
-        drawModalRectWithCustomSizedTexture(x, y, 0.0f, 0.0f, width, height, width, height);
-        GL11.glPopMatrix();
-    }
-
-    public static void drawModalRectWithCustomSizedTexture(float x, float y, float u, float v, float width, float height, float textureWidth, float textureHeight) {
-        float f = 1.0F / textureWidth;
-        float f1 = 1.0F / textureHeight;
-        Tessellator tessellator = Tessellator.getInstance();
-        BufferBuilder bufferbuilder = tessellator.getBuffer();
-        bufferbuilder.begin(7, DefaultVertexFormats.POSITION_TEX);
-        bufferbuilder.pos(x, y + height, 0.0D).tex(u * f, (v + height) * f1).endVertex();
-        bufferbuilder.pos(x + width, y + height, 0.0D).tex((u + width) * f, (v + height) * f1).endVertex();
-        bufferbuilder.pos(x + width, y, 0.0D).tex((u + width) * f, v * f1).endVertex();
-        bufferbuilder.pos(x, y, 0.0D).tex(u * f, v * f1).endVertex();
-        tessellator.draw();
-    }
-
     public static void drawOutLineGradientRect(float x1, float y1, float x2, float y2, float lineWidth, Color leftTop, Color rightTop, Color leftBottom, Color rightBottom) {
         Tessellator tessellator = Tessellator.getInstance();
         BufferBuilder bufferbuilder = tessellator.getBuffer();
@@ -110,13 +61,13 @@ public class Render2DUtil implements InterfaceMinecraft {
         GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
         GlStateManager.glLineWidth(lineWidth);
         bufferbuilder.begin(GL11.GL_LINE_LOOP, DefaultVertexFormats.POSITION);
-        Render2DUtil.glsmColor(leftTop);
+        GLUtil.glsmColor(leftTop);
         bufferbuilder.pos(x1, y1, 0.0D).endVertex();
-        Render2DUtil.glsmColor(rightTop);
+        GLUtil.glsmColor(rightTop);
         bufferbuilder.pos(x1, y2, 0.0D).endVertex();
-        Render2DUtil.glsmColor(rightBottom);
+        GLUtil.glsmColor(rightBottom);
         bufferbuilder.pos(x2, y2, 0.0D).endVertex();
-        Render2DUtil.glsmColor(leftBottom);
+        GLUtil.glsmColor(leftBottom);
         bufferbuilder.pos(x2, y1, 0.0D).endVertex();
         tessellator.draw();
         GlStateManager.enableTexture2D();
@@ -134,7 +85,7 @@ public class Render2DUtil implements InterfaceMinecraft {
         GlStateManager.enableBlend();
         GlStateManager.disableTexture2D();
         GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
-        glsmColor(color);
+        GLUtil.glsmColor(color);
         GlStateManager.glLineWidth(lineWidth);
         bufferBuilder.begin(GL11.GL_LINE_LOOP, DefaultVertexFormats.POSITION);
         bufferBuilder.pos(x1, y2, 0.0).endVertex();
@@ -157,7 +108,7 @@ public class Render2DUtil implements InterfaceMinecraft {
         GlStateManager.enableBlend();
         GlStateManager.disableTexture2D();
         GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
-        glsmColor(color);
+        GLUtil.glsmColor(color);
         bufferbuilder.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION);
         bufferbuilder.pos(x1, y2, 0.0).endVertex();
         bufferbuilder.pos(x2, y2, 0.0).endVertex();
@@ -180,13 +131,13 @@ public class Render2DUtil implements InterfaceMinecraft {
         GlStateManager.disableTexture2D();
         GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
         bufferBuilder.begin(GL11.GL_POLYGON, DefaultVertexFormats.POSITION);
-        Render2DUtil.glsmColor(leftTop);
+        GLUtil.glsmColor(leftTop);
         bufferBuilder.pos(x1, y2, 0.0).endVertex();
-        Render2DUtil.glsmColor(rightTop);
+        GLUtil.glsmColor(rightTop);
         bufferBuilder.pos(x2, y2, 0.0).endVertex();
-        Render2DUtil.glsmColor(rightBottom);
+        GLUtil.glsmColor(rightBottom);
         bufferBuilder.pos(x2, y1, 0.0).endVertex();
-        Render2DUtil.glsmColor(leftBottom);
+        GLUtil.glsmColor(leftBottom);
         bufferBuilder.pos(x1, y1, 0.0).endVertex();
         tessellator.draw();
         GlStateManager.color(1F, 1F, 1F);
@@ -196,26 +147,6 @@ public class Render2DUtil implements InterfaceMinecraft {
 
     public static void drawGradientRectWH(float x, float y, float width, float height, Color leftTop, Color rightTop, Color leftBottom, Color rightBottom) {
         drawGradientRect(x, y, x + width, y + height, leftTop, rightTop, leftBottom, rightBottom);
-    }
-
-    public static void glsmColor(Color color) {
-        int c = color.getRGB();
-        float alpha = (c >> 24 & 0xFF) / 255.0F;
-        float red = (c >> 16 & 0xFF) / 255.0F;
-        float green = (c >> 8 & 0xFF) / 255.0F;
-        float blue = (c & 0xFF) / 255.0F;
-
-        GlStateManager.color(red, green, blue, alpha);
-    }
-
-    public static void glColor(Color color) {
-        int c = color.hashCode();
-        float alpha = (c >> 24 & 0xFF) / 255.0F;
-        float red = (c >> 16 & 0xFF) / 255.0F;
-        float green = (c >> 8 & 0xFF) / 255.0F;
-        float blue = (c & 0xFF) / 255.0F;
-
-        GL11.glColor4f(red, green, blue, alpha);
     }
 
     public static void drawRoundedRectWH(float x, float y, float width, float height, float radius, float slice, Color color) {
@@ -250,7 +181,7 @@ public class Render2DUtil implements InterfaceMinecraft {
         GlStateManager.disableTexture2D();
         GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
         bufferBuilder.begin(GL11.GL_POLYGON, DefaultVertexFormats.POSITION);
-        Render2DUtil.glsmColor(color);
+        GLUtil.glsmColor(color);
 
         float i;
         if (xy) {
@@ -301,7 +232,7 @@ public class Render2DUtil implements InterfaceMinecraft {
         GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
         GlStateManager.glLineWidth(lineWidth);
         bufferBuilder.begin(GL11.GL_LINE_LOOP, DefaultVertexFormats.POSITION);
-        Render2DUtil.glsmColor(color);
+        GLUtil.glsmColor(color);
 
         float i;
         for (i = 0; i <= 90; i += slice) {
@@ -332,7 +263,7 @@ public class Render2DUtil implements InterfaceMinecraft {
         GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
         GlStateManager.glLineWidth(width);
         bufferBuilder.begin(GL11.GL_LINES, DefaultVertexFormats.POSITION);
-        Render2DUtil.glsmColor(color);
+        GLUtil.glsmColor(color);
         bufferBuilder.pos(x, y, 0.0).endVertex();
         bufferBuilder.pos(x1, y1, 0.0).endVertex();
         tessellator.draw();
@@ -353,7 +284,7 @@ public class Render2DUtil implements InterfaceMinecraft {
         GlStateManager.disableTexture2D();
         GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
         bufferBuilder.begin(GL11.GL_POINTS, DefaultVertexFormats.POSITION);
-        Render2DUtil.glsmColor(color);
+        GLUtil.glsmColor(color);
         bufferBuilder.pos(x, y, 0.0).endVertex();
         tessellator.draw();
         GlStateManager.color(1F, 1F, 1F);
@@ -369,7 +300,7 @@ public class Render2DUtil implements InterfaceMinecraft {
         GlStateManager.disableTexture2D();
         GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
         bufferBuilder.begin(GL11.GL_TRIANGLE_FAN, DefaultVertexFormats.POSITION);
-        Render2DUtil.glsmColor(color);
+        GLUtil.glsmColor(color);
         for (float i = startingAngleDeg; i <= endAngleDeg; i += slices) {
             final double x2 = Math.sin(((i * Math.PI) / 180)) * radius;
             final double y2 = Math.cos(((i * Math.PI) / 180)) * radius;

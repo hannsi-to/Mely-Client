@@ -2,7 +2,7 @@ package me.hannsi.melyclient.gui.clickGui2.Panels.altManager;
 
 import me.hannsi.melyclient.MelyClient;
 import me.hannsi.melyclient.gui.clickGui2.ClickGui2;
-import me.hannsi.melyclient.util.render.nanovg.render.NVGRenderUtil;
+import me.hannsi.melyclient.util.render.nanovg.render.NanoVGRenderUtil;
 import me.hannsi.melyclient.util.render.nanovg.render.font.FontUtil;
 import me.hannsi.melyclient.util.system.conversion.BonIcon;
 import me.hannsi.melyclient.util.system.math.MouseUtil;
@@ -13,7 +13,7 @@ import org.lwjgl.nanovg.NanoVG;
 
 import java.awt.*;
 
-import static me.hannsi.melyclient.util.render.nanovg.system.NVGUtil.nvg;
+import static me.hannsi.melyclient.util.render.nanovg.system.NanoVGSystemUtil.nvg;
 
 public class InputAccountInfoBorder {
     public String inputType;
@@ -95,14 +95,14 @@ public class InputAccountInfoBorder {
         FontUtil ubuntu15 = new FontUtil(MelyClient.fontManager.ubuntu, 15);
         FontUtil ubuntu20 = new FontUtil(MelyClient.fontManager.ubuntu, 20);
 
-        NVGRenderUtil.drawRadialGradientRect(x - 1, y - 1, width + 2, height + ubuntu20.getHeight() + 2, mouseX, mouseY, 0, 70, new Color(91, 91, 91, 255), new Color(4, 4, 4, 255));
+        NanoVGRenderUtil.drawRadialGradientRect(x - 1, y - 1, width + 2, height + ubuntu20.getHeight() + 2, mouseX, mouseY, 0, 70, new Color(91, 91, 91, 255), new Color(4, 4, 4, 255));
 
-        NVGRenderUtil.drawRectWH(x, y, width, height + ubuntu20.getHeight(), new Color(0, 0, 0, 255));
+        NanoVGRenderUtil.drawRectWH(x, y, width, height + ubuntu20.getHeight(), new Color(0, 0, 0, 255));
 
         if (MouseUtil.isHoveringWH(x, y, width, height + ubuntu20.getHeight(), mouseX, mouseY)) {
-            NVGRenderUtil.drawOutLineRectWH(x, y, width, height + ubuntu20.getHeight(), 1.0f, new Color(91, 91, 91, 255));
+            NanoVGRenderUtil.drawOutLineRectWH(x, y, width, height + ubuntu20.getHeight(), 1.0f, new Color(91, 91, 91, 255));
 
-            NVGRenderUtil.drawRadialGradientRect(x, y, width, height + ubuntu20.getHeight(), mouseX, mouseY, 0, 70, new Color(255, 255, 255, 50), new Color(4, 4, 4, 255));
+            NanoVGRenderUtil.drawRadialGradientRect(x, y, width, height + ubuntu20.getHeight(), mouseX, mouseY, 0, 70, new Color(255, 255, 255, 50), new Color(4, 4, 4, 255));
         }
 
         bonIcon40.drawText(icon, x + 5, y + 2.5f, new Color(0, 120, 212, 255));
@@ -131,9 +131,9 @@ public class InputAccountInfoBorder {
 
         if (typed) {
             if (inputType.equals("Email")) {
-                NVGRenderUtil.drawLineWH(x + bonIcon40.getWidth(icon) / 2f + ubuntu15.getWidth(AltManagerScreen.tempAccount.getEmail()) + 2, y + height, 0, ubuntu15.getHeight(), 1f, new Color(255, 255, 255, 255));
+                NanoVGRenderUtil.drawLineWH(x + bonIcon40.getWidth(icon) / 2f + ubuntu15.getWidth(AltManagerScreen.tempAccount.getEmail()) + 2, y + height, 0, ubuntu15.getHeight(), 1f, new Color(255, 255, 255, 255));
             } else if (inputType.equals("Password")) {
-                NVGRenderUtil.drawLineWH(x + bonIcon40.getWidth(icon) / 2f + ubuntu15.getWidth(drawText) + 2, y + height, 0, ubuntu15.getHeight(), 1f, new Color(255, 255, 255, 255));
+                NanoVGRenderUtil.drawLineWH(x + bonIcon40.getWidth(icon) / 2f + ubuntu15.getWidth(drawText) + 2, y + height, 0, ubuntu15.getHeight(), 1f, new Color(255, 255, 255, 255));
             }
         }
         NanoVG.nvgReset(nvg);

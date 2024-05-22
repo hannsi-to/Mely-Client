@@ -2,7 +2,7 @@ package me.hannsi.melyclient.gui.clickGui2.Panels.altManager;
 
 import me.hannsi.melyclient.MelyClient;
 import me.hannsi.melyclient.gui.clickGui2.ClickGui2;
-import me.hannsi.melyclient.util.render.nanovg.render.NVGRenderUtil;
+import me.hannsi.melyclient.util.render.nanovg.render.NanoVGRenderUtil;
 import me.hannsi.melyclient.util.render.nanovg.render.font.FontUtil;
 import me.hannsi.melyclient.util.system.auth.LoginMode;
 import me.hannsi.melyclient.util.system.math.MouseUtil;
@@ -61,14 +61,14 @@ public class LoginModeButton {
         FontUtil ubuntu10 = new FontUtil(MelyClient.fontManager.ubuntu, 10);
         FontUtil ubuntu12 = new FontUtil(MelyClient.fontManager.ubuntu, 12);
 
-        NVGRenderUtil.drawRadialGradientRect(x - 1, y - 1, width / 9f + 2, height / 3f + 2, mouseX, mouseY, 0, 70, new Color(91, 91, 91, 255), new Color(4, 4, 4, 255));
+        NanoVGRenderUtil.drawRadialGradientRect(x - 1, y - 1, width / 9f + 2, height / 3f + 2, mouseX, mouseY, 0, 70, new Color(91, 91, 91, 255), new Color(4, 4, 4, 255));
 
-        NVGRenderUtil.drawRectWH(x, y, width / 9f, height / 3f, new Color(0, 0, 0, 255));
+        NanoVGRenderUtil.drawRectWH(x, y, width / 9f, height / 3f, new Color(0, 0, 0, 255));
 
         if (MouseUtil.isHoveringWH(x, y, width / 9f, height / 3f, mouseX, mouseY)) {
-            NVGRenderUtil.drawOutLineRectWH(x, y, width / 9f, height / 3f, 1.0f, new Color(91, 91, 91, 255));
+            NanoVGRenderUtil.drawOutLineRectWH(x, y, width / 9f, height / 3f, 1.0f, new Color(91, 91, 91, 255));
 
-            NVGRenderUtil.drawRadialGradientRect(x, y, width / 9f, height / 3f, mouseX, mouseY, 0, 70, new Color(255, 255, 255, 50), new Color(4, 4, 4, 255));
+            NanoVGRenderUtil.drawRadialGradientRect(x, y, width / 9f, height / 3f, mouseX, mouseY, 0, 70, new Color(255, 255, 255, 50), new Color(4, 4, 4, 255));
         }
 
         ubuntu12.drawText(loginMode.getDisplay(), x + 5, y + 2.5f, new Color(255, 255, 255, 255));

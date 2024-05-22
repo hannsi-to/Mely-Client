@@ -15,10 +15,10 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 
-import static me.hannsi.melyclient.util.render.nanovg.system.NVGUtil.nvg;
+import static me.hannsi.melyclient.util.render.nanovg.system.NanoVGSystemUtil.nvg;
 import static org.lwjgl.system.MemoryStack.stackPush;
 
-public class NVGRenderUtil implements InterfaceMinecraft {
+public class NanoVGRenderUtil implements InterfaceMinecraft {
     public static void nvgFramePush() {
         GL11.glPushAttrib(GL11.GL_ALL_ATTRIB_BITS);
         ScaledResolution scaledResolution = new ScaledResolution(mc);

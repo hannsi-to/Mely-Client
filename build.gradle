@@ -29,13 +29,14 @@ minecraft {
 
     runs {
         client {
-            workingDirectory project.file('run')
+            workingDirectory 'run'
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
             property 'forge.logging.console.level', 'debug'
             arg '-torg.spongepowered.asm.launch.MixinTweaker'
         }
 
         server {
+            workingDirectory 'run'
             property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
             property 'forge.logging.console.level', 'debug'
             arg '-torg.spongepowered.asm.launch.MixinTweaker'

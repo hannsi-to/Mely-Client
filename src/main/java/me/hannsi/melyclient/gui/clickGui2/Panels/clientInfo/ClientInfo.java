@@ -3,7 +3,7 @@ package me.hannsi.melyclient.gui.clickGui2.Panels.clientInfo;
 import me.hannsi.melyclient.MelyClient;
 import me.hannsi.melyclient.gui.clickGui2.ClickGui2;
 import me.hannsi.melyclient.gui.clickGui2.Screen;
-import me.hannsi.melyclient.util.render.nanovg.render.NVGRenderUtil;
+import me.hannsi.melyclient.util.render.nanovg.render.NanoVGRenderUtil;
 import me.hannsi.melyclient.util.render.nanovg.render.font.FontUtil;
 import me.hannsi.melyclient.util.system.debug.DebugLevel;
 import me.hannsi.melyclient.util.system.debug.DebugLog;
@@ -19,7 +19,7 @@ import org.lwjgl.nanovg.NanoVG;
 import java.awt.*;
 import java.util.Objects;
 
-import static me.hannsi.melyclient.util.render.nanovg.system.NVGUtil.nvg;
+import static me.hannsi.melyclient.util.render.nanovg.system.NanoVGSystemUtil.nvg;
 
 public class ClientInfo {
     public static ClickGui2.HomeButton clientInfoScreenInfo;
@@ -50,7 +50,7 @@ public class ClientInfo {
         }
 
         if (clientInfoScreenInfo == null) {
-            new DebugLog("Can not load alt manager screen.", DebugLevel.WARNING);
+            new DebugLog("Can not load client info screen.", DebugLevel.WARNING);
             return;
         }
 
@@ -62,7 +62,7 @@ public class ClientInfo {
             ubuntu10.drawText(clientInfoScreen.name(), ClickGui2.INSTANCE.menuBarWidth + (ClickGui2.INSTANCE.offsetX * 2) + ubuntu10.getWidth(clientInfoScreenInfo.getDescription()) + offsetY, 5 + (bonIcon15.getHeight() * 2) + 10, new Color(255, 255, 255, 255));
 
             if (MouseUtil.isHoveringWH(ClickGui2.INSTANCE.menuBarWidth + (ClickGui2.INSTANCE.offsetX * 2) + ubuntu10.getWidth(clientInfoScreenInfo.getDescription()) + offsetY, 5 + (bonIcon15.getHeight() * 2) + 10, ubuntu10.getWidth(clientInfoScreen.name()), ubuntu10.getHeight(), mouseX, mouseY)) {
-                NVGRenderUtil.drawLineWH(ClickGui2.INSTANCE.menuBarWidth + (ClickGui2.INSTANCE.offsetX * 2) + ubuntu10.getWidth(clientInfoScreenInfo.getDescription()) + offsetY, 5 + (bonIcon15.getHeight() * 2) + 10 + ubuntu10.getHeight(), ubuntu10.getWidth(clientInfoScreen.name()), 0, 1f, new Color(255, 255, 255, 255));
+                NanoVGRenderUtil.drawLineWH(ClickGui2.INSTANCE.menuBarWidth + (ClickGui2.INSTANCE.offsetX * 2) + ubuntu10.getWidth(clientInfoScreenInfo.getDescription()) + offsetY, 5 + (bonIcon15.getHeight() * 2) + 10 + ubuntu10.getHeight(), ubuntu10.getWidth(clientInfoScreen.name()), 0, 1f, new Color(255, 255, 255, 255));
             }
 
             offsetY += ubuntu10.getWidth(clientInfoScreen.name() + (ClickGui2.INSTANCE.offsetX * 2));

@@ -44,12 +44,19 @@ Minecraft Client
 ｜｜｜      ｜｜｜｜├AltManagerScreen.java
 ｜｜｜      ｜｜｜｜├Circle.java
 ｜｜｜      ｜｜｜｜├InputAccountInfoBorder.java
-｜｜｜      ｜｜｜｜├LoadingCircles.java
 ｜｜｜      ｜｜｜｜└LoginModeButton.java
-｜｜｜      ｜｜｜└clientInfo
-｜｜｜      ｜｜｜  ├ClientInfo.java
-｜｜｜      ｜｜｜  └ClientInfoScreen.java
+｜｜｜      ｜｜｜├clientInfo
+｜｜｜      ｜｜｜｜├ClientInfo.java
+｜｜｜      ｜｜｜｜└ClientInfoScreen.java
+｜｜｜      ｜｜｜└texture
+｜｜｜      ｜｜｜  ├PopupMessage.java
+｜｜｜      ｜｜｜  ├PopupMessageButton.java
+｜｜｜      ｜｜｜  ├PopupMessageType.java
+｜｜｜      ｜｜｜  ├ResourcePackButton.java
+｜｜｜      ｜｜｜  ├Texture.java
+｜｜｜      ｜｜｜  └TextureButton.java
 ｜｜｜      ｜｜├ClickGui2.java
+｜｜｜      ｜｜├LoadingCircles.java
 ｜｜｜      ｜｜└Screen.java
 ｜｜｜      ｜└guiScreen
 ｜｜｜      ｜  ├mainMenu
@@ -138,10 +145,11 @@ Minecraft Client
 ｜｜｜      ｜｜｜｜｜├Font.java
 ｜｜｜      ｜｜｜｜｜└FontUtil.java
 ｜｜｜      ｜｜｜｜├GradientMode.java
-｜｜｜      ｜｜｜｜└NVGRenderUtil.java
+｜｜｜      ｜｜｜｜├NanoVGRenderUtil.java
+｜｜｜      ｜｜｜｜└NanoVGUtil.java
 ｜｜｜      ｜｜｜└system
 ｜｜｜      ｜｜｜  ├Lwjgl2FunctionProvider.java
-｜｜｜      ｜｜｜  └NVGUtil.java
+｜｜｜      ｜｜｜  └NanoVGSystemUtil.java
 ｜｜｜      ｜｜├render2D
 ｜｜｜      ｜｜｜├blur
 ｜｜｜      ｜｜｜｜├AbstractBufferedImageOp.java
@@ -151,6 +159,8 @@ Minecraft Client
 ｜｜｜      ｜｜｜├particle
 ｜｜｜      ｜｜｜｜├Particle.java
 ｜｜｜      ｜｜｜｜└ParticleSystem.java
+｜｜｜      ｜｜｜├texture
+｜｜｜      ｜｜｜｜└Render2DTextureUtil.java
 ｜｜｜      ｜｜｜├Render2DShadowUtil.java
 ｜｜｜      ｜｜｜└Render2DUtil.java
 ｜｜｜      ｜｜├render3D
@@ -171,6 +181,7 @@ Minecraft Client
 ｜｜｜      ｜｜｜├ChatData.java
 ｜｜｜      ｜｜｜└ChatUtil.java
 ｜｜｜      ｜｜├conversion
+｜｜｜      ｜｜｜├AlignExtractor.java
 ｜｜｜      ｜｜｜├BonIcon.java
 ｜｜｜      ｜｜｜└Keyboard.java
 ｜｜｜      ｜｜├debug
@@ -178,7 +189,8 @@ Minecraft Client
 ｜｜｜      ｜｜｜├DebugLog.java
 ｜｜｜      ｜｜｜└DebugType.java
 ｜｜｜      ｜｜├file
-｜｜｜      ｜｜｜└FileUtil.java
+｜｜｜      ｜｜｜├FileUtil.java
+｜｜｜      ｜｜｜└ModsUtil.java
 ｜｜｜      ｜｜├github
 ｜｜｜      ｜｜｜├CommitStats.java
 ｜｜｜      ｜｜｜├GitHubCommitStatistics.java
@@ -196,7 +208,8 @@ Minecraft Client
 ｜｜｜      ｜｜  ｜｜  ├Border.java
 ｜｜｜      ｜｜  ｜｜  ├Font.java
 ｜｜｜      ｜｜  ｜｜  └Line.java
-｜｜｜      ｜｜  ｜└ColorUtil.java
+｜｜｜      ｜｜  ｜├ColorUtil.java
+｜｜｜      ｜｜  ｜└MChatFormatting.java
 ｜｜｜      ｜｜  ├crypto
 ｜｜｜      ｜｜  ｜└CryptoUtil.java
 ｜｜｜      ｜｜  ├time
@@ -205,6 +218,7 @@ Minecraft Client
 ｜｜｜      ｜｜  ├vector
 ｜｜｜      ｜｜  ｜└Vector2f.java
 ｜｜｜      ｜｜  ├DisplayUtil.java
+｜｜｜      ｜｜  ├ListUtil.java
 ｜｜｜      ｜｜  ├MathUtil.java
 ｜｜｜      ｜｜  ├MouseUtil.java
 ｜｜｜      ｜｜  └StringUtil.java

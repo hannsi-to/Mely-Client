@@ -1,5 +1,6 @@
-package me.hannsi.melyclient.gui.clickGui2.Panels.altManager;
+package me.hannsi.melyclient.gui.clickGui2;
 
+import me.hannsi.melyclient.gui.clickGui2.Panels.altManager.Circle;
 import me.hannsi.melyclient.util.system.math.color.ColorUtil;
 
 import java.awt.*;

@@ -5,7 +5,7 @@ import me.hannsi.melyclient.gui.clickGui.ClickGui;
 import me.hannsi.melyclient.gui.clickGui.setting.system.SettingBase;
 import me.hannsi.melyclient.module.system.Module;
 import me.hannsi.melyclient.module.system.settings.Setting;
-import me.hannsi.melyclient.util.render.nanovg.render.NVGRenderUtil;
+import me.hannsi.melyclient.util.render.nanovg.render.NanoVGRenderUtil;
 import me.hannsi.melyclient.util.render.nanovg.render.font.FontUtil;
 import me.hannsi.melyclient.util.system.conversion.BonIcon;
 import me.hannsi.melyclient.util.system.conversion.Keyboard;
@@ -42,7 +42,7 @@ public class FloatSetting extends SettingBase {
             ClickGui.getINSTANCE().setDescription(floatSetting.getDescription());
         }
 
-        NVGRenderUtil.drawRoundedRectWH(x, y - 1, ubuntu10.getWidth("AA" + (typed ? floatText : floatSetting.getValue() + "")) + bonIcon10.getWidth(BonIcon.ARROW_BACK + BonIcon.ARROW_FORWARD), ubuntu10.getHeight() + 2, ubuntu10.getHeight() / 2f, new Color(30, 30, 30, 255));
+        NanoVGRenderUtil.drawRoundedRectWH(x, y - 1, ubuntu10.getWidth("AA" + (typed ? floatText : floatSetting.getValue() + "")) + bonIcon10.getWidth(BonIcon.ARROW_BACK + BonIcon.ARROW_FORWARD), ubuntu10.getHeight() + 2, ubuntu10.getHeight() / 2f, new Color(30, 30, 30, 255));
 
         if (MouseUtil.isHoveringWH(x, y - 1, ubuntu10.getWidth("AA" + (typed ? floatText : floatSetting.getValue() + "")) + bonIcon10.getWidth(BonIcon.ARROW_BACK + BonIcon.ARROW_FORWARD), ubuntu10.getHeight() + 2, mouseX, mouseY)) {
             ClickGui.getINSTANCE().setDescription("Min : " + floatSetting.getMin() + ".   Max : " + floatSetting.getMax() + ".   Step : " + floatSetting.getStep() + ".");
@@ -55,7 +55,7 @@ public class FloatSetting extends SettingBase {
         bonIcon10.drawText(BonIcon.ARROW_FORWARD, x + ubuntu10.getWidth("AA" + (typed ? floatText : floatSetting.getValue() + "")) + bonIcon10.getWidth(BonIcon.ARROW_BACK) - 2.5f, y, new Color(255, 255, 255, 255));
 
         if (typed) {
-            NVGRenderUtil.drawLineWH(x + ubuntu10.getWidth("AA" + floatText) + ubuntu10.getWidth(BonIcon.ARROW_BACK) - 5, y, 0, ubuntu10.getHeight(), 1, new Color(255, 255, 255, 255));
+            NanoVGRenderUtil.drawLineWH(x + ubuntu10.getWidth("AA" + floatText) + ubuntu10.getWidth(BonIcon.ARROW_BACK) - 5, y, 0, ubuntu10.getHeight(), 1, new Color(255, 255, 255, 255));
         }
 
         setting = floatSetting;

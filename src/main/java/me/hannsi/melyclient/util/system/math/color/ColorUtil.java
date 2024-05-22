@@ -1,5 +1,6 @@
 package me.hannsi.melyclient.util.system.math.color;
 
+import com.mojang.realmsclient.gui.ChatFormatting;
 import me.hannsi.melyclient.util.InterfaceMinecraft;
 import me.hannsi.melyclient.util.system.debug.DebugLevel;
 import me.hannsi.melyclient.util.system.debug.DebugLog;
@@ -10,6 +11,34 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ColorUtil implements InterfaceMinecraft {
+    public static Color getForegroundColorChatFormatting(ChatFormatting chatFormatting) {
+        MChatFormatting mChatFormatting = MChatFormatting.getMChatFormatting(chatFormatting);
+
+        if (mChatFormatting == null) {
+            return null;
+        }
+
+        return getForegroundColorChatFormatting(mChatFormatting);
+    }
+
+    public static Color getBackgroundColorChatFormatting(ChatFormatting chatFormatting) {
+        MChatFormatting mChatFormatting = MChatFormatting.getMChatFormatting(chatFormatting);
+
+        if (mChatFormatting == null) {
+            return null;
+        }
+
+        return getBackgroundColorChatFormatting(mChatFormatting);
+    }
+
+    public static Color getForegroundColorChatFormatting(MChatFormatting mChatFormatting) {
+        return mChatFormatting.getForegroundColor();
+    }
+
+    public static Color getBackgroundColorChatFormatting(MChatFormatting mChatFormatting) {
+        return mChatFormatting.getBackgroundColor();
+    }
+
     public static Color getRainbow(int delay, int timing, float saturation, float brightness) {
         double rainbowState = Math.ceil((double) (System.currentTimeMillis() + (long) delay) / 20.0 + timing);
         return Color.getHSBColor((float) (rainbowState % 360.0 / 360.0), saturation / 255.0f, brightness / 255.0f);

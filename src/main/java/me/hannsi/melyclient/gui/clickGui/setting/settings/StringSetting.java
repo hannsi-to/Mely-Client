@@ -5,7 +5,7 @@ import me.hannsi.melyclient.gui.clickGui.ClickGui;
 import me.hannsi.melyclient.gui.clickGui.setting.system.SettingBase;
 import me.hannsi.melyclient.module.system.Module;
 import me.hannsi.melyclient.module.system.settings.Setting;
-import me.hannsi.melyclient.util.render.nanovg.render.NVGRenderUtil;
+import me.hannsi.melyclient.util.render.nanovg.render.NanoVGRenderUtil;
 import me.hannsi.melyclient.util.render.nanovg.render.font.FontUtil;
 import me.hannsi.melyclient.util.system.conversion.Keyboard;
 import me.hannsi.melyclient.util.system.math.MouseUtil;
@@ -35,12 +35,12 @@ public class StringSetting extends SettingBase {
             ubuntu10.drawText(setting.getName(), this.x, this.y + 1, new Color(255, 255, 255, 255));
         }
 
-        NVGRenderUtil.drawRoundedRectWH(this.x, this.y + ubuntu10.getHeight() + 5 - 1, ubuntu10.getWidth(((Setting<String>) setting).getValue()) + ubuntu10.getWidth("AA"), ubuntu10.getHeight() + 2, ubuntu10.getHeight() / 2f, new Color(30, 30, 30, 255));
+        NanoVGRenderUtil.drawRoundedRectWH(this.x, this.y + ubuntu10.getHeight() + 5 - 1, ubuntu10.getWidth(((Setting<String>) setting).getValue()) + ubuntu10.getWidth("AA"), ubuntu10.getHeight() + 2, ubuntu10.getHeight() / 2f, new Color(30, 30, 30, 255));
 
         ubuntu10.drawText(((Setting<String>) setting).getValue(), this.x + ubuntu10.getWidth("A"), this.y + ubuntu10.getHeight() + 5, new Color(255, 255, 255, 255));
 
         if (typed) {
-            NVGRenderUtil.drawLineWH(x + ubuntu10.getWidth("A") + ubuntu10.getWidth(((Setting<String>) setting).getValue()) + 1, y + ubuntu10.getHeight() + 5, 0, ubuntu10.getHeight(), 1, new Color(255, 255, 255, 255));
+            NanoVGRenderUtil.drawLineWH(x + ubuntu10.getWidth("A") + ubuntu10.getWidth(((Setting<String>) setting).getValue()) + 1, y + ubuntu10.getHeight() + 5, 0, ubuntu10.getHeight(), 1, new Color(255, 255, 255, 255));
         }
 
         return ubuntu10.getHeight() + 5 - 1 + ubuntu10.getHeight() + 2 + maxHeight;

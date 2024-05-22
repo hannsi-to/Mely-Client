@@ -5,7 +5,7 @@ import me.hannsi.melyclient.gui.clickGui.ClickGui;
 import me.hannsi.melyclient.gui.clickGui.setting.system.SettingBase;
 import me.hannsi.melyclient.module.system.Module;
 import me.hannsi.melyclient.module.system.settings.Setting;
-import me.hannsi.melyclient.util.render.nanovg.render.NVGRenderUtil;
+import me.hannsi.melyclient.util.render.nanovg.render.NanoVGRenderUtil;
 import me.hannsi.melyclient.util.render.nanovg.render.font.FontUtil;
 import me.hannsi.melyclient.util.system.conversion.BonIcon;
 import me.hannsi.melyclient.util.system.math.MouseUtil;
@@ -46,9 +46,9 @@ public class BooleanSetting extends SettingBase {
             ubuntu10.drawText(setting.getName(), x + ubuntu10.getHeight() + 5, y + 1, new Color(255, 255, 255, 255));
         }
 
-        NVGRenderUtil.drawRectWH(x, y, ubuntu10.getHeight(), ubuntu10.getHeight(), new Color(255, 255, 255, 255));
+        NanoVGRenderUtil.drawRectWH(x, y, ubuntu10.getHeight(), ubuntu10.getHeight(), new Color(255, 255, 255, 255));
 
-        NVGRenderUtil.drawRectWH(x + 0.5f, y + 0.5f, ubuntu10.getHeight() - 1, ubuntu10.getHeight() - 1, new Color(30, 30, 30, 255));
+        NanoVGRenderUtil.drawRectWH(x + 0.5f, y + 0.5f, ubuntu10.getHeight() - 1, ubuntu10.getHeight() - 1, new Color(30, 30, 30, 255));
 
         bonIcon10.setSize(fontSize);
         bonIcon10.drawBlurTextCenter(BonIcon.CHECK, x + (ubuntu10.getHeight() / 2f), y + (ubuntu10.getHeight() / 2f) + 1, new Color(255, 255, 255, 255), 5, ColorUtil.getRainbow(20, 255, 255));

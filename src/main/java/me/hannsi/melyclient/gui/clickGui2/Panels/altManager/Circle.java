@@ -1,6 +1,6 @@
 package me.hannsi.melyclient.gui.clickGui2.Panels.altManager;
 
-import me.hannsi.melyclient.util.render.nanovg.render.NVGRenderUtil;
+import me.hannsi.melyclient.util.render.nanovg.render.NanoVGRenderUtil;
 import me.hannsi.melyclient.util.system.math.animation.Easing;
 import me.hannsi.melyclient.util.system.math.animation.EasingUtil;
 
@@ -26,7 +26,7 @@ public class Circle {
     }
 
     public void drawCircle() {
-        NVGRenderUtil.drawCircle(getX(), getY(), getRadius(), getColor());
+        NanoVGRenderUtil.drawCircle(getX(), getY(), getRadius(), getColor());
     }
 
     public float getX() {

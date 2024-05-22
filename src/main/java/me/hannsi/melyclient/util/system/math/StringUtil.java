@@ -2,8 +2,13 @@ package me.hannsi.melyclient.util.system.math;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 public class StringUtil {
+    public static char[] getChars(String string) {
+        return string.toCharArray();
+    }
+
     public static List<String> splitlnAsList(String str) {
         return Arrays.asList(splitln(str));
     }
@@ -57,5 +62,24 @@ public class StringUtil {
 
     public static String fillIfEmpty(String str, Double fillText) {
         return fillIfEmpty(str, Double.toString(fillText));
+    }
+
+    public static String getStringFromChars(char[] chars) {
+        String str = null;
+        for (char ch : chars) {
+            str = addLastChar(str, ch);
+        }
+
+        return str;
+    }
+
+    public static String getStringFromChar(char ch) {
+        return Character.toString(ch);
+    }
+
+    public static char getRandomCharacter(String input) {
+        Random random = new Random();
+        int index = random.nextInt(input.length());
+        return input.charAt(index);
     }
 }

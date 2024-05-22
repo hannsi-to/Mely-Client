@@ -2,7 +2,7 @@ package me.hannsi.melyclient;
 
 import com.mojang.realmsclient.gui.ChatFormatting;
 import me.hannsi.melyclient.manager.*;
-import me.hannsi.melyclient.util.render.nanovg.system.NVGUtil;
+import me.hannsi.melyclient.util.render.nanovg.system.NanoVGSystemUtil;
 import me.hannsi.melyclient.util.render.shader.ShaderUtil;
 import me.hannsi.melyclient.util.system.math.time.TimeCalculator;
 import net.minecraftforge.fml.common.Mod;
@@ -53,7 +53,7 @@ public class MelyClient {
     public void load() {
         Display.setTitle(MOD_NAME + " " + MOD_VER);
 
-        NVGUtil.nvg = NanoVGGL2.nvgCreate(NanoVGGL2.NVG_ANTIALIAS);
+        NanoVGSystemUtil.nvg = NanoVGGL2.nvgCreate(NanoVGGL2.NVG_ANTIALIAS);
         MelyClient.shaderUtil = new ShaderUtil();
         eventManager = new EventManager();
         moduleManager = new ModuleManager();

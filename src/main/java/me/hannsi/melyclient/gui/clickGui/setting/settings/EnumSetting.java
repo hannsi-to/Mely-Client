@@ -6,7 +6,7 @@ import me.hannsi.melyclient.gui.clickGui.setting.system.SettingBase;
 import me.hannsi.melyclient.module.system.Module;
 import me.hannsi.melyclient.module.system.settings.IEnumSetting;
 import me.hannsi.melyclient.module.system.settings.Setting;
-import me.hannsi.melyclient.util.render.nanovg.render.NVGRenderUtil;
+import me.hannsi.melyclient.util.render.nanovg.render.NanoVGRenderUtil;
 import me.hannsi.melyclient.util.render.nanovg.render.font.FontUtil;
 import me.hannsi.melyclient.util.system.math.MouseUtil;
 import me.hannsi.melyclient.util.system.math.color.ColorUtil;
@@ -37,7 +37,7 @@ public class EnumSetting extends SettingBase {
             }
         }
 
-        NVGRenderUtil.drawRoundedRectWH(this.x, this.y - 1, maxEnumTextSize, ubuntu10.getHeight() + 2, ubuntu10.getHeight() / 2f, new Color(30, 30, 30, 255));
+        NanoVGRenderUtil.drawRoundedRectWH(this.x, this.y - 1, maxEnumTextSize, ubuntu10.getHeight() + 2, ubuntu10.getHeight() / 2f, new Color(30, 30, 30, 255));
 
         float offsetY = (ubuntu10.getHeight() + 2);
         if (open) {
@@ -51,7 +51,7 @@ public class EnumSetting extends SettingBase {
                 count++;
             }
 
-            NVGRenderUtil.drawRoundedRectWH(this.x, this.y - 1 + ubuntu10.getHeight() + 2, maxEnumTextSize, (ubuntu10.getHeight() + 2) * count, ubuntu10.getHeight() / 2f, new Color(30, 30, 30, 255));
+            NanoVGRenderUtil.drawRoundedRectWH(this.x, this.y - 1 + ubuntu10.getHeight() + 2, maxEnumTextSize, (ubuntu10.getHeight() + 2) * count, ubuntu10.getHeight() / 2f, new Color(30, 30, 30, 255));
 
             for (IEnumSetting value : ((Setting<IEnumSetting>) setting).getValue().getValues()) {
                 if (value == ((Setting<IEnumSetting>) setting).getValue()) {

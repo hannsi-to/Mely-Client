@@ -2,8 +2,9 @@ package me.hannsi.melyclient.gui.clickGui2.Panels.altManager;
 
 import me.hannsi.melyclient.MelyClient;
 import me.hannsi.melyclient.gui.clickGui2.ClickGui2;
+import me.hannsi.melyclient.gui.clickGui2.LoadingCircles;
 import me.hannsi.melyclient.gui.clickGui2.Screen;
-import me.hannsi.melyclient.util.render.nanovg.render.NVGRenderUtil;
+import me.hannsi.melyclient.util.render.nanovg.render.NanoVGRenderUtil;
 import me.hannsi.melyclient.util.render.nanovg.render.font.FontUtil;
 import me.hannsi.melyclient.util.system.auth.AccountData;
 import me.hannsi.melyclient.util.system.auth.LoginMode;
@@ -59,7 +60,6 @@ public class AltManagerScreen {
         loadingBarX = ClickGui2.INSTANCE.menuBarWidth + (ClickGui2.INSTANCE.width - ClickGui2.INSTANCE.menuBarWidth) / 2f - (ubuntu15.getWidth(loadText) / 2f) - 10 - ClickGui2.INSTANCE.menuBarWidth;
         loadingBarWidth = (ClickGui2.INSTANCE.menuBarWidth + (ClickGui2.INSTANCE.width - ClickGui2.INSTANCE.menuBarWidth) / 2f + (ubuntu15.getWidth(loadText) / 2f)) - (ClickGui2.INSTANCE.menuBarWidth + (ClickGui2.INSTANCE.width - ClickGui2.INSTANCE.menuBarWidth) / 2f - (ubuntu15.getWidth(loadText) / 2f)) + 20 + ClickGui2.INSTANCE.menuBarWidth * 2;
         loadingCircles = new LoadingCircles(loadingBarX, ClickGui2.INSTANCE.height / 2f + ubuntu15.getHeight() * 2, 10, new Color(255, 255, 255, 255), 7);
-
         loadTextTimer = new TimerUtil();
         loadTextCounter = 0;
 
@@ -164,7 +164,7 @@ public class AltManagerScreen {
 
             inputAccountInfoBorderOffsetY += ubuntu10.getHeight();
 
-            NVGRenderUtil.drawRectWH(ClickGui2.INSTANCE.menuBarWidth + ClickGui2.INSTANCE.offsetX + width / 3f - ubuntu15.getWidth("    Login    "), inputAccountInfoBorderOffsetY, ubuntu15.getWidth("    Login    "), ubuntu15.getHeight() + 10f, new Color(0, 120, 212, 255));
+            NanoVGRenderUtil.drawRectWH(ClickGui2.INSTANCE.menuBarWidth + ClickGui2.INSTANCE.offsetX + width / 3f - ubuntu15.getWidth("    Login    "), inputAccountInfoBorderOffsetY, ubuntu15.getWidth("    Login    "), ubuntu15.getHeight() + 10f, new Color(0, 120, 212, 255));
             ubuntu15.drawText("    Login    ", ClickGui2.INSTANCE.menuBarWidth + ClickGui2.INSTANCE.offsetX + width / 3f - ubuntu15.getWidth("    Login    "), inputAccountInfoBorderOffsetY + 5f, new Color(255, 255, 255, 255));
 
             if (loginFailed) {
@@ -187,7 +187,7 @@ public class AltManagerScreen {
 
             ubuntu15.drawTextCenter(loadText, ClickGui2.INSTANCE.menuBarWidth + (ClickGui2.INSTANCE.width - ClickGui2.INSTANCE.menuBarWidth) / 2f, ClickGui2.INSTANCE.height / 2f, new Color(255, 255, 255, 255));
 
-            NVGRenderUtil.drawOutLineRoundedRectWH(loadingBarX, ClickGui2.INSTANCE.height / 2f + ubuntu15.getHeight() * 2 - 10, loadingBarWidth, (ClickGui2.INSTANCE.height / 2f + ubuntu15.getHeight() * 2) - (ClickGui2.INSTANCE.height / 2f + ubuntu15.getHeight() * 2) + 20, 10, 1, new Color(255, 255, 255, 255));
+            NanoVGRenderUtil.drawOutLineRoundedRectWH(loadingBarX, ClickGui2.INSTANCE.height / 2f + ubuntu15.getHeight() * 2 - 10, loadingBarWidth, (ClickGui2.INSTANCE.height / 2f + ubuntu15.getHeight() * 2) - (ClickGui2.INSTANCE.height / 2f + ubuntu15.getHeight() * 2) + 20, 10, 1, new Color(255, 255, 255, 255));
 
             loadingCircles.draw(2500, loadingBarWidth);
         } else if (screen == AccountScreen.AccountInfoScreen) {

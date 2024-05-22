@@ -5,7 +5,7 @@ import me.hannsi.melyclient.gui.clickGui.ClickGui;
 import me.hannsi.melyclient.gui.clickGui.setting.system.SettingBase;
 import me.hannsi.melyclient.module.system.Module;
 import me.hannsi.melyclient.module.system.settings.Setting;
-import me.hannsi.melyclient.util.render.nanovg.render.NVGRenderUtil;
+import me.hannsi.melyclient.util.render.nanovg.render.NanoVGRenderUtil;
 import me.hannsi.melyclient.util.render.nanovg.render.font.FontUtil;
 import me.hannsi.melyclient.util.system.conversion.BonIcon;
 import me.hannsi.melyclient.util.system.math.MathUtil;
@@ -73,11 +73,11 @@ public class ColorSetting extends SettingBase {
             ubuntu10.drawText(setting.getName(), x + ubuntu10.getHeight() + 5, y + 1, new Color(255, 255, 255, 255));
         }
 
-        NVGRenderUtil.drawRectWH(x, y, ubuntu10.getHeight(), ubuntu10.getHeight(), new Color(255, 255, 255, 255));
+        NanoVGRenderUtil.drawRectWH(x, y, ubuntu10.getHeight(), ubuntu10.getHeight(), new Color(255, 255, 255, 255));
 
-        NVGRenderUtil.drawRectWH(x + 0.5f, y + 0.5f, ubuntu10.getHeight() - 1, ubuntu10.getHeight() - 1, new Color(30, 30, 30, 255));
+        NanoVGRenderUtil.drawRectWH(x + 0.5f, y + 0.5f, ubuntu10.getHeight() - 1, ubuntu10.getHeight() - 1, new Color(30, 30, 30, 255));
 
-        NVGRenderUtil.drawRectWH(x + 0.5f, y + 0.5f, ubuntu10.getHeight() - 1, ubuntu10.getHeight() - 1, colorSetting.getValue());
+        NanoVGRenderUtil.drawRectWH(x + 0.5f, y + 0.5f, ubuntu10.getHeight() - 1, ubuntu10.getHeight() - 1, colorSetting.getValue());
 
         if (open) {
             drawPicker(mouseX, mouseY);
@@ -96,7 +96,7 @@ public class ColorSetting extends SettingBase {
         FontUtil ubuntu10 = new FontUtil(MelyClient.fontManager.ubuntu, 10);
 
         offsetY = 0.0f;
-        NVGRenderUtil.drawRoundedRectWH(x, y + fontHeight + 5, 200, 100, fontHeight / 2f, new Color(30, 30, 30, 255));
+        NanoVGRenderUtil.drawRoundedRectWH(x, y + fontHeight + 5, 200, 100, fontHeight / 2f, new Color(30, 30, 30, 255));
         drawRainbowCheckBox(mouseX, mouseY);
         drawPickerBox(mouseX, mouseY);
         if (colorSetting.isRainbow()) {
@@ -164,9 +164,9 @@ public class ColorSetting extends SettingBase {
 
         ubuntu10.drawText("Rainbow", x + fontHeight / 2f + pickerBoxScale + 1 + 5 + ubuntu10.getHeight() + 5, y + fontHeight + 5 + fontHeight / 2f + offsetY, new Color(255, 255, 255, 255));
 
-        NVGRenderUtil.drawRectWH(x + fontHeight / 2f + pickerBoxScale + 1 + 5, y + fontHeight + 5 + fontHeight / 2f + offsetY, ubuntu10.getHeight(), ubuntu10.getHeight(), new Color(255, 255, 255, 255));
+        NanoVGRenderUtil.drawRectWH(x + fontHeight / 2f + pickerBoxScale + 1 + 5, y + fontHeight + 5 + fontHeight / 2f + offsetY, ubuntu10.getHeight(), ubuntu10.getHeight(), new Color(255, 255, 255, 255));
 
-        NVGRenderUtil.drawRectWH(x + fontHeight / 2f + pickerBoxScale + 1 + 5 + 0.5f, y + fontHeight + 5 + fontHeight / 2f + offsetY + 0.5f, ubuntu10.getHeight() - 1, ubuntu10.getHeight() - 1, new Color(30, 30, 30, 255));
+        NanoVGRenderUtil.drawRectWH(x + fontHeight / 2f + pickerBoxScale + 1 + 5 + 0.5f, y + fontHeight + 5 + fontHeight / 2f + offsetY + 0.5f, ubuntu10.getHeight() - 1, ubuntu10.getHeight() - 1, new Color(30, 30, 30, 255));
 
         bonIcon10.setSize(fontSize);
         bonIcon10.drawBlurTextCenter(BonIcon.CHECK, x + fontHeight / 2f + pickerBoxScale + 1 + 5 + (ubuntu10.getHeight() / 2f), y + fontHeight + 5 + fontHeight / 2f + offsetY + (ubuntu10.getHeight() / 2f) + 1, new Color(255, 255, 255, 255), 5, ColorUtil.getRainbow(20, 255, 255));
@@ -182,17 +182,17 @@ public class ColorSetting extends SettingBase {
             colorSetting.setValue(defaultColor);
         }
 
-        NVGRenderUtil.drawLinearGradientRect(x + fontHeight / 2f, y + fontHeight + 5 + fontHeight / 2f, pickerBoxScale + 1, pickerBoxScale, new Color(0, 0, 0, 255), ColorUtil.setAlpha(maxColor, 255));
+        NanoVGRenderUtil.drawLinearGradientRect(x + fontHeight / 2f, y + fontHeight + 5 + fontHeight / 2f, pickerBoxScale + 1, pickerBoxScale, new Color(0, 0, 0, 255), ColorUtil.setAlpha(maxColor, 255));
 
-        NVGRenderUtil.drawCircle(circleX, circleY, 2, new Color(100, 100, 255, 255));
+        NanoVGRenderUtil.drawCircle(circleX, circleY, 2, new Color(100, 100, 255, 255));
     }
 
     public void drawBar(int mouseX, int mouseY) {
         FontUtil ubuntu10 = new FontUtil(MelyClient.fontManager.ubuntu, 10);
 
         ubuntu10.drawText("Red : " + colorSetting.getValue().getRed(), x + fontHeight / 2f + pickerBoxScale + 1 + 5, y + fontHeight + 5 + fontHeight / 2f + offsetY, new Color(255, 255, 255, 255));
-        NVGRenderUtil.drawLinearGradientRoundedRect(x + fontHeight / 2f + pickerBoxScale + 1 + 5, y + fontHeight + 5 + fontHeight / 2f + ubuntu10.getHeight() + offsetY, 90, 5, 2.5f, new Color(0, 0, 0, 255), new Color(255, 0, 0, 255));
-        NVGRenderUtil.drawCircle(x + fontHeight / 2f + pickerBoxScale + 1 + 5 + getColorBarX(colorSetting.getValue().getRed()), y + fontHeight + 5 + fontHeight / 2f + ubuntu10.getHeight() + 2.5f + offsetY, 2.5f, new Color(100, 100, 255, 255));
+        NanoVGRenderUtil.drawLinearGradientRoundedRect(x + fontHeight / 2f + pickerBoxScale + 1 + 5, y + fontHeight + 5 + fontHeight / 2f + ubuntu10.getHeight() + offsetY, 90, 5, 2.5f, new Color(0, 0, 0, 255), new Color(255, 0, 0, 255));
+        NanoVGRenderUtil.drawCircle(x + fontHeight / 2f + pickerBoxScale + 1 + 5 + getColorBarX(colorSetting.getValue().getRed()), y + fontHeight + 5 + fontHeight / 2f + ubuntu10.getHeight() + 2.5f + offsetY, 2.5f, new Color(100, 100, 255, 255));
 
         if (redBarDrag) {
             int red;
@@ -210,8 +210,8 @@ public class ColorSetting extends SettingBase {
 
         offsetY += ubuntu10.getHeight() + 5 + 5;
         ubuntu10.drawText("Green : " + colorSetting.getValue().getGreen(), x + fontHeight / 2f + pickerBoxScale + 1 + 5, y + fontHeight + 5 + fontHeight / 2f + offsetY, new Color(255, 255, 255, 255));
-        NVGRenderUtil.drawLinearGradientRoundedRect(x + fontHeight / 2f + pickerBoxScale + 1 + 5, y + fontHeight + 5 + fontHeight / 2f + ubuntu10.getHeight() + offsetY, 90, 5, 2.5f, new Color(0, 0, 0, 255), new Color(0, 255, 0, 255));
-        NVGRenderUtil.drawCircle(x + fontHeight / 2f + pickerBoxScale + 1 + 5 + getColorBarX(colorSetting.getValue().getGreen()), y + fontHeight + 5 + fontHeight / 2f + ubuntu10.getHeight() + 2.5f + offsetY, 2.5f, new Color(100, 100, 255, 255));
+        NanoVGRenderUtil.drawLinearGradientRoundedRect(x + fontHeight / 2f + pickerBoxScale + 1 + 5, y + fontHeight + 5 + fontHeight / 2f + ubuntu10.getHeight() + offsetY, 90, 5, 2.5f, new Color(0, 0, 0, 255), new Color(0, 255, 0, 255));
+        NanoVGRenderUtil.drawCircle(x + fontHeight / 2f + pickerBoxScale + 1 + 5 + getColorBarX(colorSetting.getValue().getGreen()), y + fontHeight + 5 + fontHeight / 2f + ubuntu10.getHeight() + 2.5f + offsetY, 2.5f, new Color(100, 100, 255, 255));
 
         if (greenBarDrag) {
             int green;
@@ -229,8 +229,8 @@ public class ColorSetting extends SettingBase {
 
         offsetY += ubuntu10.getHeight() + 5 + 5;
         ubuntu10.drawText("Blue : " + colorSetting.getValue().getBlue(), x + fontHeight / 2f + pickerBoxScale + 1 + 5, y + fontHeight + 5 + fontHeight / 2f + offsetY, new Color(255, 255, 255, 255));
-        NVGRenderUtil.drawLinearGradientRoundedRect(x + fontHeight / 2f + pickerBoxScale + 1 + 5, y + fontHeight + 5 + fontHeight / 2f + ubuntu10.getHeight() + offsetY, 90, 5, 2.5f, new Color(0, 0, 0, 255), new Color(0, 0, 255, 255));
-        NVGRenderUtil.drawCircle(x + fontHeight / 2f + pickerBoxScale + 1 + 5 + getColorBarX(colorSetting.getValue().getBlue()), y + fontHeight + 5 + fontHeight / 2f + ubuntu10.getHeight() + 2.5f + offsetY, 2.5f, new Color(100, 100, 255, 255));
+        NanoVGRenderUtil.drawLinearGradientRoundedRect(x + fontHeight / 2f + pickerBoxScale + 1 + 5, y + fontHeight + 5 + fontHeight / 2f + ubuntu10.getHeight() + offsetY, 90, 5, 2.5f, new Color(0, 0, 0, 255), new Color(0, 0, 255, 255));
+        NanoVGRenderUtil.drawCircle(x + fontHeight / 2f + pickerBoxScale + 1 + 5 + getColorBarX(colorSetting.getValue().getBlue()), y + fontHeight + 5 + fontHeight / 2f + ubuntu10.getHeight() + 2.5f + offsetY, 2.5f, new Color(100, 100, 255, 255));
 
         if (blueBarDrag) {
             int blue;
@@ -248,8 +248,8 @@ public class ColorSetting extends SettingBase {
 
         offsetY += ubuntu10.getHeight() + 5 + 5;
         ubuntu10.drawText("Alpha : " + colorSetting.getValue().getAlpha(), x + fontHeight / 2f + pickerBoxScale + 1 + 5, y + fontHeight + 5 + fontHeight / 2f + offsetY, new Color(255, 255, 255, 255));
-        NVGRenderUtil.drawLinearGradientRoundedRect(x + fontHeight / 2f + pickerBoxScale + 1 + 5, y + fontHeight + 5 + fontHeight / 2f + ubuntu10.getHeight() + offsetY, 90, 5, 2.5f, new Color(30, 30, 30, 255), ColorUtil.setAlpha(colorSetting.getValue(), 255));
-        NVGRenderUtil.drawCircle(x + fontHeight / 2f + pickerBoxScale + 1 + 5 + getColorBarX(colorSetting.getValue().getAlpha()), y + fontHeight + 5 + fontHeight / 2f + ubuntu10.getHeight() + 2.5f + offsetY, 2.5f, new Color(100, 100, 255, 255));
+        NanoVGRenderUtil.drawLinearGradientRoundedRect(x + fontHeight / 2f + pickerBoxScale + 1 + 5, y + fontHeight + 5 + fontHeight / 2f + ubuntu10.getHeight() + offsetY, 90, 5, 2.5f, new Color(30, 30, 30, 255), ColorUtil.setAlpha(colorSetting.getValue(), 255));
+        NanoVGRenderUtil.drawCircle(x + fontHeight / 2f + pickerBoxScale + 1 + 5 + getColorBarX(colorSetting.getValue().getAlpha()), y + fontHeight + 5 + fontHeight / 2f + ubuntu10.getHeight() + 2.5f + offsetY, 2.5f, new Color(100, 100, 255, 255));
 
         if (alphaBarDrag) {
             int alpha;
@@ -270,8 +270,8 @@ public class ColorSetting extends SettingBase {
         FontUtil ubuntu10 = new FontUtil(MelyClient.fontManager.ubuntu, 10);
 
         ubuntu10.drawText("Saturation : " + colorSetting.getSaturation(), x + fontHeight / 2f + pickerBoxScale + 1 + 5, y + fontHeight + 5 + fontHeight / 2f + offsetY, new Color(255, 255, 255, 255));
-        NVGRenderUtil.drawRoundedRectWH(x + fontHeight / 2f + pickerBoxScale + 1 + 5, y + fontHeight + 5 + fontHeight / 2f + ubuntu10.getHeight() + offsetY, 90, 5, 2.5f, new Color(20, 20, 20, 255));
-        NVGRenderUtil.drawCircle(x + fontHeight / 2f + pickerBoxScale + 1 + 5 + getColorBarX(colorSetting.getSaturation()), y + fontHeight + 5 + fontHeight / 2f + ubuntu10.getHeight() + 2.5f + offsetY, 2.5f, new Color(100, 100, 255, 255));
+        NanoVGRenderUtil.drawRoundedRectWH(x + fontHeight / 2f + pickerBoxScale + 1 + 5, y + fontHeight + 5 + fontHeight / 2f + ubuntu10.getHeight() + offsetY, 90, 5, 2.5f, new Color(20, 20, 20, 255));
+        NanoVGRenderUtil.drawCircle(x + fontHeight / 2f + pickerBoxScale + 1 + 5 + getColorBarX(colorSetting.getSaturation()), y + fontHeight + 5 + fontHeight / 2f + ubuntu10.getHeight() + 2.5f + offsetY, 2.5f, new Color(100, 100, 255, 255));
 
         if (saturationDrag) {
             int saturation;
@@ -288,8 +288,8 @@ public class ColorSetting extends SettingBase {
 
         offsetY += ubuntu10.getHeight() + 5 + 5;
         ubuntu10.drawText("Brightness : " + colorSetting.getBrightness(), x + fontHeight / 2f + pickerBoxScale + 1 + 5, y + fontHeight + 5 + fontHeight / 2f + offsetY, new Color(255, 255, 255, 255));
-        NVGRenderUtil.drawRoundedRectWH(x + fontHeight / 2f + pickerBoxScale + 1 + 5, y + fontHeight + 5 + fontHeight / 2f + ubuntu10.getHeight() + offsetY, 90, 5, 2.5f, new Color(20, 20, 20, 255));
-        NVGRenderUtil.drawCircle(x + fontHeight / 2f + pickerBoxScale + 1 + 5 + getColorBarX(colorSetting.getBrightness()), y + fontHeight + 5 + fontHeight / 2f + ubuntu10.getHeight() + 2.5f + offsetY, 2.5f, new Color(100, 100, 255, 255));
+        NanoVGRenderUtil.drawRoundedRectWH(x + fontHeight / 2f + pickerBoxScale + 1 + 5, y + fontHeight + 5 + fontHeight / 2f + ubuntu10.getHeight() + offsetY, 90, 5, 2.5f, new Color(20, 20, 20, 255));
+        NanoVGRenderUtil.drawCircle(x + fontHeight / 2f + pickerBoxScale + 1 + 5 + getColorBarX(colorSetting.getBrightness()), y + fontHeight + 5 + fontHeight / 2f + ubuntu10.getHeight() + 2.5f + offsetY, 2.5f, new Color(100, 100, 255, 255));
 
         if (brightnessDrag) {
             int brightness;
@@ -306,8 +306,8 @@ public class ColorSetting extends SettingBase {
 
         offsetY += ubuntu10.getHeight() + 5 + 5;
         ubuntu10.drawText("Delay : " + colorSetting.getDelay(), x + fontHeight / 2f + pickerBoxScale + 1 + 5, y + fontHeight + 5 + fontHeight / 2f + offsetY, new Color(255, 255, 255, 255));
-        NVGRenderUtil.drawRoundedRectWH(x + fontHeight / 2f + pickerBoxScale + 1 + 5, y + fontHeight + 5 + fontHeight / 2f + ubuntu10.getHeight() + offsetY, 90, 5, 2.5f, new Color(20, 20, 20, 255));
-        NVGRenderUtil.drawCircle(x + fontHeight / 2f + pickerBoxScale + 1 + 5 + getDelayBarX(colorSetting.getDelay()), y + fontHeight + 5 + fontHeight / 2f + ubuntu10.getHeight() + 2.5f + offsetY, 2.5f, new Color(100, 100, 255, 255));
+        NanoVGRenderUtil.drawRoundedRectWH(x + fontHeight / 2f + pickerBoxScale + 1 + 5, y + fontHeight + 5 + fontHeight / 2f + ubuntu10.getHeight() + offsetY, 90, 5, 2.5f, new Color(20, 20, 20, 255));
+        NanoVGRenderUtil.drawCircle(x + fontHeight / 2f + pickerBoxScale + 1 + 5 + getDelayBarX(colorSetting.getDelay()), y + fontHeight + 5 + fontHeight / 2f + ubuntu10.getHeight() + 2.5f + offsetY, 2.5f, new Color(100, 100, 255, 255));
 
         if (delayBarDrag) {
             int delay;
@@ -324,8 +324,8 @@ public class ColorSetting extends SettingBase {
 
         offsetY += ubuntu10.getHeight() + 5 + 5;
         ubuntu10.drawText("Alpha : " + colorSetting.getValue().getAlpha(), x + fontHeight / 2f + pickerBoxScale + 1 + 5, y + fontHeight + 5 + fontHeight / 2f + offsetY, new Color(255, 255, 255, 255));
-        NVGRenderUtil.drawLinearGradientRoundedRect(x + fontHeight / 2f + pickerBoxScale + 1 + 5, y + fontHeight + 5 + fontHeight / 2f + ubuntu10.getHeight() + offsetY, 90, 5, 2.5f, new Color(30, 30, 30, 255), ColorUtil.setAlpha(colorSetting.getValue(), 255));
-        NVGRenderUtil.drawCircle(x + fontHeight / 2f + pickerBoxScale + 1 + 5 + getColorBarX(colorSetting.getValue().getAlpha()), y + fontHeight + 5 + fontHeight / 2f + ubuntu10.getHeight() + 2.5f + offsetY, 2.5f, new Color(100, 100, 255, 255));
+        NanoVGRenderUtil.drawLinearGradientRoundedRect(x + fontHeight / 2f + pickerBoxScale + 1 + 5, y + fontHeight + 5 + fontHeight / 2f + ubuntu10.getHeight() + offsetY, 90, 5, 2.5f, new Color(30, 30, 30, 255), ColorUtil.setAlpha(colorSetting.getValue(), 255));
+        NanoVGRenderUtil.drawCircle(x + fontHeight / 2f + pickerBoxScale + 1 + 5 + getColorBarX(colorSetting.getValue().getAlpha()), y + fontHeight + 5 + fontHeight / 2f + ubuntu10.getHeight() + 2.5f + offsetY, 2.5f, new Color(100, 100, 255, 255));
 
         if (alphaBarDrag) {
             int alpha;

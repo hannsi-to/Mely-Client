@@ -4,7 +4,7 @@ import me.hannsi.melyclient.MelyClient;
 import me.hannsi.melyclient.gui.clickGui.setting.system.SettingPanel;
 import me.hannsi.melyclient.module.system.Category;
 import me.hannsi.melyclient.module.system.Module;
-import me.hannsi.melyclient.util.render.nanovg.render.NVGRenderUtil;
+import me.hannsi.melyclient.util.render.nanovg.render.NanoVGRenderUtil;
 import me.hannsi.melyclient.util.render.nanovg.render.font.FontUtil;
 import me.hannsi.melyclient.util.system.math.MouseUtil;
 import me.hannsi.melyclient.util.system.math.animation.Easing;
@@ -44,13 +44,13 @@ public class ModulePanel {
 
         value = 10 - easingUtil.get(1000) * 10;
 
-        NVGRenderUtil.drawRoundedRectWH(x, y, ((ClickGui.INSTANCE.width / 4f) - 100), ubuntu10.getHeight() + 5, 5, new Color(50, 50, 50, 255));
+        NanoVGRenderUtil.drawRoundedRectWH(x, y, ((ClickGui.INSTANCE.width / 4f) - 100), ubuntu10.getHeight() + 5, 5, new Color(50, 50, 50, 255));
 
-        ubuntu10.drawText(module.getName(), x + 5, y + (ubuntu10.getHeight() + 5) / 2f, new Color(255, 255, 255, 255), NanoVG.NVG_ALIGN_LEFT | NanoVG.NVG_ALIGN_MIDDLE);
+        ubuntu10.drawText(module.getName(), x + 5, y + (ubuntu10.getHeight() + 5) / 2f, new Color(255, 255, 255, 255), NanoVG.NVG_ALIGN_LEFT | NanoVG.NVG_ALIGN_MIDDLE, false);
 
-        NVGRenderUtil.drawRoundedRectWH(x + ((ClickGui.INSTANCE.width / 4f) - 100) - 25, y + 2.5f, 20, ubuntu10.getHeight(), 5, new Color(40, 40, 40, 255));
+        NanoVGRenderUtil.drawRoundedRectWH(x + ((ClickGui.INSTANCE.width / 4f) - 100) - 25, y + 2.5f, 20, ubuntu10.getHeight(), 5, new Color(40, 40, 40, 255));
 
-        NVGRenderUtil.drawCircle(x + ((ClickGui.INSTANCE.width / 4f) - 100) - 25 + (5 + value), y + 2.5f + 5, 5, module.isToggle() ? new Color(100, 100, 255, 255) : new Color(30, 30, 30, 255));
+        NanoVGRenderUtil.drawCircle(x + ((ClickGui.INSTANCE.width / 4f) - 100) - 25 + (5 + value), y + 2.5f + 5, 5, module.isToggle() ? new Color(100, 100, 255, 255) : new Color(30, 30, 30, 255));
 
         if (MouseUtil.isHoveringWH(x + ((ClickGui.INSTANCE.width / 4f) - 100) + 5, y - (bonIcon10.getHeight() + 7) / 4f, bonIcon10.getWidth("u"), (bonIcon10.getHeight() + 7), mouseX, mouseY)) {
             bonIcon10.drawBlurText("u", x + ((ClickGui.INSTANCE.width / 4f) - 100) + 5, y + (bonIcon10.getHeight() + 7) / 2f, new Color(255, 255, 255, 255), 5f, ColorUtil.getRainbow(20, 255, 255), NanoVG.NVG_ALIGN_LEFT | NanoVG.NVG_ALIGN_MIDDLE);
@@ -58,7 +58,7 @@ public class ModulePanel {
             ClickGui.INSTANCE.description = "Open " + module.getName() + " setting.";
         }
 
-        bonIcon10.drawText("u", x + ((ClickGui.INSTANCE.width / 4f) - 100) + 5, y + (bonIcon10.getHeight() + 7) / 2f, new Color(255, 255, 255, 255), NanoVG.NVG_ALIGN_LEFT | NanoVG.NVG_ALIGN_MIDDLE);
+        bonIcon10.drawText("u", x + ((ClickGui.INSTANCE.width / 4f) - 100) + 5, y + (bonIcon10.getHeight() + 7) / 2f, new Color(255, 255, 255, 255), NanoVG.NVG_ALIGN_LEFT | NanoVG.NVG_ALIGN_MIDDLE, false);
     }
 
     public void drawScreen2(int mouseX, int mouseY, float partialTicks) {

@@ -8,7 +8,7 @@ import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
-import static me.hannsi.melyclient.util.render.nanovg.system.NVGUtil.nvg;
+import static me.hannsi.melyclient.util.render.nanovg.system.NanoVGSystemUtil.nvg;
 
 public class Font {
     private final String name;

@@ -2,7 +2,7 @@ package me.hannsi.melyclient.gui.clickGui;
 
 import me.hannsi.melyclient.MelyClient;
 import me.hannsi.melyclient.module.system.Category;
-import me.hannsi.melyclient.util.render.nanovg.render.NVGRenderUtil;
+import me.hannsi.melyclient.util.render.nanovg.render.NanoVGRenderUtil;
 import me.hannsi.melyclient.util.render.nanovg.render.font.FontUtil;
 import me.hannsi.melyclient.util.system.math.MouseUtil;
 import me.hannsi.melyclient.util.system.math.animation.Easing;
@@ -31,7 +31,7 @@ public class CategoryPanel {
 
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         FontUtil bonIcon10 = new FontUtil(MelyClient.fontManager.bonIcon, 10);
-        FontUtil ubuntu10 = new FontUtil(MelyClient.fontManager.ubuntu,10);
+        FontUtil ubuntu10 = new FontUtil(MelyClient.fontManager.ubuntu, 10);
 
         boolean hover = MouseUtil.isHoveringWH(x, y, bonIcon10.getWidth(category.getIcon() + " ") + ubuntu10.getWidth(category.getDisplay()), ubuntu10.getHeight(), mouseX, mouseY);
         float lineW;
@@ -55,7 +55,7 @@ public class CategoryPanel {
             lineW = (ubuntu10.getWidth(category.getDisplay()) / 2) * 0;
         }
 
-        NVGRenderUtil.drawLineWH(x + bonIcon10.getWidth(category.getIcon() + " ") + lineW, y + ubuntu10.getHeight(), ubuntu10.getWidth(category.getDisplay()) - (lineW * 2), 0, 1, new Color(255, 255, 255, 255));
+        NanoVGRenderUtil.drawLineWH(x + bonIcon10.getWidth(category.getIcon() + " ") + lineW, y + ubuntu10.getHeight(), ubuntu10.getWidth(category.getDisplay()) - (lineW * 2), 0, 1, new Color(255, 255, 255, 255));
 
         if (hover) {
             if (Mouse.isButtonDown(0)) {

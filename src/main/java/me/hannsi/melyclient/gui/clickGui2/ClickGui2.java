@@ -4,9 +4,11 @@ import me.hannsi.melyclient.MelyClient;
 import me.hannsi.melyclient.gui.clickGui2.Panels.altManager.AccountScreen;
 import me.hannsi.melyclient.gui.clickGui2.Panels.altManager.AltManagerScreen;
 import me.hannsi.melyclient.gui.clickGui2.Panels.clientInfo.ClientInfo;
+import me.hannsi.melyclient.gui.clickGui2.Panels.texture.Texture;
 import me.hannsi.melyclient.util.render.GLUtil;
 import me.hannsi.melyclient.util.render.guiScreen.GuiScreenUtil;
-import me.hannsi.melyclient.util.render.nanovg.render.NVGRenderUtil;
+import me.hannsi.melyclient.util.render.nanovg.render.NanoVGRenderUtil;
+import me.hannsi.melyclient.util.render.nanovg.render.NanoVGUtil;
 import me.hannsi.melyclient.util.render.nanovg.render.font.FontUtil;
 import me.hannsi.melyclient.util.system.conversion.BonIcon;
 import me.hannsi.melyclient.util.system.math.MouseUtil;
@@ -28,19 +30,19 @@ public class ClickGui2 extends GuiScreen {
     public Screen nowScreen;
 
     public static void openGLStart() {
-        GLUtil.glPush();
+        GLUtil.push();
     }
 
     public static void openGLEnd() {
-        GLUtil.glPop();
+        GLUtil.pop();
     }
 
     public static void nanoVGStart() {
-        GLUtil.nvgPush();
+        NanoVGUtil.nvgPush();
     }
 
     public static void nanoVGEnd() {
-        GLUtil.nvgPop();
+        NanoVGUtil.nvgPop();
     }
 
     @Override
@@ -49,7 +51,6 @@ public class ClickGui2 extends GuiScreen {
         homeButtons.add(new HomeButton("Modules", "Displays a screen about Module.", BonIcon.RECT, Screen.Modules, 0, 0));
         homeButtons.add(new HomeButton("AltManager", "Displays a screen about your account.", BonIcon.REPEAT, Screen.AltManager, 0, 0));
         homeButtons.add(new HomeButton("Texture", "Displays screens related to textures.", BonIcon.TV, Screen.Texture, 0, 0));
-        homeButtons.add(new HomeButton("Shader", "Displays screens related to shaders.", BonIcon.SCREENSHOT, Screen.Shader, 0, 0));
         homeButtons.add(new HomeButton("Console", "Displays screens related to the console.", BonIcon.TUNE, Screen.Console, 0, 0));
         homeButtons.add(new HomeButton("ClientInfo", "Displays a screen about the client's information.", BonIcon.INFO, Screen.ClientInfo, 0, 0));
 
@@ -67,6 +68,7 @@ public class ClickGui2 extends GuiScreen {
 
         AltManagerScreen.initGui();
         ClientInfo.initGui();
+        Texture.initGui(this.width, this.height);
     }
 
     @Override
@@ -80,19 +82,19 @@ public class ClickGui2 extends GuiScreen {
 //
         nanoVGStart();
 //
-        NVGRenderUtil.drawRectWH(0, 0, this.width, this.height, new Color(4, 4, 4, 255));
+        NanoVGRenderUtil.drawRectWH(0, 0, this.width, this.height, new Color(4, 4, 4, 255));
 //
-        NVGRenderUtil.drawRectWH(0, 0, menuBarWidth, this.height, new Color(31, 31, 31, 255));
+        NanoVGRenderUtil.drawRectWH(0, 0, menuBarWidth, this.height, new Color(31, 31, 31, 255));
 //
         if (MouseUtil.isHoveringWH(0, 0, bonIcon15.getWidth(BonIcon.REORDER) + 10, bonIcon15.getHeight() + 10, mouseX, mouseY)) {
-            NVGRenderUtil.drawRadialGradientRect(0, 0, bonIcon15.getWidth(BonIcon.REORDER) + 10, bonIcon15.getHeight() + 10, mouseX, mouseY, 0, 70, new Color(255, 255, 255, 50), new Color(4, 4, 4, 255));
-            NVGRenderUtil.drawOutLineRectWH(0, 0, bonIcon15.getWidth(BonIcon.REORDER) + 10, bonIcon15.getHeight() + 10, 1f, new Color(91, 91, 91, 255));
+            NanoVGRenderUtil.drawRadialGradientRect(0, 0, bonIcon15.getWidth(BonIcon.REORDER) + 10, bonIcon15.getHeight() + 10, mouseX, mouseY, 0, 70, new Color(255, 255, 255, 50), new Color(4, 4, 4, 255));
+            NanoVGRenderUtil.drawOutLineRectWH(0, 0, bonIcon15.getWidth(BonIcon.REORDER) + 10, bonIcon15.getHeight() + 10, 1f, new Color(91, 91, 91, 255));
         }
         bonIcon15.drawText(BonIcon.ARROW_BACK, 5, 5, new Color(255, 255, 255, 255));
 //
         if (MouseUtil.isHoveringWH(0, bonIcon15.getHeight() + 10, bonIcon15.getWidth(BonIcon.REORDER) + 10, bonIcon15.getHeight() + 10, mouseX, mouseY)) {
-            NVGRenderUtil.drawRadialGradientRect(0, bonIcon15.getHeight() + 10, bonIcon15.getWidth(BonIcon.REORDER) + 10, bonIcon15.getHeight() + 10, mouseX, mouseY, 0, 70, new Color(255, 255, 255, 50), new Color(4, 4, 4, 255));
-            NVGRenderUtil.drawOutLineRectWH(0, bonIcon15.getHeight() + 10, bonIcon15.getWidth(BonIcon.REORDER) + 10, bonIcon15.getHeight() + 10, 1f, new Color(91, 91, 91, 255));
+            NanoVGRenderUtil.drawRadialGradientRect(0, bonIcon15.getHeight() + 10, bonIcon15.getWidth(BonIcon.REORDER) + 10, bonIcon15.getHeight() + 10, mouseX, mouseY, 0, 70, new Color(255, 255, 255, 50), new Color(4, 4, 4, 255));
+            NanoVGRenderUtil.drawOutLineRectWH(0, bonIcon15.getHeight() + 10, bonIcon15.getWidth(BonIcon.REORDER) + 10, bonIcon15.getHeight() + 10, 1f, new Color(91, 91, 91, 255));
         }
         bonIcon15.drawText(BonIcon.REORDER, 5, 5 + bonIcon15.getHeight() + 10, new Color(255, 255, 255, 255));
 //
@@ -111,6 +113,8 @@ public class ClickGui2 extends GuiScreen {
             AltManagerScreen.drawScreen(mouseX, mouseY, this.width, this.height);
         } else if (nowScreen == Screen.ClientInfo) {
             ClientInfo.drawScreen(mouseX, mouseY, this.width, this.height);
+        } else if (nowScreen == Screen.Texture) {
+            Texture.drawScreen(mouseX, mouseY, this.width, this.height, partialTicks);
         }
 //
         float menuBarOffsetY = (5 + bonIcon15.getHeight() + 5 + this.height / 15f) - ubuntu12.getHeight() / 2f + ubuntu12.getHeight();
@@ -193,6 +197,8 @@ public class ClickGui2 extends GuiScreen {
             AltManagerScreen.mouseClicked(mouseX, mouseY, mouseButton);
         } else if (nowScreen == Screen.ClientInfo) {
             ClientInfo.mouseClicked(mouseX, mouseY, mouseButton);
+        } else if (nowScreen == Screen.Texture) {
+            Texture.mouseClicked(mouseX, mouseY, mouseButton);
         }
 
         float menuBarOffsetY = (5 + bonIcon15.getHeight() + 5 + this.height / 15f) - ubuntu12.getHeight() / 2f + ubuntu12.getHeight();
@@ -201,8 +207,6 @@ public class ClickGui2 extends GuiScreen {
             menuBarButton.mouseClicked(mouseX, mouseY, mouseButton);
             menuBarOffsetY += (bonIcon15.getHeight() + ((bonIcon15.getHeight() / 2f)));
         }
-
-        super.mouseClicked(mouseX, mouseY, mouseButton);
     }
 
     public class HomeButton {
@@ -238,14 +242,14 @@ public class ClickGui2 extends GuiScreen {
             FontUtil ubuntu10 = new FontUtil(MelyClient.fontManager.ubuntu, 10);
             FontUtil ubuntu12 = new FontUtil(MelyClient.fontManager.ubuntu, 12);
 
-            NVGRenderUtil.drawRadialGradientRect(x - 1, y - 1, width / 9f + 2, height / 3f + 2, mouseX, mouseY, 0, 70, new Color(91, 91, 91, 255), new Color(4, 4, 4, 255));
+            NanoVGRenderUtil.drawRadialGradientRect(x - 1, y - 1, width / 9f + 2, height / 3f + 2, mouseX, mouseY, 0, 70, new Color(91, 91, 91, 255), new Color(4, 4, 4, 255));
 
-            NVGRenderUtil.drawRectWH(x, y, width / 9f, height / 3f, new Color(0, 0, 0, 255));
+            NanoVGRenderUtil.drawRectWH(x, y, width / 9f, height / 3f, new Color(0, 0, 0, 255));
 
             if (MouseUtil.isHoveringWH(x, y, width / 9f, height / 3f, mouseX, mouseY)) {
-                NVGRenderUtil.drawOutLineRectWH(x, y, width / 9f, height / 3f, 1.0f, new Color(91, 91, 91, 255));
+                NanoVGRenderUtil.drawOutLineRectWH(x, y, width / 9f, height / 3f, 1.0f, new Color(91, 91, 91, 255));
 
-                NVGRenderUtil.drawRadialGradientRect(x, y, width / 9f, height / 3f, mouseX, mouseY, 0, 70, new Color(255, 255, 255, 50), new Color(4, 4, 4, 255));
+                NanoVGRenderUtil.drawRadialGradientRect(x, y, width / 9f, height / 3f, mouseX, mouseY, 0, 70, new Color(255, 255, 255, 50), new Color(4, 4, 4, 255));
             }
 
             bonIcon40.drawText(icon, x + 5, y + 2.5f, new Color(0, 120, 212, 255));
@@ -346,9 +350,9 @@ public class ClickGui2 extends GuiScreen {
             FontUtil ubuntu12 = new FontUtil(MelyClient.fontManager.ubuntu, 12);
 
             if (MouseUtil.isHoveringWH(x, y, menuBarWidth, ubuntu12.getHeight() + (ubuntu12.getHeight()), mouseX, mouseY)) {
-                NVGRenderUtil.drawRadialGradientRect(x, y, menuBarWidth, ubuntu12.getHeight() + (ubuntu12.getHeight()), mouseX, mouseY, 0, 70, new Color(255, 255, 255, 50), new Color(31, 31, 31, 255));
+                NanoVGRenderUtil.drawRadialGradientRect(x, y, menuBarWidth, ubuntu12.getHeight() + (ubuntu12.getHeight()), mouseX, mouseY, 0, 70, new Color(255, 255, 255, 50), new Color(31, 31, 31, 255));
 
-                NVGRenderUtil.drawOutLineRectWH(x, y, menuBarWidth, ubuntu12.getHeight() + (ubuntu12.getHeight()), 1f, new Color(91, 91, 91, 255));
+                NanoVGRenderUtil.drawOutLineRectWH(x, y, menuBarWidth, ubuntu12.getHeight() + (ubuntu12.getHeight()), 1f, new Color(91, 91, 91, 255));
             }
             bonIcon12.drawText(icon, x + 5, y + ubuntu12.getHeight() / 2f, new Color(255, 255, 255, 255));
 

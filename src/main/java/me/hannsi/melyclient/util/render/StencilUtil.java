@@ -1,5 +1,7 @@
 package me.hannsi.melyclient.util.render;
 
+import me.hannsi.melyclient.util.render.nanovg.render.NanoVGRenderUtil;
+import me.hannsi.melyclient.util.render.render2D.Render2DUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.shader.Framebuffer;
@@ -8,7 +10,9 @@ import org.lwjgl.opengl.EXTFramebufferObject;
 import org.lwjgl.opengl.EXTPackedDepthStencil;
 import org.lwjgl.opengl.GL11;
 
-import static me.hannsi.melyclient.util.render.nanovg.system.NVGUtil.nvg;
+import java.awt.*;
+
+import static me.hannsi.melyclient.util.render.nanovg.system.NanoVGSystemUtil.nvg;
 import static net.minecraft.client.renderer.GlStateManager.colorMask;
 import static org.lwjgl.opengl.GL11.*;
 
@@ -78,5 +82,79 @@ public class StencilUtil {
         EXTFramebufferObject.glRenderbufferStorageEXT(EXTFramebufferObject.GL_RENDERBUFFER_EXT, EXTPackedDepthStencil.GL_DEPTH_STENCIL_EXT, Minecraft.getMinecraft().displayWidth, Minecraft.getMinecraft().displayHeight);
         EXTFramebufferObject.glFramebufferRenderbufferEXT(EXTFramebufferObject.GL_FRAMEBUFFER_EXT, EXTFramebufferObject.GL_STENCIL_ATTACHMENT_EXT, EXTFramebufferObject.GL_RENDERBUFFER_EXT, stencilDepthBufferID);
         EXTFramebufferObject.glFramebufferRenderbufferEXT(EXTFramebufferObject.GL_FRAMEBUFFER_EXT, EXTFramebufferObject.GL_DEPTH_ATTACHMENT_EXT, EXTFramebufferObject.GL_RENDERBUFFER_EXT, stencilDepthBufferID);
+    }
+
+    public static void nvgScissor(Runnable draw, float x, float y, float width, float height, float round, boolean invert) {
+        nvgPushScissor(x, y, width, height, round, invert);
+        draw.run();
+        nvgPopScissor();
+    }
+
+    public static void nvgScissor(Runnable draw, float x, float y, float width, float height, boolean invert) {
+        nvgPushScissor(x, y, width, height, invert);
+        draw.run();
+        nvgPopScissor();
+    }
+
+    public static void glScissor(Runnable draw, float x, float y, float width, float height, float round, boolean invert) {
+        glPushScissor(x, y, width, height, round, invert);
+        draw.run();
+        glPopScissor();
+    }
+
+    public static void glScissor(Runnable draw, float x, float y, float width, float height, boolean invert) {
+        glPushScissor(x, y, width, height, invert);
+        draw.run();
+        glPopScissor();
+    }
+
+    public static void nvgPushScissor(float x, float y, float width, float height, float round, boolean invert) {
+        nvgWrite();
+        NanoVGRenderUtil.drawRoundedRect(x, y, x + width, y + height, round, new Color(255, 255, 255, 255));
+        nvgErase(invert);
+    }
+
+    public static void nvgPushScissor(float x, float y, float width, float height, boolean invert) {
+        nvgWrite();
+        NanoVGRenderUtil.drawRect(x, y, x + width, y + height, new Color(255, 255, 255, 255));
+        nvgErase(invert);
+    }
+
+    public static void glPushScissor(float x, float y, float width, float height, float round, boolean invert) {
+        glWrite(false);
+        Render2DUtil.drawRoundedRect(x, y, x + width, y + height, round, new Color(255, 255, 255, 255));
+        glErase(invert);
+    }
+
+    public static void glPushScissor(float x, float y, float width, float height, boolean invert) {
+        glWrite(false);
+        Render2DUtil.drawRect(x, y, x + width, y + height, new Color(255, 255, 255, 255));
+        glErase(invert);
+    }
+
+    public static void nvgPopScissor() {
+        nvgDispose();
+    }
+
+    public static void glPopScissor() {
+        glDispose();
+    }
+
+    public static void gl11PushScissor(float x, float y, float width, float height) {
+        glEnable(GL_SCISSOR_TEST);
+        Minecraft mc = Minecraft.getMinecraft();
+        int scaleFactor = 1;
+        int guiScale = mc.gameSettings.guiScale;
+        if (guiScale == 0) {
+            guiScale = 1000;
+        }
+        while (scaleFactor < guiScale && mc.displayWidth / (scaleFactor + 1) >= 320 && mc.displayHeight / (scaleFactor + 1) >= 240) {
+            ++scaleFactor;
+        }
+        GL11.glScissor((int) (x * scaleFactor), (int) (mc.displayHeight - (y + height) * scaleFactor), (int) (width * scaleFactor), (int) (height * scaleFactor));
+    }
+
+    public static void gl11PopScissor() {
+        glDisable(GL_SCISSOR_TEST);
     }
 }

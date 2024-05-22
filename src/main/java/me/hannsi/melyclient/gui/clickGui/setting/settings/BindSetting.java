@@ -6,7 +6,7 @@ import me.hannsi.melyclient.gui.clickGui.setting.system.SettingBase;
 import me.hannsi.melyclient.module.system.Module;
 import me.hannsi.melyclient.module.system.settings.Bind;
 import me.hannsi.melyclient.module.system.settings.Setting;
-import me.hannsi.melyclient.util.render.nanovg.render.NVGRenderUtil;
+import me.hannsi.melyclient.util.render.nanovg.render.NanoVGRenderUtil;
 import me.hannsi.melyclient.util.render.nanovg.render.font.FontUtil;
 import me.hannsi.melyclient.util.system.math.MouseUtil;
 import me.hannsi.melyclient.util.system.math.color.ColorUtil;
@@ -28,7 +28,7 @@ public class BindSetting extends SettingBase {
 
         String text = (setBindMenu ? "Press key or click NONE" : Keyboard.getKeyName(((Setting<Bind>) setting).getValue().getKeyCode()));
 
-        NVGRenderUtil.drawRoundedRectWH(this.x, this.y - 1, ubuntu10.getWidth("AA" + text), ubuntu10.getHeight() + 2, ubuntu10.getHeight() / 2f, new Color(30, 30, 30, 255));
+        NanoVGRenderUtil.drawRoundedRectWH(this.x, this.y - 1, ubuntu10.getWidth("AA" + text), ubuntu10.getHeight() + 2, ubuntu10.getHeight() / 2f, new Color(30, 30, 30, 255));
 
         ubuntu10.drawText(text, this.x + ubuntu10.getWidth("A"), this.y, new Color(255, 255, 255, 255));
 

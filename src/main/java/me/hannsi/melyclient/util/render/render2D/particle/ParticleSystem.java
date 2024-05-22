@@ -1,6 +1,6 @@
 package me.hannsi.melyclient.util.render.render2D.particle;
 
-import me.hannsi.melyclient.util.render.nanovg.render.NVGRenderUtil;
+import me.hannsi.melyclient.util.render.nanovg.render.NanoVGRenderUtil;
 import me.hannsi.melyclient.util.system.math.MathUtil;
 import me.hannsi.melyclient.util.system.math.color.ColorUtil;
 
@@ -39,12 +39,12 @@ public class ParticleSystem {
 
     public void render(float mouseX, float mouseY, int displayWidth, int displayHeight) {
         for (Particle particle : particleList) {
-            NVGRenderUtil.drawPoint(particle.getX(), particle.getY(), particle.getSize() / 5, color);
+            NanoVGRenderUtil.drawPoint(particle.getX(), particle.getY(), particle.getSize() / 5, color);
 
             if (mouse) {
                 float distance = (float) MathUtil.distance(particle.getX(), particle.getY(), mouseX, mouseY);
                 if (distance < dist) {
-                    NVGRenderUtil.drawLine(particle.getX(), particle.getY(), mouseX, mouseY, lineWidth, color);
+                    NanoVGRenderUtil.drawLine(particle.getX(), particle.getY(), mouseX, mouseY, lineWidth, color);
                 }
 
             } else {
@@ -65,7 +65,7 @@ public class ParticleSystem {
                 if (nearestParticle != null) {
                     float alpha = Math.min(1.0f, Math.min(1.0f, 1.0f - nearestDistance / dist));
                     color = ColorUtil.setAlpha(color, alpha);
-                    NVGRenderUtil.drawLine(particle.getX(), particle.getY(), nearestParticle.getX(), nearestParticle.getY(), lineWidth, color);
+                    NanoVGRenderUtil.drawLine(particle.getX(), particle.getY(), nearestParticle.getX(), nearestParticle.getY(), lineWidth, color);
                 }
             }
         }
