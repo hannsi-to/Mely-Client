@@ -47,9 +47,11 @@ public class ClickGui2 extends GuiScreen {
 
     @Override
     public void initGui() {
+        FontUtil bonIcon15 = new FontUtil(MelyClient.fontManager.bonIcon, 15);
+
         homeButtons = new ArrayList<>();
         homeButtons.add(new HomeButton("Modules", "Displays a screen about Module.", BonIcon.RECT, Screen.Modules, 0, 0));
-        homeButtons.add(new HomeButton("AltManager", "Displays a screen about your account.", BonIcon.REPEAT, Screen.AltManager, 0, 0));
+        homeButtons.add(new HomeButton("AltManager", "Displays a screen about your account.      This is changed by reconnecting to the world.", BonIcon.REPEAT, Screen.AltManager, 0, 0));
         homeButtons.add(new HomeButton("Texture", "Displays screens related to textures.", BonIcon.TV, Screen.Texture, 0, 0));
         homeButtons.add(new HomeButton("Console", "Displays screens related to the console.", BonIcon.TUNE, Screen.Console, 0, 0));
         homeButtons.add(new HomeButton("ClientInfo", "Displays a screen about the client's information.", BonIcon.INFO, Screen.ClientInfo, 0, 0));
@@ -60,8 +62,8 @@ public class ClickGui2 extends GuiScreen {
         menuBarButtons.add(new MenuBarButton("Setting", BonIcon.SETTINGS, new GuiOptions(this, mc.gameSettings), 0, 0));
         menuBarButtons.add(new MenuBarButton("Language", BonIcon.PUBLIC, new GuiLanguage(this, mc.gameSettings, mc.getLanguageManager()), 0, 0));
 
-        menuBarWidth = this.width / 6f;
-        menuBarOpen = true;
+        menuBarWidth = bonIcon15.getWidth(BonIcon.PERSON) + 10;
+        menuBarOpen = false;
         offsetX = this.width / 40f;
         nowScreen = Screen.Home;
         INSTANCE = this;
@@ -228,11 +230,6 @@ public class ClickGui2 extends GuiScreen {
 
         public void mouseClicked(int mouseX, int mouseY, int mouseButton) {
             if (MouseUtil.isHoveringWH(x, y, width / 9f, height / 3f, mouseX, mouseY)) {
-                if (screen == Screen.AltManager) {
-                    if (!(mc.currentScreen instanceof GuiMainMenu)) {
-                        return;
-                    }
-                }
                 nowScreen = screen;
             }
         }
