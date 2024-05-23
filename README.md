@@ -37,7 +37,7 @@ Minecraft Client
 ｜｜｜      ｜｜├ClickGui.java
 ｜｜｜      ｜｜└ModulePanel.java
 ｜｜｜      ｜├clickGui2
-｜｜｜      ｜｜├Panels
+｜｜｜      ｜｜├panels
 ｜｜｜      ｜｜｜├altManager
 ｜｜｜      ｜｜｜｜├AccountButton.java
 ｜｜｜      ｜｜｜｜├AccountScreen.java

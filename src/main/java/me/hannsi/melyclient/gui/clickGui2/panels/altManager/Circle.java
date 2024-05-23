@@ -1,4 +1,4 @@
-package me.hannsi.melyclient.gui.clickGui2.Panels.altManager;
+package me.hannsi.melyclient.gui.clickGui2.panels.altManager;
 
 import me.hannsi.melyclient.util.render.nanovg.render.NanoVGRenderUtil;
 import me.hannsi.melyclient.util.system.math.animation.Easing;

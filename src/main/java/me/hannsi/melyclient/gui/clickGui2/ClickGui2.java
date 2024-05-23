@@ -1,10 +1,10 @@
 package me.hannsi.melyclient.gui.clickGui2;
 
 import me.hannsi.melyclient.MelyClient;
-import me.hannsi.melyclient.gui.clickGui2.Panels.altManager.AccountScreen;
-import me.hannsi.melyclient.gui.clickGui2.Panels.altManager.AltManagerScreen;
-import me.hannsi.melyclient.gui.clickGui2.Panels.clientInfo.ClientInfo;
-import me.hannsi.melyclient.gui.clickGui2.Panels.texture.Texture;
+import me.hannsi.melyclient.gui.clickGui2.panels.altManager.AccountScreen;
+import me.hannsi.melyclient.gui.clickGui2.panels.altManager.AltManagerScreen;
+import me.hannsi.melyclient.gui.clickGui2.panels.clientInfo.ClientInfo;
+import me.hannsi.melyclient.gui.clickGui2.panels.texture.Texture;
 import me.hannsi.melyclient.util.render.GLUtil;
 import me.hannsi.melyclient.util.render.guiScreen.GuiScreenUtil;
 import me.hannsi.melyclient.util.render.nanovg.render.NanoVGRenderUtil;

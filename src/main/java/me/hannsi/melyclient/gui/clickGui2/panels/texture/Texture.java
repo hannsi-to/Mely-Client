@@ -1,4 +1,4 @@
-package me.hannsi.melyclient.gui.clickGui2.Panels.texture;
+package me.hannsi.melyclient.gui.clickGui2.panels.texture;
 
 import com.google.common.collect.Lists;
 import me.hannsi.melyclient.MelyClient;

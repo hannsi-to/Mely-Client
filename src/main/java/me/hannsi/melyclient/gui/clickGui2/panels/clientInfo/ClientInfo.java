@@ -1,4 +1,4 @@
-package me.hannsi.melyclient.gui.clickGui2.Panels.clientInfo;
+package me.hannsi.melyclient.gui.clickGui2.panels.clientInfo;
 
 import me.hannsi.melyclient.MelyClient;
 import me.hannsi.melyclient.gui.clickGui2.ClickGui2;
