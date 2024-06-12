@@ -4,14 +4,15 @@ import me.hannsi.melyclient.MelyClient;
 import me.hannsi.melyclient.gui.clickGui2.panels.altManager.AccountScreen;
 import me.hannsi.melyclient.gui.clickGui2.panels.altManager.AltManagerScreen;
 import me.hannsi.melyclient.gui.clickGui2.panels.clientInfo.ClientInfo;
+import me.hannsi.melyclient.gui.clickGui2.panels.console.Console;
 import me.hannsi.melyclient.gui.clickGui2.panels.texture.Texture;
 import me.hannsi.melyclient.util.render.GLUtil;
 import me.hannsi.melyclient.util.render.guiScreen.GuiScreenUtil;
 import me.hannsi.melyclient.util.render.nanovg.render.NanoVGRenderUtil;
 import me.hannsi.melyclient.util.render.nanovg.render.NanoVGUtil;
 import me.hannsi.melyclient.util.render.nanovg.render.font.FontUtil;
+import me.hannsi.melyclient.util.system.MouseUtil;
 import me.hannsi.melyclient.util.system.conversion.BonIcon;
-import me.hannsi.melyclient.util.system.math.MouseUtil;
 import net.minecraft.client.gui.*;
 import org.lwjgl.input.Keyboard;
 
@@ -38,11 +39,11 @@ public class ClickGui2 extends GuiScreen {
     }
 
     public static void nanoVGStart() {
-        NanoVGUtil.nvgPush();
+        NanoVGUtil.push();
     }
 
     public static void nanoVGEnd() {
-        NanoVGUtil.nvgPop();
+        NanoVGUtil.pop();
     }
 
     @Override
@@ -71,6 +72,7 @@ public class ClickGui2 extends GuiScreen {
         AltManagerScreen.initGui();
         ClientInfo.initGui();
         Texture.initGui(this.width, this.height);
+        Console.initGui(this.width, this.height);
     }
 
     @Override
@@ -117,6 +119,8 @@ public class ClickGui2 extends GuiScreen {
             ClientInfo.drawScreen(mouseX, mouseY, this.width, this.height);
         } else if (nowScreen == Screen.Texture) {
             Texture.drawScreen(mouseX, mouseY, this.width, this.height, partialTicks);
+        } else if (nowScreen == Screen.Console) {
+            Console.drawScreen(mouseX, mouseY, this.width, this.height, partialTicks);
         }
 //
         float menuBarOffsetY = (5 + bonIcon15.getHeight() + 5 + this.height / 15f) - ubuntu12.getHeight() / 2f + ubuntu12.getHeight();
@@ -150,6 +154,8 @@ public class ClickGui2 extends GuiScreen {
 
         if (nowScreen == Screen.AltManager) {
             AltManagerScreen.keyTyped(typedChar, keyCode);
+        } else if (nowScreen == Screen.Console) {
+            Console.keyTyped(typedChar, keyCode);
         }
     }
 
@@ -201,6 +207,8 @@ public class ClickGui2 extends GuiScreen {
             ClientInfo.mouseClicked(mouseX, mouseY, mouseButton);
         } else if (nowScreen == Screen.Texture) {
             Texture.mouseClicked(mouseX, mouseY, mouseButton);
+        } else if (nowScreen == Screen.Console) {
+            Console.mouseClicked(mouseX, mouseY, mouseButton);
         }
 
         float menuBarOffsetY = (5 + bonIcon15.getHeight() + 5 + this.height / 15f) - ubuntu12.getHeight() / 2f + ubuntu12.getHeight();
@@ -209,6 +217,11 @@ public class ClickGui2 extends GuiScreen {
             menuBarButton.mouseClicked(mouseX, mouseY, mouseButton);
             menuBarOffsetY += (bonIcon15.getHeight() + ((bonIcon15.getHeight() / 2f)));
         }
+    }
+
+    @Override
+    public boolean doesGuiPauseGame() {
+        return false;
     }
 
     public class HomeButton {

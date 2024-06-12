@@ -6,12 +6,12 @@ import me.hannsi.melyclient.gui.clickGui2.LoadingCircles;
 import me.hannsi.melyclient.gui.clickGui2.Screen;
 import me.hannsi.melyclient.util.render.nanovg.render.NanoVGRenderUtil;
 import me.hannsi.melyclient.util.render.nanovg.render.font.FontUtil;
+import me.hannsi.melyclient.util.system.MouseUtil;
 import me.hannsi.melyclient.util.system.auth.AccountData;
 import me.hannsi.melyclient.util.system.auth.LoginMode;
 import me.hannsi.melyclient.util.system.conversion.BonIcon;
 import me.hannsi.melyclient.util.system.debug.DebugLevel;
 import me.hannsi.melyclient.util.system.debug.DebugLog;
-import me.hannsi.melyclient.util.system.math.MouseUtil;
 import me.hannsi.melyclient.util.system.math.time.TimerUtil;
 
 import java.awt.*;
