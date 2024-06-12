@@ -8,7 +8,7 @@ import me.hannsi.melyclient.module.system.settings.Bind;
 import me.hannsi.melyclient.module.system.settings.IEnumSetting;
 import me.hannsi.melyclient.module.system.settings.Setting;
 import me.hannsi.melyclient.util.render.nanovg.render.font.FontUtil;
-import me.hannsi.melyclient.util.system.math.MouseUtil;
+import me.hannsi.melyclient.util.system.MouseUtil;
 
 import java.awt.*;
 import java.util.ArrayList;

@@ -1,10 +1,33 @@
-package me.hannsi.melyclient.util.system.math;
+package me.hannsi.melyclient.util.system;
 
+import java.awt.datatransfer.StringSelection;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
 public class StringUtil {
+    public static String linkList(String[] list, String space) {
+        String result = "";
+
+        for (String str : list) {
+            result = addLastChar(result, str + space);
+        }
+
+        return result;
+    }
+
+    public static String strip(String str, String key) {
+        if (str.startsWith(key) && str.endsWith(key)) {
+            return str.substring(key.length(), str.length() - key.length());
+        }
+        return str;
+    }
+
+    public static StringSelection getStringSelection(String str) {
+        return new StringSelection(str);
+    }
+
     public static char[] getChars(String string) {
         return string.toCharArray();
     }
@@ -14,7 +37,15 @@ public class StringUtil {
     }
 
     public static String[] splitln(String str) {
-        return str.split("\n");
+        return split(str, "\n");
+    }
+
+    public static List<String> splitAsList(String str, String regex) {
+        return Arrays.asList(split(str, regex));
+    }
+
+    public static String[] split(String str, String regex) {
+        return str.split(regex);
     }
 
     public static String extractString(String input, String startDelimiter, String endDelimiter) {
@@ -34,6 +65,34 @@ public class StringUtil {
             output = str.substring(0, str.length() - 1);
         }
         return output;
+    }
+
+    public static List<String> addEndCharInList(String[] strings, String addStr) {
+        List<String> list = new ArrayList<>();
+
+        for (String string : strings) {
+            list.add(string + addStr);
+        }
+
+        return list;
+    }
+
+    public static List<String> addEndCharInList(String[] strings, char addStr) {
+        return addEndCharInList(strings, String.valueOf(addStr));
+    }
+
+    public static List<String> addStartCharInList(String[] strings, String addStr) {
+        List<String> list = new ArrayList<>();
+
+        for (String string : strings) {
+            list.add(addStr + string);
+        }
+
+        return list;
+    }
+
+    public static List<String> addStartCharInList(String[] strings, char addStr) {
+        return addStartCharInList(strings, String.valueOf(addStr));
     }
 
     public static String addLastChar(String str, String addStr) {

@@ -1,8 +1,8 @@
 package me.hannsi.melyclient.util.render.nanovg.render.font;
 
 import me.hannsi.melyclient.util.render.nanovg.render.NanoVGRenderUtil;
+import me.hannsi.melyclient.util.system.StringUtil;
 import me.hannsi.melyclient.util.system.conversion.AlignExtractor;
-import me.hannsi.melyclient.util.system.math.StringUtil;
 import me.hannsi.melyclient.util.system.math.color.ColorUtil;
 import me.hannsi.melyclient.util.system.math.color.MChatFormatting;
 import org.lwjgl.nanovg.NVGColor;

@@ -1,13 +1,22 @@
 package me.hannsi.melyclient.manager;
 
 import me.hannsi.melyclient.MelyClient;
+import me.hannsi.melyclient.command.system.CommandBase;
+import me.hannsi.melyclient.event.events.PacketSendEvent;
 import me.hannsi.melyclient.event.events.Render2DEvent;
 import me.hannsi.melyclient.event.events.Render3DEvent;
 import me.hannsi.melyclient.module.system.Module;
 import me.hannsi.melyclient.util.InterfaceMinecraft;
+import me.hannsi.melyclient.util.system.chat.ChatData;
+import me.hannsi.melyclient.util.system.chat.ChatUtil;
+import me.hannsi.melyclient.util.system.debug.DebugLevel;
+import me.hannsi.melyclient.util.system.debug.DebugLog;
 import net.minecraft.client.gui.GuiMainMenu;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.network.Packet;
+import net.minecraft.network.play.client.CPacketChatMessage;
+import net.minecraftforge.client.event.ClientChatEvent;
 import net.minecraftforge.client.event.GuiOpenEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderWorldLastEvent;
@@ -26,8 +35,16 @@ public class EventManager implements InterfaceMinecraft {
 
     public void unLoad() {
         MinecraftForge.EVENT_BUS.unregister(this);
-
         MelyClient.eventManager = null;
+    }
+
+    @SubscribeEvent
+    public void onPacketSendEvent(PacketSendEvent event) {
+        Packet<?> packet = event.getPacket();
+
+        if (packet instanceof CPacketChatMessage) {
+            ChatUtil.playerSendMessageLog.add(new ChatData(((CPacketChatMessage) packet).getMessage()));
+        }
     }
 
     @SubscribeEvent
@@ -136,6 +153,37 @@ public class EventManager implements InterfaceMinecraft {
         GlStateManager.enableBlend();
         GlStateManager.enableDepth();
         mc.profiler.endSection();
+    }
+
+    @SubscribeEvent
+    public void onClientChatEvent(ClientChatEvent event) {
+        String message = event.getMessage();
+
+        if (message.startsWith(CommandBase.getCommandPrefix())) {
+            event.setCanceled(true);
+            try {
+                EventManager.mc.ingameGUI.getChatGUI().addToSentMessages(message);
+                if (message.length() > 1) {
+                    MelyClient.commandManager.executeCommand(message.substring(CommandBase.getCommandPrefix().length() - 1));
+                } else {
+                    String errorMessage = "Please enter a command.";
+                    CommandBase.sendMessage(errorMessage, true);
+                    new DebugLog(errorMessage, DebugLevel.ERROR);
+                }
+            } catch (Exception e) {
+                if (e instanceof NullPointerException) {
+                    CommandBase.debugAndSendErrorMessage("Missing argument.");
+                    return;
+                }
+
+                new DebugLog(e, DebugLevel.ERROR);
+
+                String errorMessage = "An error occurred while running this command. Check the log.";
+                CommandBase.sendMessage(errorMessage, true);
+                new DebugLog(errorMessage, DebugLevel.ERROR);
+            }
+            event.setMessage("");
+        }
     }
 
     @SubscribeEvent

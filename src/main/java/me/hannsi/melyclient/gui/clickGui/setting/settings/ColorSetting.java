@@ -7,9 +7,9 @@ import me.hannsi.melyclient.module.system.Module;
 import me.hannsi.melyclient.module.system.settings.Setting;
 import me.hannsi.melyclient.util.render.nanovg.render.NanoVGRenderUtil;
 import me.hannsi.melyclient.util.render.nanovg.render.font.FontUtil;
+import me.hannsi.melyclient.util.system.MouseUtil;
 import me.hannsi.melyclient.util.system.conversion.BonIcon;
 import me.hannsi.melyclient.util.system.math.MathUtil;
-import me.hannsi.melyclient.util.system.math.MouseUtil;
 import me.hannsi.melyclient.util.system.math.color.ColorUtil;
 
 import java.awt.*;
@@ -63,7 +63,6 @@ public class ColorSetting extends SettingBase {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public float drawScreen(int mouseX, int mouseY, float partialTicks) {
         FontUtil ubuntu10 = new FontUtil(MelyClient.fontManager.ubuntu, 10);
 
@@ -343,7 +342,6 @@ public class ColorSetting extends SettingBase {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public void mouseClicked(int mouseX, int mouseY, int mouseButton) {
         FontUtil ubuntu10 = new FontUtil(MelyClient.fontManager.ubuntu, 10);
 
@@ -384,7 +382,6 @@ public class ColorSetting extends SettingBase {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public void mouseReleased(int mouseX, int mouseY, int state) {
         pickerBoxDrag = false;
         redBarDrag = false;
@@ -398,7 +395,6 @@ public class ColorSetting extends SettingBase {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public void keyTyped(char typedChar, int keyCode) {
         super.keyTyped(typedChar, keyCode);
     }

@@ -2,7 +2,7 @@ package me.hannsi.melyclient.util.system.math.color;
 
 import com.mojang.realmsclient.gui.ChatFormatting;
 import me.hannsi.melyclient.module.system.settings.IEnumSetting;
-import me.hannsi.melyclient.util.system.math.StringUtil;
+import me.hannsi.melyclient.util.system.StringUtil;
 
 import java.awt.*;
 

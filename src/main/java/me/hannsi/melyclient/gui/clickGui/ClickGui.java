@@ -9,7 +9,7 @@ import me.hannsi.melyclient.util.render.nanovg.render.NanoVGUtil;
 import me.hannsi.melyclient.util.render.nanovg.render.font.FontUtil;
 import me.hannsi.melyclient.util.system.debug.DebugLevel;
 import me.hannsi.melyclient.util.system.debug.DebugLog;
-import me.hannsi.melyclient.util.system.math.MouseUtil;
+import me.hannsi.melyclient.util.system.MouseUtil;
 import me.hannsi.melyclient.util.system.math.animation.Easing;
 import me.hannsi.melyclient.util.system.math.animation.EasingUtil;
 import me.hannsi.melyclient.util.system.math.color.ColorUtil;
@@ -67,15 +67,15 @@ public class ClickGui extends GuiScreen {
         FontUtil ubuntu10 = new FontUtil(MelyClient.fontManager.ubuntu, 10);
         FontUtil ubuntu15 = new FontUtil(MelyClient.fontManager.ubuntu, 15);
 
-        NanoVGUtil.nvgPush();
+        NanoVGUtil.push();
 
         if (!loaded) {
             load();
         }
 
-        NanoVGUtil.nvgTranslate(this.width / 2f, this.height / 2f);
-        NanoVGUtil.nvgScale(easingUtil2.get(300), easingUtil2.get(300));
-        NanoVGUtil.nvgTranslate(-this.width / 2f, -this.height / 2f);
+        NanoVGUtil.translate(this.width / 2f, this.height / 2f);
+        NanoVGUtil.scale(easingUtil2.get(300), easingUtil2.get(300));
+        NanoVGUtil.translate(-this.width / 2f, -this.height / 2f);
 
         ubuntu15.drawBlurTextCenter(MelyClient.MOD_NAME + " v" + MelyClient.MOD_VER, this.width / 2f, (this.height / 4f) - ubuntu15.getHeight(), new Color(255, 255, 255, 255), 5, ColorUtil.getRainbow(20, 255, 255));
 
@@ -153,11 +153,11 @@ public class ClickGui extends GuiScreen {
         NanoVG.nvgScissor(nvg, ClickGui.this.width / 4f + 100, ClickGui.this.height / 4f + 25, (ClickGui.this.width / 4f) * 2 - 100, (ClickGui.this.height / 4f) * 2 - 50);
         for (ModulePanel modulePanel : modulePanels) {
             if (modulePanel.category == selectCategory) {
-                NanoVGUtil.nvgTranslate(-value, 0);
+                NanoVGUtil.translate(-value, 0);
                 modulePanel.drawScreen(mouseX, mouseY, partialTicks);
             }
         }
-        NanoVGUtil.nvgTranslate(value, 0);
+        NanoVGUtil.translate(value, 0);
         NanoVG.nvgResetScissor(nvg);
 
         NanoVG.nvgScissor(nvg, ClickGui.this.width / 4f + 105 + ((ClickGui.this.width / 4f) - 100) + 5 + bonIcon10.getWidth("u") + 5 + (ClickGui.this.value * (MelyClient.moduleManager.getModulesCountByCategory(selectCategory) - 1)), ClickGui.this.height / 4f + 26, 215, 201);
@@ -191,9 +191,9 @@ public class ClickGui extends GuiScreen {
             timerUtil2.reset();
         }
 
-        NanoVGUtil.nvgTranslate(this.width / 2f, this.height / 2f);
-        NanoVGUtil.nvgScale(-easingUtil2.get(300), -easingUtil2.get(300));
-        NanoVGUtil.nvgPop();
+        NanoVGUtil.translate(this.width / 2f, this.height / 2f);
+        NanoVGUtil.scale(-easingUtil2.get(300), -easingUtil2.get(300));
+        NanoVGUtil.pop();
 
         if (!MelyClient.moduleManager.getModuleByClass(me.hannsi.melyclient.module.modules.client.ClickGui.class).isToggle() && !easingUtil2.isReverse()) {
             setFocus();

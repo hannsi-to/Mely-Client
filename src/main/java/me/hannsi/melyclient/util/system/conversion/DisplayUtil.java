@@ -1,4 +1,4 @@
-package me.hannsi.melyclient.util.system.math;
+package me.hannsi.melyclient.util.system.conversion;
 
 import me.hannsi.melyclient.util.InterfaceMinecraft;
 import net.minecraft.client.gui.ScaledResolution;

@@ -1,12 +1,24 @@
-package me.hannsi.melyclient.util.system.math;
+package me.hannsi.melyclient.util.system;
 
 import me.hannsi.melyclient.util.system.debug.DebugLevel;
 import me.hannsi.melyclient.util.system.debug.DebugLog;
 
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 
 public class ListUtil {
+    public static String[] removeElement(String[] input, int indexToDelete) {
+        LinkedList<String> result = new LinkedList<>();
+        for (int i = 0; i < input.length; ++i) {
+            if (i == indexToDelete) {
+                continue;
+            }
+            result.add(input[i]);
+        }
+        return result.toArray(input);
+    }
+
     public static <T> int findValueInInt(List<T> list, T value) {
         int count = 0;
         for (T t : list) {
@@ -45,5 +57,9 @@ public class ListUtil {
         } catch (IndexOutOfBoundsException e) {
             return true;
         }
+    }
+
+    public static <T> void reverse(List<T> list) {
+        Collections.reverse(list);
     }
 }

@@ -25,10 +25,11 @@ public class MelyClient {
     public static ModuleManager moduleManager;
     public static FontManager fontManager;
     public static AltManager altManager;
-
-    public static ShaderUtil shaderUtil;
     public static GitHubManager gitHubManager;
     public static ConfigManager configManager;
+    public static CommandManager commandManager;
+
+    public static ShaderUtil shaderUtil;
 
     public static void unLoad() {
         logger.info(MOD_NAME + " v" + MOD_VER + " unloading...");
@@ -39,6 +40,7 @@ public class MelyClient {
             gitHubManager.unLoad();
             shaderUtil.unLoad();
             configManager.unLoad();
+            commandManager.unLoad();
         });
         logger.info(MOD_NAME + " v" + MOD_VER + " took " + tookTime + "ms to unload!");
     }
@@ -61,5 +63,6 @@ public class MelyClient {
         altManager = new AltManager();
         configManager = new ConfigManager();
         gitHubManager = new GitHubManager();
+        commandManager = new CommandManager();
     }
 }

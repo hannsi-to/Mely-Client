@@ -1,7 +1,14 @@
 package me.hannsi.melyclient.util.system.conversion;
 
+import me.hannsi.melyclient.util.system.debug.DebugLevel;
+import me.hannsi.melyclient.util.system.debug.DebugLog;
+
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Keyboard {
     public static final int EVENT_SIZE = 18;
@@ -141,8 +148,11 @@ public class Keyboard {
     public static final int KEY_SLEEP = 223;
     public static final int KEYBOARD_SIZE = 256;
     private static final int BUFFER_SIZE = 50;
-
+    private static final String[] keyName = new String[KEYBOARD_SIZE];
+    private static final Map<String, Integer> keyMap = new HashMap<>(253);
     public static List<Integer> numbers = new ArrayList<>();
+    private static int counter;
+    private static final int keyCount = counter;
 
     static {
         numbers.add(KEY_0);
@@ -165,9 +175,43 @@ public class Keyboard {
         numbers.add(KEY_NUMPAD8);
         numbers.add(KEY_9);
         numbers.add(KEY_NUMPAD9);
+
+        Field[] fields = org.lwjgl.input.Keyboard.class.getFields();
+        try {
+            for (Field field : fields) {
+                if (Modifier.isStatic(field.getModifiers()) && Modifier.isPublic(field.getModifiers()) && Modifier.isFinal(field.getModifiers()) && field.getType().equals(int.class) && field.getName().startsWith("KEY_") && !field.getName().endsWith("WIN")) {
+
+                    int key = field.getInt(null);
+                    String name = field.getName().substring(4);
+                    keyName[key] = name;
+                    keyMap.put(name, key);
+                    counter++;
+                }
+
+            }
+        } catch (Exception e) {
+            new DebugLog(e, DebugLevel.ERROR);
+        }
     }
 
     public static List<Integer> getNumberKey() {
         return numbers;
+    }
+
+    public static String getKeyName(int key) {
+        return keyName[key];
+    }
+
+    public static int getKeyCount() {
+        return keyCount;
+    }
+
+    public static int getKeyIndex(String keyName) {
+        Integer ret = keyMap.get(keyName);
+        if (ret == null) {
+            return KEY_NONE;
+        } else {
+            return ret;
+        }
     }
 }

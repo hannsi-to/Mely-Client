@@ -4,7 +4,7 @@ import me.hannsi.melyclient.MelyClient;
 import me.hannsi.melyclient.module.system.Category;
 import me.hannsi.melyclient.util.render.nanovg.render.NanoVGRenderUtil;
 import me.hannsi.melyclient.util.render.nanovg.render.font.FontUtil;
-import me.hannsi.melyclient.util.system.math.MouseUtil;
+import me.hannsi.melyclient.util.system.MouseUtil;
 import me.hannsi.melyclient.util.system.math.animation.Easing;
 import me.hannsi.melyclient.util.system.math.animation.EasingUtil;
 import me.hannsi.melyclient.util.system.math.color.ColorUtil;

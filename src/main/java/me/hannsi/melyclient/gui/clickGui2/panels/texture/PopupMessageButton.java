@@ -3,9 +3,9 @@ package me.hannsi.melyclient.gui.clickGui2.panels.texture;
 import me.hannsi.melyclient.MelyClient;
 import me.hannsi.melyclient.util.render.nanovg.render.NanoVGRenderUtil;
 import me.hannsi.melyclient.util.render.nanovg.render.font.FontUtil;
+import me.hannsi.melyclient.util.system.MouseUtil;
 import me.hannsi.melyclient.util.system.debug.DebugLevel;
 import me.hannsi.melyclient.util.system.debug.DebugLog;
-import me.hannsi.melyclient.util.system.math.MouseUtil;
 import me.hannsi.melyclient.util.system.math.time.TimerUtil;
 
 import java.awt.*;

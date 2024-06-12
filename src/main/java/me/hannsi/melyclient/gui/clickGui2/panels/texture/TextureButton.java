@@ -4,7 +4,7 @@ import com.google.common.collect.Lists;
 import me.hannsi.melyclient.MelyClient;
 import me.hannsi.melyclient.util.render.nanovg.render.NanoVGRenderUtil;
 import me.hannsi.melyclient.util.render.nanovg.render.font.FontUtil;
-import me.hannsi.melyclient.util.system.math.MouseUtil;
+import me.hannsi.melyclient.util.system.MouseUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.resources.ResourcePackRepository;

@@ -1,4 +1,4 @@
-package me.hannsi.melyclient.util.system.math;
+package me.hannsi.melyclient.util.system;
 
 public class MouseUtil {
     public static boolean isHoveringWH(float x, float y, float width, float height, float mouseX, float mouseY) {

@@ -5,6 +5,7 @@
   "mixins": [
     "net.minecraft.client.entity.IEntity",
     "net.minecraft.entity.player.IEntityPlayer",
+    "net.minecraft.network.MixinNetworkManager",
     "org.lwjgl.nanovg.MixinNanoVGGLConfig"
   ],
   "client": [
@@ -13,6 +14,7 @@
     "net.minecraft.client.entity.IAbstractClientPlayer",
     "net.minecraft.client.entity.IEntityPlayerSP",
     "net.minecraft.client.entity.MixinEntityPlayerSP",
+    "net.minecraft.client.gui.MixinGuiNewChat",
     "net.minecraft.client.shader.IShaderGroup",
     "net.minecraft.client.shader.MixinShaderGroup",
     "net.minecraft.util.ISession",

@@ -13,9 +13,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ModuleManager implements InterfaceMinecraft {
-    public List<Module> modules = new ArrayList<>();
+    public List<Module> modules;
 
     public ModuleManager() {
+        load();
+    }
+
+    public void load() {
+        modules = new ArrayList<>();
+        loadModules();
+    }
+
+    public void loadModules() {
         //Combat
 
         //Exploit
@@ -45,6 +54,18 @@ public class ModuleManager implements InterfaceMinecraft {
         MelyClient.moduleManager = null;
     }
 
+    @SuppressWarnings("unchecked")
+    public <T extends Module> T getModuleByName(String name) {
+        for (Module module : this.modules) {
+            if (module.getName().equals(name)) {
+                return (T) module;
+            }
+        }
+
+        return null;
+    }
+
+    @SuppressWarnings("unchecked")
     public <T extends Module> T getModuleByClass(Class<T> clazz) {
         for (Module module : this.modules) {
             if (!clazz.isInstance(module)) {

@@ -16,10 +16,11 @@ public class PacketUtil implements InterfaceMinecraft {
         mc.player.connection.sendPacket(packet);
     }
 
+    public static void sendCPacketChatMessage(String message) {
+        sendPacket(new CPacketChatMessage(message));
+    }
+
     public static void sendCPacketSneakState(boolean sneaking) {
-        if (mc.player == null || mc.world == null) {
-            return;
-        }
         if (sneaking) {
             sendCPacketEntityAction(mc.player, CPacketEntityAction.Action.START_SNEAKING);
         } else {

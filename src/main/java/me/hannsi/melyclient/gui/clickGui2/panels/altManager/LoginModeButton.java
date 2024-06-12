@@ -4,8 +4,8 @@ import me.hannsi.melyclient.MelyClient;
 import me.hannsi.melyclient.gui.clickGui2.ClickGui2;
 import me.hannsi.melyclient.util.render.nanovg.render.NanoVGRenderUtil;
 import me.hannsi.melyclient.util.render.nanovg.render.font.FontUtil;
+import me.hannsi.melyclient.util.system.MouseUtil;
 import me.hannsi.melyclient.util.system.auth.LoginMode;
-import me.hannsi.melyclient.util.system.math.MouseUtil;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Session;
 
