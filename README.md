@@ -10,10 +10,20 @@ Minecraft Client
 ｜｜｜└me
 ｜｜｜  └hannsi
 ｜｜｜    └melyclient
+｜｜｜      ├command
+｜｜｜      ｜├commands
+｜｜｜      ｜｜├BindCommand.java
+｜｜｜      ｜｜├HelpCommand.java
+｜｜｜      ｜｜└PrefixCommand.java
+｜｜｜      ｜└system
+｜｜｜      ｜  ├ChatMessage.java
+｜｜｜      ｜  └CommandBase.java
 ｜｜｜      ├event
 ｜｜｜      ｜├events
 ｜｜｜      ｜｜├LivingUpdateEvent.java
 ｜｜｜      ｜｜├MotionEvent.java
+｜｜｜      ｜｜├PacketReadEvent.java
+｜｜｜      ｜｜├PacketSendEvent.java
 ｜｜｜      ｜｜├Render2DEvent.java
 ｜｜｜      ｜｜├Render3DEvent.java
 ｜｜｜      ｜｜├UpdateMoveStateEvent.java
@@ -48,6 +58,8 @@ Minecraft Client
 ｜｜｜      ｜｜｜├clientInfo
 ｜｜｜      ｜｜｜｜├ClientInfo.java
 ｜｜｜      ｜｜｜｜└ClientInfoScreen.java
+｜｜｜      ｜｜｜├console
+｜｜｜      ｜｜｜｜└Console.java
 ｜｜｜      ｜｜｜└texture
 ｜｜｜      ｜｜｜  ├PopupMessage.java
 ｜｜｜      ｜｜｜  ├PopupMessageButton.java
@@ -66,6 +78,7 @@ Minecraft Client
 ｜｜｜      ｜    └SplashProgress.java
 ｜｜｜      ├manager
 ｜｜｜      ｜├AltManager.java
+｜｜｜      ｜├CommandManager.java
 ｜｜｜      ｜├ConfigManager.java
 ｜｜｜      ｜├EventManager.java
 ｜｜｜      ｜├FontManager.java
@@ -81,6 +94,7 @@ Minecraft Client
 ｜｜｜      ｜｜｜｜｜├IEntityPlayerSP.java
 ｜｜｜      ｜｜｜｜｜└MixinEntityPlayerSP.java
 ｜｜｜      ｜｜｜｜├gui
+｜｜｜      ｜｜｜｜｜└MixinGuiNewChat.java
 ｜｜｜      ｜｜｜｜├shader
 ｜｜｜      ｜｜｜｜｜├IShaderGroup.java
 ｜｜｜      ｜｜｜｜｜└MixinShaderGroup.java
@@ -89,6 +103,8 @@ Minecraft Client
 ｜｜｜      ｜｜｜├entity
 ｜｜｜      ｜｜｜｜└player
 ｜｜｜      ｜｜｜｜  └IEntityPlayer.java
+｜｜｜      ｜｜｜├network
+｜｜｜      ｜｜｜｜└MixinNetworkManager.java
 ｜｜｜      ｜｜｜└util
 ｜｜｜      ｜｜｜  ├ISession.java
 ｜｜｜      ｜｜｜  └MixinMovementInputFromOptions.java
@@ -183,6 +199,7 @@ Minecraft Client
 ｜｜｜      ｜｜├conversion
 ｜｜｜      ｜｜｜├AlignExtractor.java
 ｜｜｜      ｜｜｜├BonIcon.java
+｜｜｜      ｜｜｜├DisplayUtil.java
 ｜｜｜      ｜｜｜└Keyboard.java
 ｜｜｜      ｜｜├debug
 ｜｜｜      ｜｜｜├DebugLevel.java
@@ -196,32 +213,32 @@ Minecraft Client
 ｜｜｜      ｜｜｜├GitHubCommitStatistics.java
 ｜｜｜      ｜｜｜├GitHubCommitUtil.java
 ｜｜｜      ｜｜｜└GitHubUtil.java
-｜｜｜      ｜｜└math
-｜｜｜      ｜｜  ├animation
-｜｜｜      ｜｜  ｜├Easing.java
-｜｜｜      ｜｜  ｜└EasingUtil.java
-｜｜｜      ｜｜  ├color
-｜｜｜      ｜｜  ｜├theme
-｜｜｜      ｜｜  ｜｜├clickGui
-｜｜｜      ｜｜  ｜｜｜└ThemeClickGui.java
-｜｜｜      ｜｜  ｜｜└parts
-｜｜｜      ｜｜  ｜｜  ├Border.java
-｜｜｜      ｜｜  ｜｜  ├Font.java
-｜｜｜      ｜｜  ｜｜  └Line.java
-｜｜｜      ｜｜  ｜├ColorUtil.java
-｜｜｜      ｜｜  ｜└MChatFormatting.java
-｜｜｜      ｜｜  ├crypto
-｜｜｜      ｜｜  ｜└CryptoUtil.java
-｜｜｜      ｜｜  ├time
-｜｜｜      ｜｜  ｜├TimeCalculator.java
-｜｜｜      ｜｜  ｜└TimerUtil.java
-｜｜｜      ｜｜  ├vector
-｜｜｜      ｜｜  ｜└Vector2f.java
-｜｜｜      ｜｜  ├DisplayUtil.java
-｜｜｜      ｜｜  ├ListUtil.java
-｜｜｜      ｜｜  ├MathUtil.java
-｜｜｜      ｜｜  ├MouseUtil.java
-｜｜｜      ｜｜  └StringUtil.java
+｜｜｜      ｜｜├math
+｜｜｜      ｜｜｜├animation
+｜｜｜      ｜｜｜｜├Easing.java
+｜｜｜      ｜｜｜｜└EasingUtil.java
+｜｜｜      ｜｜｜├color
+｜｜｜      ｜｜｜｜├theme
+｜｜｜      ｜｜｜｜｜├clickGui
+｜｜｜      ｜｜｜｜｜｜└ThemeClickGui.java
+｜｜｜      ｜｜｜｜｜└parts
+｜｜｜      ｜｜｜｜｜  ├Border.java
+｜｜｜      ｜｜｜｜｜  ├Font.java
+｜｜｜      ｜｜｜｜｜  └Line.java
+｜｜｜      ｜｜｜｜├ColorUtil.java
+｜｜｜      ｜｜｜｜└MChatFormatting.java
+｜｜｜      ｜｜｜├crypto
+｜｜｜      ｜｜｜｜└CryptoUtil.java
+｜｜｜      ｜｜｜├time
+｜｜｜      ｜｜｜｜├TimeCalculator.java
+｜｜｜      ｜｜｜｜└TimerUtil.java
+｜｜｜      ｜｜｜├vector
+｜｜｜      ｜｜｜｜└Vector2f.java
+｜｜｜      ｜｜｜└MathUtil.java
+｜｜｜      ｜｜├ClipboardUtil.java
+｜｜｜      ｜｜├ListUtil.java
+｜｜｜      ｜｜├MouseUtil.java
+｜｜｜      ｜｜└StringUtil.java
 ｜｜｜      ｜└InterfaceMinecraft.java
 ｜｜｜      └MelyClient.java
 ｜｜└resources
