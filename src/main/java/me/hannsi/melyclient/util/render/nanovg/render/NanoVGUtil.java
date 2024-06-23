@@ -17,11 +17,19 @@ public class NanoVGUtil {
         NanoVG.nvgScale(nvg, x, y);
     }
 
+    public static void scissor(float x, float y, float width, float height) {
+        NanoVG.nvgScissor(nvg, x, y, width, height);
+    }
+
+    public static void resetScissor() {
+        NanoVG.nvgResetScissor(nvg);
+    }
+
     public static void translate(float x, float y) {
         NanoVG.nvgTranslate(nvg, x, y);
     }
 
-    public static void restTranslate() {
+    public static void resetTranslate() {
         NanoVG.nvgResetTransform(nvg);
     }
 }

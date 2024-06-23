@@ -165,7 +165,7 @@ public class Console implements InterfaceMinecraft {
 
             offsetY2 += textBoxHeight;
         }
-        NanoVGUtil.restTranslate();
+        NanoVGUtil.resetTranslate();
         NanoVG.nvgResetScissor(nvg);
     }
 

@@ -8,6 +8,7 @@ import me.hannsi.melyclient.module.system.settings.Bind;
 import me.hannsi.melyclient.module.system.settings.IEnumSetting;
 import me.hannsi.melyclient.module.system.settings.Setting;
 import me.hannsi.melyclient.util.InterfaceMinecraft;
+import me.hannsi.melyclient.util.system.debug.DebugLevel;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.gameevent.InputEvent;
@@ -36,6 +37,10 @@ public class Module implements InterfaceMinecraft {
         this.toggle = toggle;
     }
 
+    public Module(String name, Category category, String description, boolean toggle) {
+        this(name, category, description, Keyboard.KEY_NONE, toggle);
+    }
+
     public Module(String name, Category category, String description, int keyBind) {
         this(name, category, description, keyBind, false);
     }
@@ -52,6 +57,7 @@ public class Module implements InterfaceMinecraft {
         MinecraftForge.EVENT_BUS.register(this);
 
         sendMessage(this.getName() + ChatFormatting.GREEN + " Enable.");
+        MelyClient.notificationManager.addNotification(this.getName(), "Enable.", DebugLevel.INFO);
         onEnable();
     }
 
@@ -59,6 +65,7 @@ public class Module implements InterfaceMinecraft {
         MinecraftForge.EVENT_BUS.unregister(this);
 
         sendMessage(this.getName() + ChatFormatting.RED + " Disable.");
+        MelyClient.notificationManager.addNotification(this.getName(), "Disable.", DebugLevel.ERROR);
         onDisable();
     }
 

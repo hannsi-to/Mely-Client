@@ -28,6 +28,7 @@ public class MelyClient {
     public static GitHubManager gitHubManager;
     public static ConfigManager configManager;
     public static CommandManager commandManager;
+    public static NotificationManager notificationManager;
 
     public static ShaderUtil shaderUtil;
 
@@ -41,6 +42,7 @@ public class MelyClient {
             shaderUtil.unLoad();
             configManager.unLoad();
             commandManager.unLoad();
+            notificationManager.unLoad();
         });
         logger.info(MOD_NAME + " v" + MOD_VER + " took " + tookTime + "ms to unload!");
     }
@@ -64,5 +66,6 @@ public class MelyClient {
         configManager = new ConfigManager();
         gitHubManager = new GitHubManager();
         commandManager = new CommandManager();
+        notificationManager = new NotificationManager();
     }
 }

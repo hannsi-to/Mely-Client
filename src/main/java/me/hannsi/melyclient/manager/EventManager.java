@@ -7,6 +7,7 @@ import me.hannsi.melyclient.event.events.Render2DEvent;
 import me.hannsi.melyclient.event.events.Render3DEvent;
 import me.hannsi.melyclient.module.system.Module;
 import me.hannsi.melyclient.util.InterfaceMinecraft;
+import me.hannsi.melyclient.util.render.DisplayUtil;
 import me.hannsi.melyclient.util.system.chat.ChatData;
 import me.hannsi.melyclient.util.system.chat.ChatUtil;
 import me.hannsi.melyclient.util.system.debug.DebugLevel;
@@ -68,6 +69,8 @@ public class EventManager implements InterfaceMinecraft {
 
     @SubscribeEvent
     public void onPlayerTickEvent(TickEvent.PlayerTickEvent event) {
+        DisplayUtil.upDateGuiScales();
+
         if (event.phase != TickEvent.Phase.START) {
             return;
         }

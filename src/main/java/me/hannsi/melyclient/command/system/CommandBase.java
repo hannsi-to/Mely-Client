@@ -23,6 +23,9 @@ public class CommandBase implements InterfaceMinecraft {
 
     public static void sendMessage(String message, boolean error) {
         ChatUtil.sendMessage(MelyClient.commandManager.getModPrefix() + " " + ChatFormatting.RESET + (error ? ChatFormatting.RED : "") + message);
+        if (!error) {
+            new DebugLog(message, DebugLevel.DEBUG);
+        }
     }
 
     public static void debugAndSendErrorMessage(String errorMessage) {

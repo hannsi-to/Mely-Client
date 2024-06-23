@@ -31,18 +31,31 @@ public class DebugLog {
     }
 
     public static void logEvent(DebugType debugType, Exception exception, String debugText, DebugLevel debugLevel, ChatData chatData) {
+        String title = debugLevel.getDisplay();
+        String description = "";
+
+        if (debugType == DebugType.EXCEPTION) {
+            description = exception.getClass().getName();
+        } else if (debugType == DebugType.TEXT) {
+            description = debugText;
+        }
+
         switch (debugLevel) {
             case DEBUG:
                 MelyClient.logger.debug(chatData.getText());
+                MelyClient.notificationManager.addNotification(title, description, debugLevel);
                 break;
             case INFO:
                 MelyClient.logger.info(chatData.getText());
+                MelyClient.notificationManager.addNotification(title, description, debugLevel);
                 break;
             case ERROR:
                 MelyClient.logger.error(chatData.getText());
+                MelyClient.notificationManager.addNotification(title, description, debugLevel);
                 break;
             case WARNING:
                 MelyClient.logger.warn(chatData.getText());
+                MelyClient.notificationManager.addNotification(title, description, debugLevel);
                 break;
         }
     }
