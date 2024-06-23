@@ -60,6 +60,9 @@ Minecraft Client
 ｜｜｜      ｜｜｜｜└ClientInfoScreen.java
 ｜｜｜      ｜｜｜├console
 ｜｜｜      ｜｜｜｜└Console.java
+｜｜｜      ｜｜｜├module
+｜｜｜      ｜｜｜｜├CategoryButton.java
+｜｜｜      ｜｜｜｜└ModuleScreen.java
 ｜｜｜      ｜｜｜└texture
 ｜｜｜      ｜｜｜  ├PopupMessage.java
 ｜｜｜      ｜｜｜  ├PopupMessageButton.java
@@ -83,7 +86,8 @@ Minecraft Client
 ｜｜｜      ｜├EventManager.java
 ｜｜｜      ｜├FontManager.java
 ｜｜｜      ｜├GitHubManager.java
-｜｜｜      ｜└ModuleManager.java
+｜｜｜      ｜├ModuleManager.java
+｜｜｜      ｜└NotificationManager.java
 ｜｜｜      ├mixin
 ｜｜｜      ｜├net
 ｜｜｜      ｜｜├minecraft
@@ -126,7 +130,8 @@ Minecraft Client
 ｜｜｜      ｜｜├exploit
 ｜｜｜      ｜｜｜└TestExploit.java
 ｜｜｜      ｜｜├hud
-｜｜｜      ｜｜｜└FPS.java
+｜｜｜      ｜｜｜├FPS.java
+｜｜｜      ｜｜｜└Notification.java
 ｜｜｜      ｜｜├misc
 ｜｜｜      ｜｜｜└TestMisc.java
 ｜｜｜      ｜｜├movement
@@ -142,7 +147,11 @@ Minecraft Client
 ｜｜｜      ｜  ｜├IEnumSetting.java
 ｜｜｜      ｜  ｜└Setting.java
 ｜｜｜      ｜  ├Category.java
+｜｜｜      ｜  ├HudModule.java
 ｜｜｜      ｜  └Module.java
+｜｜｜      ├notification
+｜｜｜      ｜├NotificationData.java
+｜｜｜      ｜└NotificationType.java
 ｜｜｜      ├util
 ｜｜｜      ｜├player
 ｜｜｜      ｜｜├movement
@@ -183,6 +192,7 @@ Minecraft Client
 ｜｜｜      ｜｜├shader
 ｜｜｜      ｜｜｜├GLSLSandboxShader.java
 ｜｜｜      ｜｜｜└ShaderUtil.java
+｜｜｜      ｜｜├DisplayUtil.java
 ｜｜｜      ｜｜├GLUtil.java
 ｜｜｜      ｜｜├IOUtil.java
 ｜｜｜      ｜｜└StencilUtil.java
@@ -199,7 +209,6 @@ Minecraft Client
 ｜｜｜      ｜｜├conversion
 ｜｜｜      ｜｜｜├AlignExtractor.java
 ｜｜｜      ｜｜｜├BonIcon.java
-｜｜｜      ｜｜｜├DisplayUtil.java
 ｜｜｜      ｜｜｜└Keyboard.java
 ｜｜｜      ｜｜├debug
 ｜｜｜      ｜｜｜├DebugLevel.java
