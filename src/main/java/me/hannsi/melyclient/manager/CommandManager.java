@@ -2,17 +2,18 @@ package me.hannsi.melyclient.manager;
 
 import com.mojang.realmsclient.gui.ChatFormatting;
 import me.hannsi.melyclient.MelyClient;
-import me.hannsi.melyclient.command.commands.BindCommand;
-import me.hannsi.melyclient.command.commands.HelpCommand;
-import me.hannsi.melyclient.command.commands.PrefixCommand;
 import me.hannsi.melyclient.command.system.CommandBase;
 import me.hannsi.melyclient.util.system.ListUtil;
 import me.hannsi.melyclient.util.system.StringUtil;
+import me.hannsi.melyclient.util.system.conversion.PackagePath;
 import me.hannsi.melyclient.util.system.debug.DebugLevel;
 import me.hannsi.melyclient.util.system.debug.DebugLog;
+import me.hannsi.melyclient.util.system.file.ClassUtil;
+import me.hannsi.melyclient.util.system.math.time.TimeCalculator;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class CommandManager {
     private final String defaultPrefix = "*";
@@ -36,9 +37,21 @@ public class CommandManager {
 
     public void loadCommandBases() {
         commandBases = new ArrayList<>();
-        register(new PrefixCommand());
-        register(new HelpCommand());
-        register(new BindCommand());
+
+        Set<Class<? extends CommandBase>> subTypes = ClassUtil.getClassesFormPackage(PackagePath.commands, CommandBase.class);
+
+        new DebugLog("Commands loading...", DebugLevel.DEBUG);
+        long tookTime = TimeCalculator.calculate(() -> {
+            for (Class<? extends CommandBase> subType : subTypes) {
+                CommandBase commandBase = ClassUtil.createInstance(subType);
+
+                if (commandBase != null) {
+                    register(commandBase);
+                }
+                new DebugLog("Loaded command : " + subType.getName(), DebugLevel.DEBUG);
+            }
+        });
+        new DebugLog("Commands took " + tookTime + "ms to load!", DebugLevel.DEBUG);
     }
 
     public void register(CommandBase commandBase) {

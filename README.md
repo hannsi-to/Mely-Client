@@ -209,12 +209,15 @@ Minecraft Client
 ｜｜｜      ｜｜├conversion
 ｜｜｜      ｜｜｜├AlignExtractor.java
 ｜｜｜      ｜｜｜├BonIcon.java
-｜｜｜      ｜｜｜└Keyboard.java
+｜｜｜      ｜｜｜├DirectoryPath.java
+｜｜｜      ｜｜｜├Keyboard.java
+｜｜｜      ｜｜｜└PackagePath.java
 ｜｜｜      ｜｜├debug
 ｜｜｜      ｜｜｜├DebugLevel.java
 ｜｜｜      ｜｜｜├DebugLog.java
 ｜｜｜      ｜｜｜└DebugType.java
 ｜｜｜      ｜｜├file
+｜｜｜      ｜｜｜├ClassUtil.java
 ｜｜｜      ｜｜｜├FileUtil.java
 ｜｜｜      ｜｜｜└ModsUtil.java
 ｜｜｜      ｜｜├github

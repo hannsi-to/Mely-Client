@@ -1,6 +1,7 @@
 package me.hannsi.melyclient.manager;
 
 import me.hannsi.melyclient.MelyClient;
+import me.hannsi.melyclient.util.system.conversion.DirectoryPath;
 import me.hannsi.melyclient.util.system.debug.DebugLevel;
 import me.hannsi.melyclient.util.system.debug.DebugLog;
 import me.hannsi.melyclient.util.system.file.FileUtil;
@@ -9,9 +10,6 @@ import me.hannsi.melyclient.util.system.math.crypto.CryptoUtil;
 import java.io.File;
 
 public class ConfigManager {
-    public final String baseDirectory = "melyclient/";
-    public final String gitHubDirectory = "gitHub/";
-    public final String baseGitHubDirectory = baseDirectory + gitHubDirectory;
     public String gitHubToken;
 
     public ConfigManager() {
@@ -49,10 +47,10 @@ public class ConfigManager {
     }
 
     public void gitHubLoad() throws Exception {
-        File file = new File(baseGitHubDirectory + "crypto");
+        File file = new File(DirectoryPath.baseGitHubDirectory + "crypto");
 
         if (!file.exists()) {
-            file.createNewFile();
+            boolean ignore = file.createNewFile();
 
             FileUtil.writeString("fKgwA4P4BHEikFkajSS4Si2zNMYBwPEQ/3NiZKGwz5Wf/PzLteMcd8ICwafApwA5", file);
         }
@@ -61,13 +59,13 @@ public class ConfigManager {
     }
 
     public void gitHubSave() throws Exception {
-        File file = new File(baseGitHubDirectory + "crypto");
-        file.createNewFile();
+        File file = new File(DirectoryPath.baseGitHubDirectory + "crypto");
+        boolean ignore = file.createNewFile();
 
         FileUtil.writeString(CryptoUtil.encrypt(gitHubToken, CryptoUtil.getKey(MelyClient.MOD_ID)), file);
     }
 
     public void createDirectory() {
-        FileUtil.createDirectory(baseGitHubDirectory);
+        FileUtil.createDirectory(DirectoryPath.baseGitHubDirectory);
     }
 }

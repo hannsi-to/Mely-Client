@@ -1,18 +1,18 @@
 package me.hannsi.melyclient.manager;
 
 import me.hannsi.melyclient.MelyClient;
-import me.hannsi.melyclient.module.modules.client.ClickGui;
-import me.hannsi.melyclient.module.modules.hud.FPS;
-import me.hannsi.melyclient.module.modules.hud.Notification;
-import me.hannsi.melyclient.module.modules.movement.Fly;
-import me.hannsi.melyclient.module.modules.movement.Sprint;
-import me.hannsi.melyclient.module.modules.player.FastEat;
 import me.hannsi.melyclient.module.system.Category;
 import me.hannsi.melyclient.module.system.Module;
 import me.hannsi.melyclient.util.InterfaceMinecraft;
+import me.hannsi.melyclient.util.system.conversion.PackagePath;
+import me.hannsi.melyclient.util.system.debug.DebugLevel;
+import me.hannsi.melyclient.util.system.debug.DebugLog;
+import me.hannsi.melyclient.util.system.file.ClassUtil;
+import me.hannsi.melyclient.util.system.math.time.TimeCalculator;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class ModuleManager implements InterfaceMinecraft {
     public List<Module> modules;
@@ -27,27 +27,19 @@ public class ModuleManager implements InterfaceMinecraft {
     }
 
     public void loadModules() {
-        //Combat
+        Set<Class<? extends Module>> subTypes = ClassUtil.getClassesFormPackage(PackagePath.modules, Module.class);
 
-        //Exploit
-
-        //Movement
-        register(new Sprint());
-        register(new Fly());
-
-        //Player
-        register(new FastEat());
-
-        //Render
-
-        //Misc
-
-        //Client
-        register(new ClickGui());
-
-        //Hud
-        register(new Notification());
-        register(new FPS());
+        new DebugLog("Modules loading...", DebugLevel.DEBUG);
+        long tookTime = TimeCalculator.calculate(() -> {
+            for (Class<? extends Module> subType : subTypes) {
+                Module module = ClassUtil.createInstance(subType);
+                if (module != null) {
+                    register(module);
+                }
+                new DebugLog("Loaded module : " + subType.getName(), DebugLevel.DEBUG);
+            }
+        });
+        new DebugLog("Modules took " + tookTime + "ms to load!", DebugLevel.DEBUG);
     }
 
     public void register(Module module) {

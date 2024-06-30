@@ -43,19 +43,27 @@ public class DebugLog {
         switch (debugLevel) {
             case DEBUG:
                 MelyClient.logger.debug(chatData.getText());
-                MelyClient.notificationManager.addNotification(title, description, debugLevel);
+                if (MelyClient.notificationManager != null) {
+                    MelyClient.notificationManager.addNotification(title, description, debugLevel);
+                }
                 break;
             case INFO:
                 MelyClient.logger.info(chatData.getText());
-                MelyClient.notificationManager.addNotification(title, description, debugLevel);
+                if (MelyClient.notificationManager != null) {
+                    MelyClient.notificationManager.addNotification(title, description, debugLevel);
+                }
                 break;
             case ERROR:
                 MelyClient.logger.error(chatData.getText());
-                MelyClient.notificationManager.addNotification(title, description, debugLevel);
+                if (MelyClient.notificationManager != null) {
+                    MelyClient.notificationManager.addNotification(title, description, debugLevel);
+                }
                 break;
             case WARNING:
                 MelyClient.logger.warn(chatData.getText());
-                MelyClient.notificationManager.addNotification(title, description, debugLevel);
+                if (MelyClient.notificationManager != null) {
+                    MelyClient.notificationManager.addNotification(title, description, debugLevel);
+                }
                 break;
         }
     }
