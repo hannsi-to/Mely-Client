@@ -2,6 +2,7 @@ package me.hannsi.melyclient.manager;
 
 import me.hannsi.melyclient.MelyClient;
 import me.hannsi.melyclient.module.modules.client.ClickGui;
+import me.hannsi.melyclient.module.modules.hud.FPS;
 import me.hannsi.melyclient.module.modules.hud.Notification;
 import me.hannsi.melyclient.module.modules.movement.Fly;
 import me.hannsi.melyclient.module.modules.movement.Sprint;
@@ -46,6 +47,7 @@ public class ModuleManager implements InterfaceMinecraft {
 
         //Hud
         register(new Notification());
+        register(new FPS());
     }
 
     public void register(Module module) {

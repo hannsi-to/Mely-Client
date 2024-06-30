@@ -7,8 +7,8 @@ import me.hannsi.melyclient.util.render.GLUtil;
 import me.hannsi.melyclient.util.render.nanovg.render.NanoVGUtil;
 
 public class HudModule extends Module {
-    public Setting<Integer> x = register(new Setting<>("X", 0, 0, Integer.MAX_VALUE, 1, "Set drawing coordinate X"));
-    public Setting<Integer> y = register(new Setting<>("Y", 0, 0, Integer.MAX_VALUE, 1, "Set drawing coordinate Y"));
+    public Setting<Integer> x = register(new Setting<>("X", 0, 0, DisplayUtil.getScaledResolutionWidthI(), 1, "Set drawing coordinate X"));
+    public Setting<Integer> y = register(new Setting<>("Y", 0, 0, DisplayUtil.getScaledResolutionHeightI(), 1, "Set drawing coordinate Y"));
     public float width = DisplayUtil.width;
     public float height = DisplayUtil.height;
 

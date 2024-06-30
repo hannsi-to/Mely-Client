@@ -66,13 +66,13 @@ public class ResourcePackButton {
             int index = ListUtil.findValueInInt(Texture.availableResourcePacks, this);
             if ((popupMessageDelete.getType() != 0 && TextureButton.popupMessageOpenUrl.getType() != 0)) {
                 if (MouseUtil.isHoveringWH(x + borderWidth - 60 + 5, y + this.displayHeight / 10f - bonIcon20.getHeight(), bonIcon20.getWidth(BonIcon.ARROW_DOWNWARD), bonIcon20.getHeight(), mouseX, mouseY)) {
-                    if (!ListUtil.isOutOfBounce(Texture.availableResourcePacks, index + 1)) {
+                    if (ListUtil.checkOutOfBounce(Texture.availableResourcePacks, index + 1)) {
                         ListUtil.changeNext(Texture.availableResourcePacks, index);
                     }
                     return;
                 }
                 if (MouseUtil.isHoveringWH(x + borderWidth - 60 + 5, y + 2, bonIcon20.getWidth(BonIcon.ARROW_UPWARD), bonIcon20.getHeight(), mouseX, mouseY)) {
-                    if (!ListUtil.isOutOfBounce(Texture.availableResourcePacks, index - 1)) {
+                    if (ListUtil.checkOutOfBounce(Texture.availableResourcePacks, index - 1)) {
                         ListUtil.changeBack(Texture.availableResourcePacks, index);
                     }
                     return;

@@ -3,11 +3,32 @@ package me.hannsi.melyclient.util.system;
 import me.hannsi.melyclient.util.system.debug.DebugLevel;
 import me.hannsi.melyclient.util.system.debug.DebugLog;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
 public class ListUtil {
+    public static <T> List<T> removeAdjacentDuplicates(List<T> list) {
+        if (list.size() < 2) {
+            return new ArrayList<>(list);
+        }
+
+        List<T> resultList = new ArrayList<>();
+        T previous = list.get(0);
+        resultList.add(previous);
+
+        for (int i = 1; i < list.size(); i++) {
+            T current = list.get(i);
+            if (current != previous) {
+                resultList.add(current);
+            }
+            previous = current;
+        }
+
+        return resultList;
+    }
+
     public static String[] removeElement(String[] input, int indexToDelete) {
         LinkedList<String> result = new LinkedList<>();
         for (int i = 0; i < input.length; ++i) {
@@ -50,12 +71,12 @@ public class ListUtil {
         }
     }
 
-    public static <T> boolean isOutOfBounce(List<T> list, int i) {
+    public static <T> boolean checkOutOfBounce(List<T> list, int i) {
         try {
-            list.get(i);
-            return false;
-        } catch (IndexOutOfBoundsException e) {
+            T ignore = list.get(i);
             return true;
+        } catch (IndexOutOfBoundsException e) {
+            return false;
         }
     }
 
